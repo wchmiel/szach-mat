@@ -1,0 +1,33 @@
+{
+  "name": "szach-mat",
+  "version": "1.0.0",
+  "description": "A web chess app/game.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wojton124/szach-mat.git"
+  },
+  "author": "Wojciech Chmiel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wojton124/szach-mat/issues"
+  },
+  "homepage": "https://github.com/wojton124/szach-mat#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "font-awesome": "^4.7.0",
+    "method-override": "^2.3.10",
+    "mongoose": "^5.0.7",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^4.5.0",
+    "request": "^2.83.0",
+    "require": "^2.4.20"
+  }
+}
