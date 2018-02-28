@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import * as AuthActions from '../store/auth.actions';
+import * as fromApp from '../../store/app.reducers';
+import { UserDatas } from '../../models/user-datas.model';
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +14,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
 
-  constructor() { }
+  constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
     // declaration of signup Form
@@ -18,22 +22,19 @@ export class SignupComponent implements OnInit {
       'nick': new FormControl(null, Validators.required),
       'email': new FormControl(null, [Validators.required, Validators.email]),
       'passFields': new FormGroup({
-        'password': new FormControl(null, [
-          Validators.required,
-          this.passwordLengthValidator,
-          // this.firstPasswordEquality.bind(this)
-        ]),
-        'conf_password': new FormControl(null, [
-          Validators.required,
-          this.passwordLengthValidator,
-          // this.secondPasswordEquality.bind(this)
-        ])
+        'password': new FormControl(null, [Validators.required, this.passwordLengthValidator]),
+        'conf_password': new FormControl(null, [Validators.required, this.passwordLengthValidator])
       }, this.passwordMatchValidator)
     });
   }
 
   onSubmit() {
-    console.log(this.signupForm);
+    const newUser: UserDatas = {
+      nick: this.signupForm.value['nick'],
+      email: this.signupForm.value['email'],
+      password: this.signupForm.value.passFields['password']
+    };
+    this.store.dispatch(new AuthActions.TrySignup(newUser));
   }
 
   passwordLengthValidator(control: FormControl): {[s: string]: boolean} {
@@ -49,21 +50,5 @@ export class SignupComponent implements OnInit {
     }
     return null;
   }
-
-  // firstPasswordEquality(control: FormControl): {[s: string]: boolean} {
-  //   console.log('first-check');
-  //   if (control.value && control.value !== this.signupForm.get('conf_password').value) {
-  //     return {'passwordsEquality': true};
-  //   }
-  //   return null;
-  // }
-  //
-  // secondPasswordEquality(control: FormControl): {[s: string]: boolean} {
-  //   console.log('second-check');
-  //   if (control.value && control.value !== this.signupForm.get('password').value) {
-  //     return {'passwordsEquality': true};
-  //   }
-  //   return null;
-  // }
 
 }
