@@ -48,7 +48,7 @@
             <input type="password" class="form-control" id="conf_password" formControlName="conf_password" ngModel>
             <p class="help-block" *ngIf="signupForm.get('passFields.conf_password').touched && signupForm.get('passFields').errors !== null">
               <!-- message for empty password -->
-              <span *ngIf="signupForm.get('passFields.conf_password').errors['required']">
+              <span *ngIf="!signupForm.get('passFields.conf_password').valid && signupForm.get('passFields.conf_password').errors['required']">
                 This field is required.
               </span>
 
