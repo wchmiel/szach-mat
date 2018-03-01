@@ -59,7 +59,7 @@
             </p>
           </div>
         </div>
-        <button (click)="onSubmit()" type="submit" class="btn btn-success" >
+        <button (click)="onSubmit()" type="submit" class="btn btn-success" [disabled]="!signupForm.valid">
           Sign Up
         </button>
       </form>

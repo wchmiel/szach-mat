@@ -17,11 +17,8 @@ export class AuthEffects {
       return action.payload;
     })
     .map((userData: UserDatas) => {
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json'
-      });
-
-      return this.http.post<any>('http://localhost:3000/api/task/signup', userData, {
+      const headers = new HttpHeaders({'Content-Type': 'application/json'});
+      return this.http.post<any>('http://localhost:3000/api/auth/signup', userData, {
         headers: headers
       });
     })
