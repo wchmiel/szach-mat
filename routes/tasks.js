@@ -2,17 +2,35 @@
 
 const express = require("express"),
       router = express.Router(),
-      Example = require("../models/example");
+      User = require("../models/user");
 
 
-router.get('/tasks', (req, res, next) => {
-  Example.find({}, (err, data) => {
-    if (err) {
-      res.send(err);
+// router.get('/tasks', (req, res, next) => {
+//   Example.find({}, (err, data) => {
+//     if (err) {
+//       res.send(err);
+//     } else {
+//       res.json(data);
+//     }
+//   });
+// });
+
+router.post('/task/signup', (req, res, next) => {
+  // const userData = req.body;
+  // console.log(userData);
+  // res.json(userData);
+  User.create({
+    nick: req.body.nick,
+    email: req.body.email,
+    password: req.body.password
+  }, (err, user) => {
+    if(err) {
+      res.json(err);
     } else {
-      res.json(data);
+      res.json(user);
     }
   });
+
 });
 
 module.exports = router;

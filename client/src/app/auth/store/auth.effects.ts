@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as AuthActions from './auth.actions';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 import { UserDatas } from '../../models/user-datas.model';
 
 @Injectable()
@@ -16,8 +17,11 @@ export class AuthEffects {
       return action.payload;
     })
     .map((userData: UserDatas) => {
-      const headers = new HttpHeaders().set('Content-Type': 'application/json');
-      return this.http.get('http://localhost:3000/api/tasks', {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json'
+      });
+
+      return this.http.post<any>('http://localhost:3000/api/task/signup', userData, {
         headers: headers
       });
     })

@@ -13,14 +13,14 @@ const express = require("express"),
       passportLocalMongoose = require("passport-local-mongoose");
 
 // Connect to db using mongoose
-mongoose.connect("mongodb://localhost/tasks");
+mongoose.connect("mongodb://localhost/szach-dev");
 
 // Api routes folders
 const index = require('./routes/index');
 const tasks = require('./routes/tasks');
 
 // View Engine
-app.set('views', path.join(__dirname, 'client/src'));
+app.set('views', path.join(__dirname, 'client/dist'));
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
@@ -34,6 +34,14 @@ app.use(express.static(__dirname + "/client"));
 
 //use to override http method (mandatory to use PUT, DESTROY methods)
 app.use(methodOverride("_method"));
+
+// CORS middleware
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', "*");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
 // routes
 app.use('/', index);
