@@ -16,29 +16,41 @@ const express = require("express"),
 // });
 
 router.post('/signup', (req, res, next) => {
-  // const userData = req.body;
-  // console.log(userData);
-  // res.json(userData);
+
   const userValid = ValidateUserSignupData(req.body);
   if (userValid.valid) {
-    const userDataUniqueness = ValidateUserDataUniqueness(req.body); // blad poniewaz kod jest asynchorniczny w tamtej funkcji - zrobic tam Observable albo Promise
-    console.log(req.body);
-    if (userDataUniqueness.valid) {
-      User.create({
-        nick: req.body.nick,
-        email: req.body.email,
-        password: req.body.password
-      }, (err, user) => {
-        if(err) {
-          res.json(err);
-        } else {
-          res.json(user);
-        }
-      });
-    } else {
-      console.log('uniqueness error: ', userDataUniqueness);
-      res.json(userDataUniqueness);
-    }
+
+    // check if user email and nick are uniqueness
+    User.find({email: req.body.email}, (err, email) => {
+      if (err) {
+        res.json({valid: false, error_type: 'db', error_mess: "Database error. Try again later.", error: err});
+      } else if (email.length) {
+        res.json({ valid: false, error_type: 'email', error_mess: "This email is already registered.", error: {}});
+      } else {
+        User.find({nick: req.body.nick}, (err, nick) => {
+          if (err) {
+            res.json({valid: false, error_type: 'db', error_mess: "Database error. Try again later.", error: err});
+          } else if (nick.length) {
+            res.json({valid: false, error_type: 'nick', error_mess: "This nick is already registered.", error: {}});
+          } else {
+
+            // If user email and nick are uniqueness then create a new user
+            User.create({
+              nick: req.body.nick,
+              email: req.body.email,
+              password: req.body.password
+            }, (err, user) => {
+              if(err) {
+                res.json({valid: false, error_type: 'db', error_mess: "Database error. Try again later.", error: err});
+              } else {
+                res.json({valid: true});
+              }
+            });
+          }
+        });
+      }
+    });
+
   } else {
     res.json(userValid);
   }
@@ -78,44 +90,19 @@ module.exports = router;
 
 
 // Validators
-const ValidateUserDataUniqueness = function(userData) { // asynchorniczny kod - zrobic Observable!!!!!!!!
-  User.find({email: userData.email}, (err, email) => {
-    if (err) {
-      // console.log({valid: false, error_database: "Database error. Try again later."});
-      return {valid: false, error_database: "Database error. Try again later."};
-    } else if (email) {
-      // console.log({valid: false, error_email: "This email is already registered."});
-      return { valid: false, error_email: "This email is already registered." };
-    } else {
-      User.find({nick: userData.nick}, (error, nick) => {
-        if (error) {
-          // console.log({valid: false, error_database: "Database error. Try again later."});
-          return {valid: false, error_database: "Database error. Try again later."};
-        } else if (nick) {
-          // console.log({valid: false, error_nick: "This nick is already registered. Try another one."});
-          return {valid: false, error_nick: "This nick is already registered. Try another one."};
-        } else {
-          // console.log({valid: true});
-          return {valid: true};
-        }
-      });
-    }
-  });
-};
-
 const ValidateUserSignupData = function(userData) {
   if (userData.nick) {
     if(validateEmail(userData.email)) {
       if (passwordLengthValidator(userData.password)) {
         return { valid: true };
       } else {
-        return { valid: false, error_password: "Password is too short." };
+        return { valid: false, error_type: 'password', error_mess: "Password is too short.", error: {}};
       }
     } else {
-      return { valid: false, error_email: "Email is not correct." };
+      return { valid: false, error_type: 'email', error_mess: "Email is not correct.", error: {}};
     }
   } else {
-    return { valid: false, error_nick: "User Nick is empty." };
+    return { valid: false, error_type: 'nick', error_mess: "User Nick is empty.", error: {}};
   }
 };
 
