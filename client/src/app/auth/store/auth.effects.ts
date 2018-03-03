@@ -24,7 +24,7 @@ export class AuthEffects {
     })
     .map((res) => {
       if (res.valid) {
-        this.router.navigate(['/signin']);
+        this.router.navigate(['/signin', { srm: true}]);
         return {
           type: AuthActions.SIGNUP
         };

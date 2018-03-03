@@ -5,6 +5,7 @@ export const TRY_SIGNUP = 'TRY_SIGNUP';
 // export const TRY_SIGNIN = 'TRY_SIGNIN';
 export const SIGNUP = 'SIGNUP';
 export const SIGNUP_ERR = 'SIGNUP_ERR';
+export const SIGNUP_MESS_SHOWN = 'SIGNUP_MESS_SHOWN';
 // export const SIGNIN = 'SIGNIN';
 // export const SET_TOKEN = 'SET_TOKEN';
 // export const LOGOUT = 'LOGOUT';
@@ -23,4 +24,8 @@ export class SignupErr implements Action {
   constructor(public payload: {valid: boolean, error_type: string, error_mess: string, error: any}) {}
 }
 
-export type AuthActions = TrySignup | Signup | SignupErr;
+export class SignupMessShown implements Action {
+  readonly type = SIGNUP_MESS_SHOWN;
+}
+
+export type AuthActions = TrySignup | Signup | SignupErr | SignupMessShown;
