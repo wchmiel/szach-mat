@@ -17,17 +17,16 @@ const initialState: State = {
   }
 };
 
+
 export function AuthReducer(state = initialState, action: AuthActions.AuthActions) {
   switch (action.type) {
     case AuthActions.SIGNUP:
       return state;
-    // case AuthActions.SIGNUP_ERR:
-    //   return {
-    //     ...state,
-    //     signup_err: {...action.payload}
-    //   };
-    case AuthActions.TRY_SIGNUP:
-      return state;
+    case AuthActions.SIGNUP_ERR:
+      return {
+        ...state,
+        signup_err: {...action.payload}
+      };
     default:
       return state;
   }

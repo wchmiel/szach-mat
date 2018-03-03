@@ -6,15 +6,20 @@
       <form [formGroup]="signupForm">
         <div class="form-group">
           <label for="nick">Nick:</label>
-          <input type="text" class="form-control" id="nick" formControlName="nick" ngModel>
+          <input type="text" class="form-control" id="nick" formControlName="nick" (focus)="onInputFocus('nick')" ngModel>
           <!-- message for empty nick -->
           <p class="help-block" *ngIf="!signupForm.get('nick').valid && signupForm.get('nick').touched">
             This field is required.
           </p>
+
+          <!-- message for nick uniqueness from the server -->
+          <p class="help-block" *ngIf="serverErrMess !== null && serverErrMess.error_type === 'nick'">
+            {{ serverErrMess.error_mess }}
+          </p>
         </div>
         <div class="form-group">
           <label for="email">Email:</label>
-          <input type="email" class="form-control" id="email" formControlName="email" ngModel>
+          <input type="email" class="form-control" id="email" formControlName="email" (focus)="onInputFocus('email')" ngModel>
           <p class="help-block" *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched">
             <!-- message for empty email -->
             <span *ngIf="signupForm.get('email').errors['required']">
@@ -25,6 +30,11 @@
             <span *ngIf="signupForm.get('email').errors['email'] && signupForm.get('email').value">
               Must use a valid email.
             </span>
+          </p>
+
+          <!-- message for email uniqueness from the server -->
+          <p class="help-block" *ngIf="serverErrMess !== null && serverErrMess.error_type === 'email'">
+            {{ serverErrMess.error_mess }}
           </p>
         </div>
         <div formGroupName="passFields">
