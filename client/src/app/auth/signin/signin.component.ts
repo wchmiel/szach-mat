@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/take';
 import { Store } from '@ngrx/store';
@@ -6,14 +6,17 @@ import * as fromApp from '../../store/app.reducers';
 import * as AuthActions from '../store/auth.actions';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss']
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent implements OnInit, OnDestroy {
   signinForm: FormGroup;
+  signinServerErr: Observable<any>;
+  private signinServerErrSub: Subscription;
 
   constructor(private store: Store<fromApp.AppState>,
     private flashMessagesService: FlashMessagesService) { }
@@ -36,6 +39,17 @@ export class SigninComponent implements OnInit {
           this.flashMessagesService.show('Your registration was succesfull. Now you can signin to your account!');
         }
       });
+
+      // bind this.signinServerErr with signup error from auth store
+      this.signinServerErr = this.store.select('auth').map(err => err.signin_err);
+
+      // subscribe for the signinServerErr occur
+      this.signinServerErrSub = this.signinServerErr.subscribe((err) => {
+        if (!err.valid && err.error_mess !== '') {
+          this.flashMessagesService.show(err.error_mess);
+          this.store.dispatch(new AuthActions.SigninMessShown);
+        }
+      });
   }
 
   onSubmit() {
@@ -45,6 +59,10 @@ export class SigninComponent implements OnInit {
     };
     // console.log(user);
     this.store.dispatch(new AuthActions.TrySignin(user));
+  }
+
+  ngOnDestroy() {
+    this.signinServerErrSub.unsubscribe();
   }
 
 }

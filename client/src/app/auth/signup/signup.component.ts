@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class SignupComponent implements OnInit, OnDestroy {
   signupForm: FormGroup;
-  signupServerErr: Observable<{signup_err}>;
+  signupServerErr: Observable<{any}>;
   public serverErrMess = null;
   private signupServerErrSub: Subscription;
 

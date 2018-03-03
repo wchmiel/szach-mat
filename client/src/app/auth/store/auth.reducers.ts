@@ -4,18 +4,15 @@ export interface State {
   token: string;
   authenticated: boolean;
   signup_err: any;
+  signin_err: any;
   signup_mess_show: boolean; // when true app will flafh message in /signin route
 }
 
 const initialState: State = {
   token: null,
   authenticated: false,
-  signup_err: {
-    valid: false,
-    error_type: '',
-    error_mess: '',
-    error: ''
-  },
+  signup_err: { valid: false, error_type: '', error_mess: '', error: '' },
+  signin_err: { valid: false, error_type: '', error_mess: '', error: '' },
   signup_mess_show: false
 };
 
@@ -36,6 +33,21 @@ export function AuthReducer(state = initialState, action: AuthActions.AuthAction
       return {
         ...state,
         signup_mess_show: false
+      };
+    case AuthActions.SIGNIN:
+      return {
+        ...state,
+        // add token + authenticated
+      };
+    case AuthActions.SIGNIN_ERR:
+      return {
+        ...state,
+        signin_err: {...action.payload}
+      };
+    case AuthActions.SIGNIN_MESS_SHOWN:
+      return {
+        ...state,
+        signin_err: { valid: false, error_type: '', error_mess: '', error: '' }
       };
     default:
       return state;

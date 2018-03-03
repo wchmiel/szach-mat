@@ -23,6 +23,8 @@ router.post('/signin', (req, res, next) => {
       res.json({valid: false, error_type: 'user_data', error_mess: "Invalid user data. Try again.", error: {}});
     } else {
       res.json({valid: true});
+
+      //create a JWT here
     }
   });
 });
