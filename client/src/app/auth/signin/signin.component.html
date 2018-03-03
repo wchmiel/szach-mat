@@ -2,16 +2,30 @@
 <br>
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      <form (ngSubmit)="onSignin(f)" #f="ngForm">
+      <form [formGroup]="signinForm">
         <div class="form-group">
           <label for="email">Email - signin:</label>
-          <input type="email" class="form-control" id="email" name="email" ngModel>
+          <input type="email" class="form-control" id="email" formControlName="email" ngModel>
+          <p class="help-block" *ngIf="!signinForm.get('email').valid && signinForm.get('email').touched">
+            <!-- message for empty email -->
+            <span *ngIf="signinForm.get('email').errors['required']">
+              This field is required.
+            </span>
+
+            <!-- message for invalid email -->
+            <span *ngIf="signinForm.get('email').errors['email'] && signinForm.get('email').value">
+              Must use a valid email.
+            </span>
+          </p>
         </div>
         <div class="form-group">
           <label for="password">Password:</label>
-          <input type="password" class="form-control" id="password" name="password" ngModel>
+          <input type="password" class="form-control" id="password" formControlName="password" ngModel>
+          <p class="help-block" *ngIf="!signinForm.get('password').valid && signinForm.get('password').touched">
+            This field is required.
+          </p>
         </div>
-        <button type="submit" class="btn btn-primary">
+        <button (click)="onSubmit()" type="submit" class="btn btn-primary">
           Sign In
         </button>
       </form>

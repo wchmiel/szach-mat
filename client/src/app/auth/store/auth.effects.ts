@@ -36,5 +36,15 @@ export class AuthEffects {
       }
     });
 
+    @Effect({dispatch: false}) authSignin$ = this.actions$
+      .ofType(AuthActions.TRY_SIGNIN)
+      .switchMap((action: AuthActions.TrySignin) => {
+        const headers = new HttpHeaders({'Content-Type': 'application/json'});
+        return this.http.post<any>('http://localhost:3000/api/auth/signin', action.payload, {headers: headers});
+      })
+      .map((res) => {
+        console.log(res);
+      });
+
   constructor(private actions$: Actions, private http: HttpClient, private router: Router) {}
 }

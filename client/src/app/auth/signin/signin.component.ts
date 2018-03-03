@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.reducers';
 import * as AuthActions from '../store/auth.actions';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signin',
@@ -12,11 +13,18 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
+  signinForm: FormGroup;
 
   constructor(private store: Store<fromApp.AppState>,
     private flashMessagesService: FlashMessagesService) { }
 
   ngOnInit() {
+
+    // declaration of signin Form
+    this.signinForm = new FormGroup({
+      'email': new FormControl(null, [Validators.required, Validators.email]),
+      'password': new FormControl(null, Validators.required)
+    });
 
     // when redirect from signup this observable occur
     this.store.select('auth')
@@ -30,8 +38,13 @@ export class SigninComponent implements OnInit {
       });
   }
 
-  onSignin(form) {
-    console.log('signup');
+  onSubmit() {
+    const user = {
+      email: this.signinForm.value['email'],
+      password: this.signinForm.value['password']
+    };
+    // console.log(user);
+    this.store.dispatch(new AuthActions.TrySignin(user));
   }
 
 }

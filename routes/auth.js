@@ -15,6 +15,18 @@ const express = require("express"),
 //   });
 // });
 
+router.post('/signin', (req, res, next) => {
+  User.find({email: req.body.email, password: req.body.password}, (err, user) => {
+    if (err) {
+      res.json({valid: false, error_type: 'db', error_mess: "We have problem with our database. Try again later.", error: err});
+    } else if (!user.length) {
+      res.json({valid: false, error_type: 'user_data', error_mess: "Invalid user data. Try again.", error: {}});
+    } else {
+      res.json({valid: true});
+    }
+  });
+});
+
 router.post('/signup', (req, res, next) => {
 
   const userValid = ValidateUserSignupData(req.body);

@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 import { UserDatas } from '../../models/user-datas.model';
 
 export const TRY_SIGNUP = 'TRY_SIGNUP';
-// export const TRY_SIGNIN = 'TRY_SIGNIN';
+export const TRY_SIGNIN = 'TRY_SIGNIN';
 export const SIGNUP = 'SIGNUP';
 export const SIGNUP_ERR = 'SIGNUP_ERR';
 export const SIGNUP_MESS_SHOWN = 'SIGNUP_MESS_SHOWN';
@@ -28,4 +28,9 @@ export class SignupMessShown implements Action {
   readonly type = SIGNUP_MESS_SHOWN;
 }
 
-export type AuthActions = TrySignup | Signup | SignupErr | SignupMessShown;
+export class TrySignin implements Action {
+  readonly type = TRY_SIGNIN;
+  constructor(public payload: {email: string, password: string}) {}
+}
+
+export type AuthActions = TrySignup | Signup | SignupErr | SignupMessShown | TrySignin;
