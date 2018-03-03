@@ -57,7 +57,6 @@ export class SigninComponent implements OnInit, OnDestroy {
       email: this.signinForm.value['email'],
       password: this.signinForm.value['password']
     };
-    // console.log(user);
     this.store.dispatch(new AuthActions.TrySignin(user));
   }
 

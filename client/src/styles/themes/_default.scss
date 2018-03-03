@@ -1,0 +1,12 @@
+body {
+  font-family: 'Lato';
+  background-color: $main-background-color;
+  color: $main-text-grey-color;
+}
+
+// webkit autofill
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    background-color: $form-main-background-color !important;
+    background-image: none;
+    color: $main-text-grey-color !important;
+}

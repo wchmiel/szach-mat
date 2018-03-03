@@ -21,9 +21,10 @@
   // 'base/helpers';
 
 // 4. Layout-related sections
-// @import
-//   'layout/header',
-//   'layout/footer';
+@import
+  'layout/forms';
+  // 'layout/header',
+  // 'layout/footer';
 
 // 5. Components
 // @import
@@ -34,5 +35,5 @@
 //   'pages/home';
 
 // 7. Themes
-// @import
-//   'themes/default';
+@import
+  'themes/default';

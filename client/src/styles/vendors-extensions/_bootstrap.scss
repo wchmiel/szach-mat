@@ -1,7 +1,20 @@
-body {
-  font-family: 'Lato';
-}
 
-.help-block {
-  color: $lightgrey;
+// forms
+.form-group {
+  .form-control {
+    color: $main-text-grey-color;
+    border-radius: 0rem;
+    background-color: $form-main-background-color;
+    border-color: $form-main-border-color;
+  }
+  .form-control.is-invalid {
+    background-color: $form-invalid-background-color;
+  }
+  .form-control:focus {
+    color: $main-text-grey-color;
+    border-color: $form-main-border-color;
+    outline: 0;
+    -webkit-box-shadow: 0 0 0 0.05rem rgba(208,208,210, 0.25);
+    box-shadow: 0 0 0 0.05rem rgba(208,208,210, 0.25);
+  }
 }
