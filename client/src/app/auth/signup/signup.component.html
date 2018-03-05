@@ -37,7 +37,7 @@
             {{ serverErrMess.error_mess }}
           </p>
         </div>
-        <div formGroupName="passFields">
+        <div formGroupName="passFields" id="sz-pass-fields">
           <div class="form-group">
             <label for="password" class="h5">Password:</label>
             <input type="password" class="form-control" id="password" formControlName="password" ngModel>
@@ -69,7 +69,7 @@
             </p>
           </div>
         </div>
-        <button (click)="onSubmit()" type="submit" class="btn btn-success" [disabled]="!signupForm.valid">
+        <button (click)="onSubmit()" [promiseBtn]="signupServerErrSub" type="submit" class="btn btn-success" [disabled]="!signupForm.valid">
           Sign Up
         </button>
       </form>
