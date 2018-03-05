@@ -8,3 +8,13 @@
 .sz-invalid-form-text {
   color: $form-invalid-text-color;
 }
+
+// styles for invalid form input
+input.ng-invalid.ng-touched {
+  background-color: $form-invalid-background-color;
+  &:focus {
+    border-color: $form-invalid-background-color * 1.5;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}

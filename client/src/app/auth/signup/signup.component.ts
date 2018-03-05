@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -18,8 +18,10 @@ export class SignupComponent implements OnInit, OnDestroy {
   signupServerErr: Observable<{any}>;
   public serverErrMess = null;
   private signupServerErrSub: Subscription;
+  @ViewChild('nickInput') nickInput: ElementRef;
+  @ViewChild('emailInput') emailInput: ElementRef;
 
-  constructor(private store: Store<fromApp.AppState>) { }
+  constructor(private store: Store<fromApp.AppState>, private renderer: Renderer2) { }
 
   ngOnInit() {
     // declaration of signup Form
@@ -38,6 +40,19 @@ export class SignupComponent implements OnInit, OnDestroy {
     // subscribe for the signupServerErr occur
     this.signupServerErrSub = this.signupServerErr.subscribe((err) => {
       this.serverErrMess = err;
+
+      // remove all is-invalid classes on submit form
+      this.removeIsInvalidInputClass('all');
+
+      // add is-invalid class to mark invalid input
+      switch (this.serverErrMess.error_type) {
+        case ('nick'):
+          this.renderer.addClass(this.nickInput.nativeElement, 'is-invalid');
+          break;
+        case ('email'):
+          this.renderer.addClass(this.emailInput.nativeElement, 'is-invalid');
+          break;
+      }
     });
   }
 
@@ -50,11 +65,30 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.store.dispatch(new AuthActions.TrySignup(newUser));
   }
 
-  onInputFocus(inputType: string) {
+  onInputFocus(event: any) {
     if (this.serverErrMess) {
-      if (this.serverErrMess.error_type === inputType) {
+      if (this.serverErrMess.error_type === event.target.id) {
         this.serverErrMess = null;
       }
+    }
+
+    // remove particular is-invalid class on element focus
+    this.removeIsInvalidInputClass(event.target.id);
+  }
+
+  // remove particular is-invalid class on element
+  removeIsInvalidInputClass(input: any) {
+    switch (input) {
+      case ('nick'):
+        this.renderer.removeClass(this.nickInput.nativeElement, 'is-invalid');
+        break;
+      case ('email'):
+        this.renderer.removeClass(this.emailInput.nativeElement, 'is-invalid');
+        break;
+      case ('all'):
+        this.renderer.removeClass(this.nickInput.nativeElement, 'is-invalid');
+        this.renderer.removeClass(this.emailInput.nativeElement, 'is-invalid');
+        break;
     }
   }
 
