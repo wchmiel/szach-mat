@@ -2,7 +2,10 @@
 
 const express = require("express"),
       router = express.Router(),
-      User = require("../models/user");
+      User = require("../models/user"),
+      jwt = require("jsonwebtoken"),
+      fs = require('fs');
+
 
 
 // router.get('/tasks', (req, res, next) => {
@@ -22,9 +25,30 @@ router.post('/signin', (req, res, next) => {
     } else if (!user.length) {
       res.json({valid: false, error_type: 'user_data', error_mess: "Invalid user data. Try again.", error: {}});
     } else {
-      res.json({valid: true});
+
+      // Creating JWT
+      try {
+        const userId = toString(user[0]._id);
+        const options = {
+           key: fs.readFileSync('./private-key/key.pem', 'utf8'),
+           cert: fs.readFileSync('./private-key/server.crt', 'utf8')
+        };
+        const jwtBearerToken = jwt.sign({}, options, {
+          algorithm: 'RS256',
+          expiresIn: 120,
+          subject: userId
+        });
+        console.log('jwt -> ' + jwtBearerToken);
+        // res.status(200).json({
+        //   idToken: jwtBearerToken,
+        //   expiresIn: fsdfdf
+        // });
+      } catch(error) {
+        console.log(error);
+      }
 
       //create a JWT here
+      res.json({valid: true});
     }
   });
 });
