@@ -69,8 +69,9 @@
             </p>
           </div>
         </div>
-        <button (click)="onSubmit()" [promiseBtn]="signupServerErrSub" type="submit" class="btn btn-success" [disabled]="!signupForm.valid">
+        <button (click)="onSubmit()" #btnSubmitForm type="submit" class="btn btn-success" [disabled]="!signupForm.valid">
           Sign Up
+          <span class="sz-btn-spinner"></span>
         </button>
       </form>
     </div>

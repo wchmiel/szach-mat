@@ -7,6 +7,7 @@ import * as fromApp from '../../store/app.reducers';
 import { UserDatas } from '../../models/user-datas.model';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-signup',
@@ -20,8 +21,11 @@ export class SignupComponent implements OnInit, OnDestroy {
   private signupServerErrSub: Subscription;
   @ViewChild('nickInput') nickInput: ElementRef;
   @ViewChild('emailInput') emailInput: ElementRef;
+  @ViewChild('btnSubmitForm') btnSubmitForm: ElementRef;
 
-  constructor(private store: Store<fromApp.AppState>, private renderer: Renderer2) { }
+  constructor(private store: Store<fromApp.AppState>,
+    private renderer: Renderer2,
+    private flashMessagesService: FlashMessagesService) { }
 
   ngOnInit() {
     // declaration of signup Form
@@ -39,6 +43,12 @@ export class SignupComponent implements OnInit, OnDestroy {
 
     // subscribe for the signupServerErr occur
     this.signupServerErrSub = this.signupServerErr.subscribe((err) => {
+
+      console.log(err);
+
+      // stop btn_spinner animation
+      this.renderer.removeClass(this.btnSubmitForm.nativeElement, 'sz-btn-is-loading');
+
       this.serverErrMess = err;
 
       // remove all is-invalid classes on submit form
@@ -52,6 +62,10 @@ export class SignupComponent implements OnInit, OnDestroy {
         case ('email'):
           this.renderer.addClass(this.emailInput.nativeElement, 'is-invalid');
           break;
+        case ('db'):
+          this.flashMessagesService.show(
+            this.serverErrMess.error_mess,
+            { cssClass: 'sz-alert sz-alert-error' });
       }
     });
   }
@@ -63,6 +77,9 @@ export class SignupComponent implements OnInit, OnDestroy {
       password: this.signupForm.value.passFields['password']
     };
     this.store.dispatch(new AuthActions.TrySignup(newUser));
+
+    // start btn_spinner animation
+    this.renderer.addClass(this.btnSubmitForm.nativeElement, 'sz-btn-is-loading');
   }
 
   onInputFocus(event: any) {

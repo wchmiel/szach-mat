@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthRoutingModule } from './auth-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+// import { Angular2PromiseButtonModule } from 'angular2-promise-buttons/dist';
 
 import { SignupComponent } from './signup/signup.component';
 import { SigninComponent } from './signin/signin.component';
@@ -16,7 +17,12 @@ import { SigninComponent } from './signin/signin.component';
     CommonModule,
     ReactiveFormsModule,
     AuthRoutingModule, // routes for auth module
-    FormsModule
+    FormsModule,
+    // Angular2PromiseButtonModule.forRoot({ // setting for spinner buttons
+    //   spinnerTpl: '<span class="sz-btn-spinner"></span>',
+    //   disableBtn: true,
+    //   btnLoadingClass: 'sz-btn-is-loading',
+    // })
   ]
 })
 

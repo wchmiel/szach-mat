@@ -4,13 +4,16 @@
 
 
 // -----------------------------------------------------------------------------
-// Text colors
 
+// Z-index variables
+$alerts-z-index: 9999;
+
+// Text colors
 $lightgrey: #b0b0b0 !default;
 $main-background-color: #141422 !default;
 $main-text-grey-color: #d0d0d2 !default;
 
-//forms colors
+// Forms colors
 $form-main-background-color: #191923;
 $form-invalid-background-color: #522025;
 $form-invalid-text-color: #f04a43;

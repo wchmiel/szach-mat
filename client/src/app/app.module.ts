@@ -13,7 +13,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { environment } from './../environments/environment';
 import { FlashMessagesModule } from 'angular2-flash-messages';
-import { Angular2PromiseButtonModule } from 'angular2-promise-buttons/dist';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './core/home/home.component';
@@ -33,12 +33,8 @@ import { HomeComponent } from './core/home/home.component';
     EffectsModule.forRoot([AuthEffects]),
     NgbModule.forRoot(),
     StoreRouterConnectingModule,
+    BrowserAnimationsModule,
     FlashMessagesModule.forRoot(),
-    Angular2PromiseButtonModule.forRoot({ // setting for spinner buttons
-      spinnerTpl: '<span class="sz-btn-spinner"></span>',
-      disableBtn: true,
-      btnLoadingClass: 'sz-btn-is-loading',
-    }),
     // we will add it here only when environment is not production
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],

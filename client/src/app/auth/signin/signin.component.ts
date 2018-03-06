@@ -36,7 +36,9 @@ export class SigninComponent implements OnInit, OnDestroy {
       .subscribe((signup_mess_show) => {
         if (signup_mess_show) {
           this.store.dispatch(new AuthActions.SignupMessShown);
-          this.flashMessagesService.show('Your registration was succesfull. Now you can signin to your account!');
+          this.flashMessagesService.show(
+            'Your registration was succesfull. Now you can signin to your account!',
+            { cssClass: 'sz-alert sz-alert-success' });
         }
       });
 
@@ -46,7 +48,9 @@ export class SigninComponent implements OnInit, OnDestroy {
       // subscribe for the signinServerErr occur
       this.signinServerErrSub = this.signinServerErr.subscribe((err) => {
         if (!err.valid && err.error_mess !== '') {
-          this.flashMessagesService.show(err.error_mess);
+          this.flashMessagesService.show(
+            err.error_mess,
+            { cssClass: 'sz-alert sz-alert-error' });
           this.store.dispatch(new AuthActions.SigninMessShown);
         }
       });

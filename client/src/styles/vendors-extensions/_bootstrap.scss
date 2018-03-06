@@ -23,3 +23,13 @@
     }
   }
 }
+
+//buttons
+.btn {
+  &:hover {
+    cursor: pointer;
+  }
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
