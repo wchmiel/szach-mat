@@ -4,13 +4,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as AuthActions from './auth.actions';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/shareReplay';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/of';
 import { UserDatas } from '../../models/user-datas.model';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { AuthService } from '../auth.service';
 
 @Injectable()
 export class AuthEffects {
@@ -44,9 +41,13 @@ export class AuthEffects {
       })
       .map((res) => {
         if (res.valid) {
+          console.log('signin before: ' + this.authService.isLoggedIn());
+          this.authService.login({ idToken: res.idToken, expiresIn: res.expiresIn });
+          console.log('signin after: ' + this.authService.isLoggedIn());
           this.router.navigate(['/']);
           return {
-            type: AuthActions.SIGNIN
+            type: AuthActions.SIGNIN,
+            payload: { idToken: res.idToken, expiresIn: res.expiresIn }
           };
         } else {
           return {
@@ -56,5 +57,8 @@ export class AuthEffects {
         }
       });
 
-  constructor(private actions$: Actions, private http: HttpClient, private router: Router) {}
+  constructor(private actions$: Actions,
+    private http: HttpClient,
+    private router: Router,
+    private authService: AuthService) {}
 }

@@ -2,6 +2,7 @@
 
 const express = require("express"),
       router = express.Router(),
+      serverMainConst = require("../constants/server/server-main.const"),
       User = require("../models/user"),
       jwt = require("jsonwebtoken"),
       fs = require('fs');
@@ -38,17 +39,17 @@ router.post('/signin', (req, res, next) => {
           expiresIn: 120,
           subject: userId
         });
-        console.log('jwt -> ' + jwtBearerToken);
-        // res.status(200).json({
-        //   idToken: jwtBearerToken,
-        //   expiresIn: fsdfdf
-        // });
+
+        // sending JWT info to client
+        res.status(200).json({
+          valid: true,
+          idToken: jwtBearerToken,
+          expiresIn: serverMainConst.JWT_EXPIRES_IN
+        });
       } catch(error) {
         console.log(error);
+        res.json({valid: false, error_type: 'jwt', error_mess: "We have problem with authentication. Try again later.", error: err});
       }
-
-      //create a JWT here
-      res.json({valid: true});
     }
   });
 });

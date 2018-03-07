@@ -3,6 +3,7 @@ import * as AuthActions from './auth.actions';
 export interface State {
   token: string;
   authenticated: boolean;
+  expiresIn: number;
   signup_err: any;
   signin_err: any;
   signup_mess_show: boolean; // when true app will flafh message in /signin route
@@ -11,6 +12,7 @@ export interface State {
 const initialState: State = {
   token: null,
   authenticated: false,
+  expiresIn: null,
   signup_err: { valid: false, error_type: '', error_mess: '', error: '' },
   signin_err: { valid: false, error_type: '', error_mess: '', error: '' },
   signup_mess_show: false
@@ -37,7 +39,9 @@ export function AuthReducer(state = initialState, action: AuthActions.AuthAction
     case AuthActions.SIGNIN:
       return {
         ...state,
-        // add token + authenticated
+        authenticated: true,
+        token: action.payload.idToken,
+        expiresIn: action.payload.expiresIn
       };
     case AuthActions.SIGNIN_ERR:
       return {

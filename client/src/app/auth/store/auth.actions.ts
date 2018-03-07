@@ -37,6 +37,7 @@ export class TrySignin implements Action {
 
 export class Signin implements Action {
   readonly type = SIGNIN;
+  constructor (public payload: {idToken: string, expiresIn: number}) {}
 }
 
 export class SigninErr implements Action {
