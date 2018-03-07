@@ -41,15 +41,28 @@ export class AuthEffects {
       })
       .map((res) => {
         if (res.valid) {
-          console.log('signin before: ' + this.authService.isLoggedIn());
-          this.authService.login({ idToken: res.idToken, expiresIn: res.expiresIn });
-          console.log('signin after: ' + this.authService.isLoggedIn());
-          this.router.navigate(['/']);
-          return {
-            type: AuthActions.SIGNIN,
-            payload: { idToken: res.idToken, expiresIn: res.expiresIn }
-          };
+          // saving token to localstorege via authService
+          const tokenSaved = this.authService.login({ idToken: res.idToken, expiresIn: res.expiresIn });
+
+          // token saved correctly
+          if (tokenSaved) {
+            this.router.navigate(['/']);
+            return {
+              type: AuthActions.SIGNIN,
+              payload: { idToken: res.idToken, expiresIn: res.expiresIn }
+            };
+          } else { // there was an error when saving token
+            return {
+              type: AuthActions.SIGNIN_ERR,
+              payload: { valid: false,
+                error_type: 'saving_token',
+                error_mess: 'We have problem with authentication in your browser. Try again later.',
+                error: ''
+              }
+            };
+          }
         } else {
+          console.log(res);
           return {
             type: AuthActions.SIGNIN_ERR,
             payload: res

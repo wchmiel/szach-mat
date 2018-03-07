@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/app.reducers';
@@ -14,6 +15,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { environment } from './../environments/environment';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthInterceptor } from './helpers/interceptors/auth.interceptor';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './core/home/home.component';
@@ -38,7 +40,9 @@ import { HomeComponent } from './core/home/home.component';
     // we will add it here only when environment is not production
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

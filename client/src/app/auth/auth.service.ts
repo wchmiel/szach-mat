@@ -11,7 +11,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   public login(tokenData: {idToken: string, expiresIn: number}) {
-    this.setSession(tokenData);
+    return this.setSession(tokenData); // return true when token saved in localstorage
   }
 
   public logout() {
@@ -24,9 +24,11 @@ export class AuthService {
 
       // setting token to local storage
       localStorage.setItem(this.idTokenKey, authResult.idToken);
-      localStorage.setItem(this.tokenExpiresAtKey, JSON.stringify(expiresAt.valueOf()) );
+      localStorage.setItem(this.tokenExpiresAtKey, JSON.stringify(expiresAt.valueOf()));
+      return true;
     } catch (error) {
       console.log(error);
+      return false;
     }
   }
 
@@ -51,5 +53,9 @@ export class AuthService {
     const expiration = localStorage.getItem(this.tokenExpiresAtKey);
     const expiresAt = JSON.parse(expiration);
     return moment(expiresAt);
+  }
+
+  public getToken() {
+    return localStorage.getItem(this.idTokenKey);
   }
 }

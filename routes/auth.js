@@ -5,8 +5,9 @@ const express = require("express"),
       serverMainConst = require("../constants/server/server-main.const"),
       User = require("../models/user"),
       jwt = require("jsonwebtoken"),
-      fs = require('fs');
-
+      fs = require('fs'),
+      middleware = require('../helpers/middlewares/auth'),
+      validators = require('../helpers/validators/auth');
 
 
 // router.get('/tasks', (req, res, next) => {
@@ -30,13 +31,15 @@ router.post('/signin', (req, res, next) => {
       // Creating JWT
       try {
         const userId = toString(user[0]._id);
+
+        // PRIVATE KEY
         const options = {
-           key: fs.readFileSync('./private-key/key.pem', 'utf8'),
-           cert: fs.readFileSync('./private-key/server.crt', 'utf8')
+           key: fs.readFileSync('./constants/private-key/key.pem', 'utf8'),
+           cert: fs.readFileSync('./constants/private-key/server.crt', 'utf8')
         };
         const jwtBearerToken = jwt.sign({}, options, {
           algorithm: 'RS256',
-          expiresIn: 120,
+          expiresIn: serverMainConst.JWT_EXPIRES_IN,
           subject: userId
         });
 
@@ -56,7 +59,7 @@ router.post('/signin', (req, res, next) => {
 
 router.post('/signup', (req, res, next) => {
 
-  const userValid = ValidateUserSignupData(req.body);
+  const userValid = validators.ValidateUserSignupData(req.body);
   if (userValid.valid) {
 
     // check if user email and nick are uniqueness
@@ -96,6 +99,15 @@ router.post('/signup', (req, res, next) => {
 
 });
 
+
+router.get('/myaccount', middleware.checkIfAuthenticated, middleware.handleTokenErrors, (req, res, next) => {
+  res.json({
+    status: 200,
+    authorized: true
+  });
+});
+
+
 module.exports = router;
 
 
@@ -126,30 +138,3 @@ module.exports = router;
 //       console.log(examples);
 //     }
 // });
-
-
-// Validators
-const ValidateUserSignupData = function(userData) {
-  if (userData.nick) {
-    if(validateEmail(userData.email)) {
-      if (passwordLengthValidator(userData.password)) {
-        return { valid: true };
-      } else {
-        return { valid: false, error_type: 'password', error_mess: "Password is too short.", error: {}};
-      }
-    } else {
-      return { valid: false, error_type: 'email', error_mess: "Email is not correct.", error: {}};
-    }
-  } else {
-    return { valid: false, error_type: 'nick', error_mess: "User Nick is empty.", error: {}};
-  }
-};
-
-const validateEmail = function(email) {
-  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(email).toLowerCase());
-};
-
-const passwordLengthValidator = function(pass) {
-  return (pass.length < 6) ? false : true;
-};
