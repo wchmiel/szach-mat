@@ -1,5 +1,20 @@
 @import '~styles/abstracts/variables';
 
+// logo styles
+.logo-cont {
+  position: relative;
+  height: 50px;
+  margin: 20px;
+  .sz-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  &:after {
+    clear: both;
+  }
+}
+
 // invalid passwords fileds styles
 #sz-pass-fields.ng-invalid.ng-touched {
   input {
@@ -16,5 +31,19 @@
 button {
   .sz-btn-spinner {
     top: 4px;
+  }
+  .sz-btn-spinner:after {
+    background: #262633;
+    transition: 0.23s;
+  }
+  &:hover {
+    .sz-btn-spinner:after {
+      background: #28a745;
+    }
+  }
+  &:disabled {
+    .sz-btn-spinner:after {
+      background: #262633;
+    }
   }
 }

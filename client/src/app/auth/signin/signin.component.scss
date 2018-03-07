@@ -1,0 +1,50 @@
+@import '~styles/abstracts/variables';
+
+// logo styles
+.logo-cont {
+  position: relative;
+  height: 50px;
+  margin: 20px;
+  .sz-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// button spinner styles
+button {
+  .sz-btn-spinner {
+    top: 4px;
+  }
+  .sz-btn-spinner:after {
+    background: #262633;
+    transition: 0.23s;
+  }
+  &:hover {
+    .sz-btn-spinner:after {
+      background: #28a745;
+    }
+  }
+  &:disabled {
+    .sz-btn-spinner:after {
+      background: #262633;
+    }
+  }
+}
+
+.signin-section {
+  text-align: center;
+  margin-top: 20px;
+  a {
+    color: $khaki;
+    transition: 0.3s;
+    &:hover {
+      color: $khaki * 1.2;
+      text-decoration: none;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/take';
 import { Store } from '@ngrx/store';
@@ -17,8 +17,10 @@ export class SigninComponent implements OnInit, OnDestroy {
   signinForm: FormGroup;
   signinServerErr: Observable<any>;
   private signinServerErrSub: Subscription;
+  @ViewChild('btnSubmitForm') btnSubmitForm: ElementRef;
 
   constructor(private store: Store<fromApp.AppState>,
+    private renderer: Renderer2,
     private flashMessagesService: FlashMessagesService) { }
 
   ngOnInit() {
@@ -47,6 +49,10 @@ export class SigninComponent implements OnInit, OnDestroy {
 
       // subscribe for the signinServerErr occur
       this.signinServerErrSub = this.signinServerErr.subscribe((err) => {
+
+        // stop btn_spinner animation
+        this.renderer.removeClass(this.btnSubmitForm.nativeElement, 'sz-btn-is-loading');
+
         if (!err.valid && err.error_mess !== '') {
           this.flashMessagesService.show(
             err.error_mess,
@@ -62,6 +68,9 @@ export class SigninComponent implements OnInit, OnDestroy {
       password: this.signinForm.value['password']
     };
     this.store.dispatch(new AuthActions.TrySignin(user));
+
+    // start btn_spinner animation
+    this.renderer.addClass(this.btnSubmitForm.nativeElement, 'sz-btn-is-loading');
   }
 
   ngOnDestroy() {

@@ -6,6 +6,7 @@
     border-radius: 0rem;
     background-color: $form-main-background-color;
     border-color: $form-main-border-color;
+    transition: 0.2s;
     &:focus {
       color: $main-text-grey-color;
       border-color: $form-main-border-color;
