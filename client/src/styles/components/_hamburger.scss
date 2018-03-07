@@ -1,0 +1,51 @@
+.icon-bar-eff,
+.icon-bar-eff:after,
+.icon-bar-eff:before {
+  background-color: $khaki;
+  display: block;
+  width: 40px;
+  height: 3px;
+  border-radius: 1px;
+  transition: all 300ms;
+  position: relative;
+}
+
+.icon-bar-eff:before {
+  top: -11px;
+  content: "";
+}
+
+.icon-bar-eff:after {
+  bottom: -8px;
+  content: "";
+}
+
+.icon-bar-eff-end,
+.icon-bar-eff-end:after,
+.icon-bar-eff-end:before {
+  background-color: $khaki;
+  display: block;
+  width: 40px;
+  height: 3px;
+  border-radius: 1px;
+  transition: all 300ms;
+  position: relative;
+}
+
+.icon-bar-eff-end {
+  background-color: transparent;
+}
+
+.icon-bar-eff-end:before {
+  top: 1px;
+  content: "";
+  transform: rotate(45deg);
+  transition: all 300ms;
+}
+
+.icon-bar-eff-end:after {
+  bottom: 1px;
+  content: "";
+  transform: rotate(-45deg);
+  transition: all 300ms;
+}

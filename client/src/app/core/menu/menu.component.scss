@@ -1,0 +1,18 @@
+@import '~styles/abstracts/variables';
+
+.sz-hamburger {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 200px;
+  height: 200px;
+  border-radius: 300000px;
+  background-color: $darkCyan;
+  transform: translate(-50%, -50%);
+  .icon-bar-eff {
+    position: absolute;
+    top: 70%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+  }
+}

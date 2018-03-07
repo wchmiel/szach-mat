@@ -19,11 +19,13 @@ import { AuthInterceptor } from './helpers/interceptors/auth.interceptor';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './core/home/home.component';
+import { MenuComponent } from './core/menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
