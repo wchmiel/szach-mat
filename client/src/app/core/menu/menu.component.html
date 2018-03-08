@@ -3,25 +3,26 @@
     <div class="sz-hamburger" (click)="toggleMenu()">
       <span class='icon-bar-eff' #hamburger></span>
     </div>
-    <div class="sz-menu-content">
-      <nav>
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Active</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-        </ul>
-      </nav>
+    <div class="sz-menu-cont">
+      <div class="sz-menu-content">
+        <nav>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" routerLink="/" (click)="toggleMenu()">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/signin" (click)="toggleMenu()">Sign in</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/signup" (click)="toggleMenu()">Sign up</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" >About</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
-    <div class="sz-menu-cont"></div>
     <div class="sz-menu-grey-bg" (click)="toggleMenu()"></div>
   </div>
 </header>
