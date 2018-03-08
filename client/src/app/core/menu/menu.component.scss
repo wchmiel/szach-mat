@@ -1,36 +1,99 @@
 @import '~styles/abstracts/variables';
 
-.sz-menu-cont {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  z-index: $sz-menu-cont-z-index;
-  width: 200px;
-  height: 200px;
-  border-radius: 300000px;
-  background-color: $darkCyan;
-  transform: translate(-50%, -50%);
-  transition: all 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
-  -webkit-transition: all 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
+
+.sz-menu-component {
+
   &.sz-menu-active {
-    @media all and (orientation: landscape) {
-      width: 100vw * 3;
-      height: 100vw * 3;
+
+    .sz-menu-cont {
+      @media all and (orientation: landscape) and (max-width: 992px) {
+        width: 100vw *3;
+        height: 100vw *3;
+      }
+      @media all and (orientation: landscape) and (min-width: 992px) {
+        width: 70vw;
+        height: 70vw;
+      }
+      @media all and (orientation: portrait) {
+        width: 100vh * 3;
+        height: 100vh * 3;
+      }
     }
-    @media all and (orientation: portrait) {
-      width: 100vh * 3;
-      height: 100vh * 3;
+
+    .sz-menu-grey-bg {
+      pointer-events: auto;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .sz-menu-content {
+      display: block;
     }
   }
-}
 
-.sz-hamburger {
-  position: absolute;
-  top: 22px;
-  left: 19px;
-  padding: 17px 5px;
-  z-index: $sz-hamburger-z-index;
-  &:hover {
-    cursor: pointer;
+  .sz-menu-cont {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: $sz-menu-cont-z-index;
+    width: 170px;
+    height: 170px;
+    border-radius: 300000px;
+    background-color: $darkCyan;
+    transform: translate(-50%, -50%);
+    transition: all 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
+    -webkit-transition: all 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
+    @media all and (min-width: 768px) {
+      width: 200px;
+      height: 200px;
+    }
+  }
+
+  .sz-menu-grey-bg {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    pointer-events: none;
+    top: 0px;
+    left: 0px;
+    z-index: $sz-menu-grey-bg-z-index;
+    transition: all 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
+    -webkit-transition: all 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  .sz-hamburger {
+    position: fixed;
+    top: 15px;
+    left: 13px;
+    padding: 17px 5px;
+    z-index: $sz-menu-content-z-index;
+    @media all and (min-width: 768px) {
+      top: 22px;
+      left: 19px;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .sz-menu-content {
+    position: fixed;
+    display: none;
+    top: 50px;
+    left: 50px;
+    z-index: $sz-menu-content-z-index;
+    font-size: 1.4rem;
+    @media all and (min-width: 992px) {
+      top: 80px;
+      left: 110px;
+    }
+
+    ul {
+      li {
+        a {
+          color: $main-text-grey-color;
+        }
+      }
+    }
   }
 }
