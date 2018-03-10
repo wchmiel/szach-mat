@@ -1,0 +1,36 @@
+@import '~styles/abstracts/variables';
+
+// logo styles
+.sz-home-cont {
+  width: 100vw;
+  height: 100vh;
+  position: absolute; 
+  top: 0;
+  left: 0;
+  z-index: $sz-home-cont-z-index;
+  padding: 0;
+  margin: 0;
+  background: url('../../img/chess_main_bg.jpeg') no-repeat;
+  background-position: 50% 60%;
+  background-size: cover;
+}
+.logo-cont {
+  position: relative;
+  height: 50px;
+  margin: 20px;
+  .sz-logo {
+    font-size: 40px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 310px;
+    height: 80px;
+    svg {
+      width: 100px;
+      height: 80px;
+    }
+  }
+  &:after {
+    clear: both;
+  }
+}

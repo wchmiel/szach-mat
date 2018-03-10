@@ -35,8 +35,8 @@
       display: block;
       opacity: 0;
       animation-name: fadeIn;
-      animation-duration: 200ms;
-      animation-delay: 300ms;
+      animation-duration: 150ms;
+      animation-delay: 250ms;
       animation-fill-mode: both;
     }
   }
@@ -51,8 +51,8 @@
     border-bottom-right-radius: 300000px;
     background-color: $darkCyan;
     // transform: translate(-50%, -50%);
-    transition: all 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
-    -webkit-transition: all 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: all 400ms cubic-bezier(0.645, 0.045, 0.355, 1);
+    -webkit-transition: all 400ms cubic-bezier(0.645, 0.045, 0.355, 1);
     @media all and (min-width: 768px) {
       width: 110px;
       height: 110px;
@@ -67,8 +67,8 @@
     top: 0px;
     left: 0px;
     z-index: $sz-menu-grey-bg-z-index;
-    transition: all 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
-    -webkit-transition: all 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: all 400ms cubic-bezier(0.645, 0.045, 0.355, 1);
+    -webkit-transition: all 400ms cubic-bezier(0.645, 0.045, 0.355, 1);
     background-color: rgba(0, 0, 0, 0);
   }
 
@@ -105,6 +105,11 @@
       li {
         a {
           color: $main-text-grey-color;
+          text-align: center;
+          transition: color 0.3s;
+          &:hover {
+            color: $khaki;
+          }
         }
       }
     }
