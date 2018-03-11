@@ -1,0 +1,117 @@
+.sz-sidebar-cont {
+  position: fixed;
+  z-index: $sz-sidebar-cont-z-index;
+  top: 0px;
+  right: 0px;
+  width: $sidebar-cont-width;
+  height: 100vh;
+  background-color: $sidebar-main-bg-color;
+  -webkit-box-shadow: -2px 0px 12px 0px rgba(0,0,0,0.13);
+  -moz-box-shadow: -2px 0px 12px 0px rgba(0,0,0,0.13);
+  box-shadow: -2px 0px 12px 0px rgba(0,0,0,0.13);
+  .sz-sidebar-content {
+    background-color: $sidebar-main-bg-color;
+    z-index: 1;
+    height: 100%;
+  }
+  .sz-sidebar-arr {
+    display: none;
+    opacity: 0;
+    width: 30px;
+    height: 50px;
+    background-color: $sidebar-main-bg-color;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -30px;
+    border-left: 1px solid rgb(0, 0, 0);
+    border-top: 1px solid rgb(0, 0, 0);
+    border-bottom: 1px solid rgb(0, 0, 0);
+    border-top-left-radius: 3000px;
+    border-bottom-left-radius: 3000px;
+    transition: background-color 0.3s;
+    .fa {
+      font-size: 1.5rem;
+      color: $darkCyan;
+      position: absolute;
+      top: 50%;
+      left: 65%;
+      transform: translate(-50%, -50%);
+      transition: color 0.3s;
+    }
+
+    &:hover {
+      background-color: $darkCyan;
+      cursor: pointer;
+      .fa {
+        color: $khaki;
+      }
+    }
+  }
+
+  &:hover {
+    .sz-sidebar-arr {
+      display: block;
+      animation-name: showarr;
+      animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+      animation-duration: 300ms;
+      animation-fill-mode: forwards;
+    }
+  }
+
+  &:not(:hover) {
+    .sz-sidebar-arr {
+      display: block;
+      animation-name: hidearr;
+      animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+      animation-duration: 300ms;
+      animation-fill-mode: forwards;
+    }
+  }
+
+  &.sz-sidebar-cont-close {
+    animation-name: hidesidebar;
+    animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+    animation-duration: 600ms;
+    animation-fill-mode: forwards;
+    .sz-sidebar-arr {
+      .fa.fa-angle-right {
+        display: none;
+      }
+    }
+  }
+
+  &.sz-sidebar-cont-open {
+    animation-name: showsidebar;
+    animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+    animation-duration: 600ms;
+    animation-fill-mode: forwards;
+    .sz-sidebar-arr {
+      .fa.fa-angle-left {
+        display: none;
+      }
+    }
+  }
+}
+
+
+@keyframes showarr {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0px); }
+}
+
+@keyframes hidearr {
+  from { opacity: 1; transform: translateX(0px); }
+  to { opacity: 0; transform: translateX(20px); }
+}
+
+@keyframes showsidebar {
+  from { right: -$sidebar-cont-width }
+  to { right: 0px }
+}
+
+@keyframes hidesidebar {
+  from { right: 0px }
+  to { right: -$sidebar-cont-width }
+}

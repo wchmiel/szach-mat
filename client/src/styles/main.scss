@@ -9,6 +9,9 @@
 @import
   './vendors/bootstrap';
 
+$fa-font-path: "~font-awesome/fonts";
+@import '~font-awesome/scss/font-awesome';
+
 // 3. Vendors extensions
 @import
   './vendors-extensions/bootstrap';
@@ -31,7 +34,8 @@
   'components/alerts',
   'components/btn_spinner',
   'components/hamburger',
-  'components/main_logo';
+  'components/main_logo',
+  'components/sidebar';
 
 // 6. Page-specific styles
 // @import
