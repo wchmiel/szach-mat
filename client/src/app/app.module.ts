@@ -6,6 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/app.reducers';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthModule } from './auth/auth.module';
+import { AccountModule } from './account/account.module';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
@@ -32,6 +33,7 @@ import { MenuComponent } from './core/menu/menu.component';
     HttpClientModule,
     ReactiveFormsModule,
     AuthModule,
+    AccountModule,
     AppRoutingModule, // the main routing module
     StoreModule.forRoot(reducers), // here we pass all our reducers bound to reducers obj
     EffectsModule.forRoot([AuthEffects]),
