@@ -1,0 +1,43 @@
+
+.sz-account-flex-cont {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 100vh;
+  background-color: red;
+  &.sz-account-flex-cont-full {
+    right: 0px;
+    animation-name: flexcont_full;
+    animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+    animation-duration: 600ms;
+    animation-fill-mode: forwards;
+  }
+  &.sz-account-flex-cont-tight {
+    right: $sidebar-cont-md-width;
+    animation-name: flexcont_tight;
+    animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+    animation-duration: 600ms;
+    animation-fill-mode: forwards;
+  }
+}
+
+.sz-account-cont {
+  background-color: #262633;
+  border-radius: 3px;
+  padding: 1.7rem 1.7rem;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  right: 50px;
+}
+
+@keyframes flexcont_full {
+  from { right: $sidebar-cont-md-width }
+  to { right: 0px }
+}
+
+@keyframes flexcont_tight {
+  from { right: 0px }
+  to { right: $sidebar-cont-md-width }
+}

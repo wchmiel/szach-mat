@@ -6,12 +6,14 @@ import { AccountRoutingModule } from './account-routing.module';
 import { AccountComponent } from './account.component';
 import { IndexComponent } from './index/index.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
     AccountComponent,
     IndexComponent,
-    SidebarComponent
+    SidebarComponent,
+    SettingsComponent
   ],
   imports: [
     CommonModule,

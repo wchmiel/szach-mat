@@ -117,21 +117,21 @@
 }
 
 @keyframes showsidebar_lg {
-  from { right: -$sidebar-cont-md-width }
+  from { right: -$sidebar-cont-md-width + 50px }
   to { right: 0px }
 }
 
 @keyframes hidesidebar_lg {
   from { right: 0px }
-  to { right: -$sidebar-cont-md-width }
+  to { right: -$sidebar-cont-md-width + 50px }
 }
 
 @keyframes showsidebar_xs {
-  from { right: -$sidebar-cont-xs-width }
+  from { right: -$sidebar-cont-xs-width + 45px }
   to { right: 0px }
 }
 
 @keyframes hidesidebar_xs {
   from { right: 0px }
-  to { right: -$sidebar-cont-xs-width }
+  to { right: -$sidebar-cont-xs-width + 45px }
 }

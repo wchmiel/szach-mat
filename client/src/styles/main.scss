@@ -1,7 +1,8 @@
 
 // 1. Configuration and helpers
 @import
-  'abstracts/variables';
+  'abstracts/variables',
+  'abstracts/mixins';
   // 'abstracts/functions',
   // 'abstracts/mixins';
 
@@ -25,7 +26,8 @@ $fa-font-path: "~font-awesome/fonts";
 
 // 4. Layout-related sections
 @import
-  'layout/forms';
+  'layout/forms',
+  'layout/account';
   // 'layout/header',
   // 'layout/footer';
 

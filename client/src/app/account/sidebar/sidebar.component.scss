@@ -4,7 +4,7 @@
   font-family: "Bungee Inline", cursive;
   padding: 0px 15px;
   @media all and (min-width: 768px) {
-    padding: 0px 25px;
+    padding: 0px 15px;
   }
 
   // logo styles
@@ -23,6 +23,7 @@
       svg {
         width: 45px;
         height: 45px;
+        transition: all 600ms;
       }
       span {
         display: none;
@@ -39,11 +40,15 @@
       height: 2px;
       background-color: $lightgrey;
       opacity: 0.2;
+      transition: all 600ms;
     }
   }
 
   .sz-avatar-cont {
-    margin-top: 30px;
+    margin-top: 10px;
+    @media all and (min-width: 768px) {
+      margin-top: 30px;
+    }
     span {
       display: none;
       padding-left: 10px;
@@ -52,6 +57,7 @@
       }
     }
     img {
+      transition: all 600ms;
       display: block;
       margin: 0 auto;
       @media all and (min-width: 768px) {
@@ -70,8 +76,56 @@
           font-size: 1.2rem;
         }
         i {
-          margin-right: 5px;
+          margin-right: 10px;
         }
+      }
+    }
+  }
+}
+
+// when sidebar is closed
+.sz-sidebar-cont-close {
+  .sz-avatar-cont {
+    span {
+      display: none;
+    }
+    img {
+      margin: 0px;
+      width: 30px;
+      height: 30px;
+      position: relative;
+      left: -7px;
+      @media all and (min-width: 768px) {
+        left: -5px;
+      }
+    }
+  }
+  .logo-cont {
+    position: relative;
+    height: 85px;
+    margin: 0px;
+    .sz-logo {
+      width: 30px;
+      margin-left: 0px;
+      svg {
+        width: 30px;
+        height: 30px;
+        position: relative;
+        left: -7px;
+        @media all and (min-width: 768px) {
+          left: -5px;
+        }
+      }
+      span {
+        display: none;
+      }
+    }
+    &:after {
+      width: 30px;
+      position: relative;
+      left: -7px;
+      @media all and (min-width: 768px) {
+        left: -5px;
       }
     }
   }
