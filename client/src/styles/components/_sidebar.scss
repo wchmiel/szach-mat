@@ -117,21 +117,21 @@
 }
 
 @keyframes showsidebar_lg {
-  from { right: -$sidebar-cont-md-width + 50px }
+  from { right: -$sidebar-cont-md-width + $sidebar-cont-md-offset }
   to { right: 0px }
 }
 
 @keyframes hidesidebar_lg {
   from { right: 0px }
-  to { right: -$sidebar-cont-md-width + 50px }
+  to { right: -$sidebar-cont-md-width + $sidebar-cont-md-offset }
 }
 
 @keyframes showsidebar_xs {
-  from { right: -$sidebar-cont-xs-width + 45px }
+  from { right: -$sidebar-cont-xs-width + $sidebar-cont-xs-offset }
   to { right: 0px }
 }
 
 @keyframes hidesidebar_xs {
   from { right: 0px }
-  to { right: -$sidebar-cont-xs-width + 45px }
+  to { right: -$sidebar-cont-xs-width + $sidebar-cont-xs-offset }
 }

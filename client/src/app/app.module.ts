@@ -22,6 +22,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './core/home/home.component';
 import { MenuComponent } from './core/menu/menu.component';
 
+import { ConstantsService } from './helpers/constants/constants.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +47,7 @@ import { MenuComponent } from './core/menu/menu.component';
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [
+    ConstantsService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]

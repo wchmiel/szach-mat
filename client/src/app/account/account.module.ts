@@ -8,6 +8,9 @@ import { IndexComponent } from './index/index.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { SettingsComponent } from './settings/settings.component';
 
+import { AccountService } from './account.service';
+import { ConstantsService } from '../helpers/constants/constants.service';
+
 @NgModule({
   declarations: [
     AccountComponent,
@@ -19,6 +22,10 @@ import { SettingsComponent } from './settings/settings.component';
     CommonModule,
     FormsModule,
     AccountRoutingModule
+  ],
+  providers: [
+    AccountService,
+    ConstantsService
   ]
 })
 

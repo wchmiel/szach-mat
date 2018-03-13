@@ -1,8 +1,8 @@
 
 // 1. Configuration and helpers
 @import
-  'abstracts/variables',
-  'abstracts/mixins';
+  './abstracts/variables',
+  './abstracts/mixins';
   // 'abstracts/functions',
   // 'abstracts/mixins';
 
@@ -26,19 +26,19 @@ $fa-font-path: "~font-awesome/fonts";
 
 // 4. Layout-related sections
 @import
-  'layout/forms',
-  'layout/account';
+  './layout/account',
+  './layout/forms';
   // 'layout/header',
   // 'layout/footer';
 
 // 5. Components
 @import
-  'components/alerts',
-  'components/avatar',
-  'components/btn_spinner',
-  'components/hamburger',
-  'components/main_logo',
-  'components/sidebar';
+  './components/alerts',
+  './components/avatar',
+  './components/btn_spinner',
+  './components/hamburger',
+  './components/main_logo',
+  './components/sidebar';
 
 // 6. Page-specific styles
 // @import
@@ -46,4 +46,4 @@ $fa-font-path: "~font-awesome/fonts";
 
 // 7. Themes
 @import
-  'themes/default';
+  './themes/default';
