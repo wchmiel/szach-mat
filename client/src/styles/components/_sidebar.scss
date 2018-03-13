@@ -3,12 +3,16 @@
   z-index: $sz-sidebar-cont-z-index;
   top: 0px;
   right: 0px;
-  width: $sidebar-cont-width;
+  width: $sidebar-cont-xs-width;
   height: 100vh;
   background-color: $sidebar-main-bg-color;
   -webkit-box-shadow: -2px 0px 12px 0px rgba(0,0,0,0.13);
   -moz-box-shadow: -2px 0px 12px 0px rgba(0,0,0,0.13);
   box-shadow: -2px 0px 12px 0px rgba(0,0,0,0.13);
+
+  @media all and (min-width: 768px) {
+    width: $sidebar-cont-md-width;
+  }
   .sz-sidebar-content {
     background-color: $sidebar-main-bg-color;
     z-index: 1;
@@ -71,10 +75,13 @@
   }
 
   &.sz-sidebar-cont-close {
-    animation-name: hidesidebar;
+    animation-name: hidesidebar_xs;
     animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
     animation-duration: 600ms;
     animation-fill-mode: forwards;
+    @media all and (min-width: 768px) {
+      animation-name: hidesidebar_lg;
+    }
     .sz-sidebar-arr {
       .fa.fa-angle-right {
         display: none;
@@ -83,10 +90,13 @@
   }
 
   &.sz-sidebar-cont-open {
-    animation-name: showsidebar;
+    animation-name: showsidebar_xs;
     animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
     animation-duration: 600ms;
     animation-fill-mode: forwards;
+    @media all and (min-width: 768px) {
+      animation-name: showsidebar_lg;
+    }
     .sz-sidebar-arr {
       .fa.fa-angle-left {
         display: none;
@@ -106,12 +116,22 @@
   to { opacity: 0; transform: translateX(20px); }
 }
 
-@keyframes showsidebar {
-  from { right: -$sidebar-cont-width }
+@keyframes showsidebar_lg {
+  from { right: -$sidebar-cont-md-width }
   to { right: 0px }
 }
 
-@keyframes hidesidebar {
+@keyframes hidesidebar_lg {
   from { right: 0px }
-  to { right: -$sidebar-cont-width }
+  to { right: -$sidebar-cont-md-width }
+}
+
+@keyframes showsidebar_xs {
+  from { right: -$sidebar-cont-xs-width }
+  to { right: 0px }
+}
+
+@keyframes hidesidebar_xs {
+  from { right: 0px }
+  to { right: -$sidebar-cont-xs-width }
 }
