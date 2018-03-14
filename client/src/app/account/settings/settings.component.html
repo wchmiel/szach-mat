@@ -1,3 +1,52 @@
-<p>
-  asdfsdfsdf
-</p>
+<div class="sz-account-settings">
+  <h4 class="sz-h">Account Settings</h4>
+  <div class="row">
+      <div class="col-md-6 sz-form-wrap">
+
+
+        <form>
+          <div class="form-group">
+            <label for="nick" class="h5">Nick:</label>
+            <input type="text" class="form-control-plaintext" id="nick" readonly value="wojton124">
+          </div>
+          <div class="form-group">
+            <label for="nick" class="h5">Email:</label>
+            <input type="text" class="form-control-plaintext" id="nick" readonly value="woj124@poczta.onet.pl">
+          </div>
+          <div class="form-group">
+            <label for="nick" class="h5">Name:</label>
+            <input type="text" class="form-control" id="nick">
+          </div>
+          <div class="form-group">
+            <label for="nick" class="h5">Surname:</label>
+            <input type="text" class="form-control" id="nick">
+          </div>
+          <div class="form-group">
+            <label for="nick" class="h5">Country:</label>
+            <country-picker [classes]="['form-control']" [flag]="true" [setValue]="'cca3'" [setName]="'name.common'"></country-picker>
+          </div>
+
+          <!-- <button (click)="onSubmit()" #btnSubmitForm type="submit" class="btn btn-outline-success btn-block mt-5" [disabled]="!signupForm.valid">
+            Sign Up
+            <span class="sz-btn-spinner"></span>
+          </button> -->
+        </form>
+      </div>
+      <div class="col-md-6 sz-form-wrap">
+
+
+        <form>
+          <div class="form-group">
+            <!-- formControlName="nick"-->
+            <label for="nick" class="h5">Nick:</label>
+            <input type="text" class="form-control" id="nick" #nickInput (focus)="onInputFocus($event)" ngModel>
+          </div>
+
+          <!-- <button (click)="onSubmit()" #btnSubmitForm type="submit" class="btn btn-outline-success btn-block mt-5" [disabled]="!signupForm.valid">
+            Sign Up
+            <span class="sz-btn-spinner"></span>
+          </button> -->
+        </form>
+      </div>
+  </div>
+</div>
