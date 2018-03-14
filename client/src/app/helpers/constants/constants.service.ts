@@ -1,6 +1,6 @@
 export class ConstantsService {
   public XS_RES = 576;
   public SM_RES = 768;
-  public MDRES = 992;
-  public LGRES = 1200;
+  public MD_RES = 992;
+  public LG_RES = 1200;
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, Renderer2, ElementRef, HostListener } from '@angular/core';
 import { AccountService } from './account.service';
+import { AppService } from '../app.service';
+import { ConstantsService } from '../helpers/constants/constants.service';
 
 @Component({
   selector: 'app-account',
@@ -10,24 +12,35 @@ export class AccountComponent implements OnInit {
 
   @ViewChild('szAccountFlexCont') szAccountFlexCont: ElementRef;
 
-
-
-  // PRZEROBIC ZEBY TO BYLO GLOBALNE - WYSYLANE Z APP COMPONENT EVENT Z APP SERVICE!
-  @HostListener('window:resize', ['$event']) windowResize(event) {
-    this.accountService.windowResizeEvent.next(event.target['innerWidth']);
-  }
-
-  constructor(private renderer: Renderer2, private accountService: AccountService) { }
+  constructor(private renderer: Renderer2,
+    private accountService: AccountService,
+    private appService: AppService,
+    private constService: ConstantsService) { }
 
   ngOnInit() {
     this.renderer.addClass(this.szAccountFlexCont.nativeElement, 'sz-account-flex-cont-tight');
+
+    // if widnow width is greater than 768px
+    if (window.screen.width > this.constService.SM_RES) {
+      this.toggleSidebar('open');
+    } else {
+      this.toggleSidebar('close');
+    }
 
     // event from sidebar component
     this.accountService.toggleSidebarEvent.subscribe(() => {
       this.onToggleSidebar();
     });
 
-    // DOROBIC SUBSKRYPCJE NA RESIZE Z APP SERVICE - sprawdxac width jesli mobile
+    // widnow resize event from app component
+    this.appService.windowResizeEvent.subscribe((windowWidth: number) => {
+      if (windowWidth > this.constService.SM_RES) {
+        this.toggleSidebar('open');
+      } else {
+        this.toggleSidebar('close');
+      }
+    });
+
   }
 
   onToggleSidebar() {

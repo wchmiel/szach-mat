@@ -3,21 +3,28 @@
   position: absolute;
   top: 0px;
   left: 0px;
-  right: 0px;
+  right: $sidebar-cont-xs-offset;
   height: 100vh;
-  &.sz-account-flex-cont-full {
+  @media all and (min-width: $SM_RES) {
     right: 0px;
-    animation-name: flexcont_full;
-    animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
-    animation-duration: 600ms;
-    animation-fill-mode: forwards;
+  }
+  &.sz-account-flex-cont-full {
+    @media all and (min-width: $SM_RES) {
+      right: 0px;
+      animation-name: flexcont_full;
+      animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+      animation-duration: 600ms;
+      animation-fill-mode: forwards;
+    }
   }
   &.sz-account-flex-cont-tight {
-    right: $sidebar-cont-md-width;
-    animation-name: flexcont_tight;
-    animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
-    animation-duration: 600ms;
-    animation-fill-mode: forwards;
+    @media all and (min-width: $SM_RES) {
+      right: $sidebar-cont-md-width;
+      animation-name: flexcont_tight;
+      animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+      animation-duration: 600ms;
+      animation-fill-mode: forwards;
+    }
   }
 }
 
@@ -26,9 +33,14 @@
   border-radius: 3px;
   padding: 1.7rem 1.7rem;
   position: absolute;
-  top: 50px;
-  left: 50px;
-  right: 50px;
+  top: 30px;
+  left: 15px;
+  right: 15px;
+  @media all and (min-width: $SM_RES) {
+    top: 80px;
+    left: 30px;
+    right: 30px;
+  }
 }
 
 @keyframes flexcont_full {

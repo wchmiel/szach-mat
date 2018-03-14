@@ -23,6 +23,7 @@ import { HomeComponent } from './core/home/home.component';
 import { MenuComponent } from './core/menu/menu.component';
 
 import { ConstantsService } from './helpers/constants/constants.service';
+import { AppService } from './app.service';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ConstantsService } from './helpers/constants/constants.service';
   ],
   providers: [
     ConstantsService,
+    AppService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]

@@ -10,7 +10,7 @@
   -moz-box-shadow: -2px 0px 12px 0px rgba(0,0,0,0.13);
   box-shadow: -2px 0px 12px 0px rgba(0,0,0,0.13);
 
-  @media all and (min-width: 768px) {
+  @media all and (min-width: $SM_RES) {
     width: $sidebar-cont-md-width;
   }
   .sz-sidebar-content {
@@ -79,7 +79,7 @@
     animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
     animation-duration: 600ms;
     animation-fill-mode: forwards;
-    @media all and (min-width: 768px) {
+    @media all and (min-width: $SM_RES) {
       animation-name: hidesidebar_lg;
     }
     .sz-sidebar-arr {
@@ -94,7 +94,7 @@
     animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
     animation-duration: 600ms;
     animation-fill-mode: forwards;
-    @media all and (min-width: 768px) {
+    @media all and (min-width: $SM_RES) {
       animation-name: showsidebar_lg;
     }
     .sz-sidebar-arr {

@@ -3,7 +3,7 @@
 .sz-sidebar-content {
   font-family: "Bungee Inline", cursive;
   padding: 0px 15px;
-  @media all and (min-width: 768px) {
+  @media all and (min-width: $SM_RES) {
     padding: 0px 15px;
   }
 
@@ -16,7 +16,7 @@
       width: 45px;
       font-size: 26px;
       margin-left: 35px;
-      @media all and (min-width: 768px) {
+      @media all and (min-width: $SM_RES) {
         width: 190px;
         margin-left: 0px;
       }
@@ -27,7 +27,7 @@
       }
       span {
         display: none;
-        @media all and (min-width: 768px) {
+        @media all and (min-width: $SM_RES) {
           display: inline;
         }
       }
@@ -46,13 +46,13 @@
 
   .sz-avatar-cont {
     margin-top: 10px;
-    @media all and (min-width: 768px) {
+    @media all and (min-width: $SM_RES) {
       margin-top: 30px;
     }
     span {
       display: none;
       padding-left: 10px;
-      @media all and (min-width: 768px) {
+      @media all and (min-width: $SM_RES) {
         display: inline-block;
       }
     }
@@ -60,7 +60,7 @@
       transition: all 600ms;
       display: block;
       margin: 0 auto;
-      @media all and (min-width: 768px) {
+      @media all and (min-width: $SM_RES) {
         display: inline-block;
       }
     }
@@ -72,7 +72,7 @@
       .nav-link {
         font-size: 1rem;
         padding-left: 0px;
-        @media all and (min-width: 768px) {
+        @media all and (min-width: $SM_RES) {
           font-size: 1.2rem;
         }
         i {
@@ -95,7 +95,7 @@
       height: 30px;
       position: relative;
       left: -7px;
-      @media all and (min-width: 768px) {
+      @media all and (min-width: $SM_RES) {
         left: -5px;
       }
     }
@@ -112,7 +112,7 @@
         height: 30px;
         position: relative;
         left: -7px;
-        @media all and (min-width: 768px) {
+        @media all and (min-width: $SM_RES) {
           left: -5px;
         }
       }
@@ -124,7 +124,7 @@
       width: 30px;
       position: relative;
       left: -7px;
-      @media all and (min-width: 768px) {
+      @media all and (min-width: $SM_RES) {
         left: -5px;
       }
     }

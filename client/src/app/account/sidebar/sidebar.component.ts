@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, Renderer2, ElementRef, HostListener, Input } from '@angular/core';
 import { AccountService } from '../account.service';
+import { AppService } from '../../app.service';
 import { ConstantsService } from '../../helpers/constants/constants.service';
 
 @Component({
@@ -12,20 +13,21 @@ export class SidebarComponent implements OnInit {
 
   constructor(private renderer: Renderer2,
     private accountService: AccountService,
-    private constantsService: ConstantsService) { }
+    private appService: AppService,
+    private constService: ConstantsService) { }
 
   ngOnInit() {
 
     // if widnow width is greater than 768px
-    if (window.screen.width > this.constantsService.SM_RES) {
+    if (window.screen.width > this.constService.SM_RES) {
       this.toggleSidebar('open');
     } else {
       this.toggleSidebar('close');
     }
 
     // window resize event from account component
-    this.accountService.windowResizeEvent.subscribe((windowWidth) => {
-      if (windowWidth > this.constantsService.SM_RES) {
+    this.appService.windowResizeEvent.subscribe((windowWidth) => {
+      if (windowWidth > this.constService.SM_RES) {
         this.toggleSidebar('open');
       } else {
         this.toggleSidebar('close');
