@@ -18,6 +18,7 @@ mongoose.connect("mongodb://localhost/szach-dev");
 // Api routes folders
 const indexRoute = require('./routes/index');
 const authRoute = require('./routes/auth');
+const tasksRoute = require('./routes/tasks');
 // const tasksRoute = require('./routes/tasks');
 
 // View Engine
@@ -48,7 +49,7 @@ app.use(function(req, res, next) {
 // routes
 app.use('/', indexRoute);
 app.use('/api/auth', authRoute);
-// app.use('/api/task', tasksRoute);
+app.use('/api/tasks', tasksRoute);
 
 app.listen(serverMainConst.SERVER_PORT, () => {
   console.log('Szach-mat app listening on port ' + serverMainConst.SERVER_PORT);

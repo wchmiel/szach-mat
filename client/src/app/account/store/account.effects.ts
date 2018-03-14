@@ -17,8 +17,8 @@ export class AccountEffects {
       console.log('----------------- from store -----------');
       console.log(action.payload);
       const fd = new FormData();
-      fd.append('image', action.payload, action.payload.name);
-      this.http.post('http://localhost:3000/api/auth/tasks/uploadFile', fd)
+      fd.append('avatar', action.payload, action.payload.name);
+      this.http.post('http://localhost:3000/api/tasks/uploadFile', fd)
         .subscribe((res) => {
           console.log(res);
         });
