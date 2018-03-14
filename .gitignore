@@ -58,6 +58,6 @@ typings/
 .env
 
 # main app constants
-./constants/private-key
-./constants/public-key
-./constants/server
+/constants/private-key
+/constants/public-key
+/constants/server
