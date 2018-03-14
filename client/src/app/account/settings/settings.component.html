@@ -34,19 +34,9 @@
       </div>
       <div class="col-md-6 sz-form-wrap">
 
+        <input type="file" (change)="onFileSelected($event)">
+        <button type="button" (click)="onUpload()">Upload</button>
 
-        <form>
-          <div class="form-group">
-            <!-- formControlName="nick"-->
-            <label for="nick" class="h5">Nick:</label>
-            <input type="text" class="form-control" id="nick" #nickInput (focus)="onInputFocus($event)" ngModel>
-          </div>
-
-          <!-- <button (click)="onSubmit()" #btnSubmitForm type="submit" class="btn btn-outline-success btn-block mt-5" [disabled]="!signupForm.valid">
-            Sign Up
-            <span class="sz-btn-spinner"></span>
-          </button> -->
-        </form>
       </div>
   </div>
 </div>

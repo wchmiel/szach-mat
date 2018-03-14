@@ -100,12 +100,22 @@ router.post('/signup', (req, res, next) => {
 });
 
 
-router.get('/myaccount', middleware.checkIfAuthenticated, middleware.handleTokenErrors, (req, res, next) => {
+router.get('/account', middleware.checkIfAuthenticated, middleware.handleTokenErrors, (req, res, next) => {
   res.json({
     status: 200,
     authorized: true
   });
 });
+
+router.post('/tasks/uploadFile', (req, res, next) => {
+  const file = req.body;
+  console.log(req);
+  res.json({
+    status: 200,
+    uploaded: true
+  });
+});
+
 
 
 module.exports = router;

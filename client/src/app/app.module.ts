@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './auth/store/auth.effects';
+import { AccountEffects } from './account/store/account.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { environment } from './../environments/environment';
@@ -39,7 +40,7 @@ import { AppService } from './app.service';
     AccountModule,
     AppRoutingModule, // the main routing module
     StoreModule.forRoot(reducers), // here we pass all our reducers bound to reducers obj
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, AccountEffects]),
     NgbModule.forRoot(),
     StoreRouterConnectingModule,
     BrowserAnimationsModule,

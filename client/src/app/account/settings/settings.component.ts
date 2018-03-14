@@ -1,4 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../store/app.reducers';
+import * as AccountActions from '../store/account.actions';
 
 @Component({
   selector: 'app-settings',
@@ -7,10 +10,20 @@ import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/co
 })
 export class SettingsComponent implements OnInit {
 
-  constructor(private renderer: Renderer2) { }
+  private selectedImg: File = null;
+
+  constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
 
+  }
+
+  onFileSelected(event) {
+    this.selectedImg = <File>event.target.files[0];
+  }
+
+  onUpload() {
+    this.store.dispatch(new AccountActions.TryUploadFile(this.selectedImg));
   }
 
 }

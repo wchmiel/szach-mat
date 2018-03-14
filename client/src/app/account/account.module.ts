@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AccountRoutingModule } from './account-routing.module';
 import { CountryPickerModule } from 'ngx-country-picker';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AccountComponent } from './account.component';
 import { IndexComponent } from './index/index.component';
@@ -21,6 +22,7 @@ import { CountryPickerService } from 'ngx-country-picker';
     SettingsComponent
   ],
   imports: [
+    HttpClientModule,
     CommonModule,
     FormsModule,
     AccountRoutingModule,
