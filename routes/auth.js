@@ -10,16 +10,6 @@ const express = require("express"),
       validators = require('../helpers/validators/auth');
 
 
-// router.get('/tasks', (req, res, next) => {
-//   Example.find({}, (err, data) => {
-//     if (err) {
-//       res.send(err);
-//     } else {
-//       res.json(data);
-//     }
-//   });
-// });
-
 router.post('/signin', (req, res, next) => {
   User.find({email: req.body.email, password: req.body.password}, (err, user) => {
     if (err) {
@@ -104,15 +94,6 @@ router.get('/account', middleware.checkIfAuthenticated, middleware.handleTokenEr
   res.json({
     status: 200,
     authorized: true
-  });
-});
-
-router.post('/tasks/uploadFile', (req, res, next) => {
-  const file = req.body;
-  console.log(req);
-  res.json({
-    status: 200,
-    uploaded: true
   });
 });
 

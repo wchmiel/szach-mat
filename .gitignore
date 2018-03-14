@@ -61,3 +61,6 @@ typings/
 /constants/private-key
 /constants/public-key
 /constants/server
+
+# uploaded files
+/files

@@ -6,11 +6,21 @@ export interface State {
 
 
 const initialState: State = {
-  file_upload_mess: null
+  file_upload_mess: {success: false, message: ''}
 };
 
 export function AccountReducer(state = initialState, action: AccountActions.AccountActions) {
-  // switch (action.type) {
-  //   case
-  // }
+  switch (action.type) {
+    case AccountActions.UPLOAD_FILE:
+      return {
+        ...state
+      };
+    case AccountActions.UPLOAD_FILE_ERR:
+      return {
+        ...state,
+        file_upload_mess: {success: action.payload.success, message: action.payload.message}
+      };
+    default:
+      return state;
+  }
 }

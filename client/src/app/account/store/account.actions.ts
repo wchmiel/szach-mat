@@ -9,4 +9,14 @@ export class TryUploadFile implements Action {
   constructor(public payload: File) {}
 }
 
-export type AccountActions = TryUploadFile;
+export class UploadFile implements Action {
+  readonly type = UPLOAD_FILE;
+  constructor(public payload: {success: boolean, message: string}) {}
+}
+
+export class UploadFileErr implements Action {
+  readonly type = UPLOAD_FILE_ERR;
+  constructor(public payload: {success: boolean, message: string}) {}
+}
+
+export type AccountActions = TryUploadFile | UploadFile | UploadFileErr;

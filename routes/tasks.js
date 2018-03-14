@@ -6,7 +6,7 @@ const express = require("express"),
       middleware = require('../helpers/middlewares/auth');
 
 
-const storage = multer.diskStorage({
+const storageAvatar = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './files/account/images'); // files path
   },
@@ -18,24 +18,25 @@ const storage = multer.diskStorage({
       err.code = 'filetype';
       return cb(err);
     } else {
-      cb(null, file.originalname + '_' +  Date.now()); // name of the uploaded file
+      const ext = file.originalname.split('.').pop();
+      cb(null, 'iddddddd' + '_' +  Date.now() + '.' + ext); // name of the uploaded file
+      // cb(null, file.originalname + '_' +  Date.now());
     }
   }
 });
 
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: 4000000 } // maks file size 5mb
+const uploadAvatar = multer({
+  storage: storageAvatar,
+  limits: { fileSize: 4000000 } // maks file size 4mb
 }).single('avatar');
 
 
-
-router.post('/uploadFile', function (req, res) {
-  upload(req, res, function (err) {
+router.post('/uploadFile', middleware.checkIfAuthenticated, middleware.handleTokenErrors, function (req, res) {
+  uploadAvatar(req, res, function (err) {
     if (err) {
       // An error occurred when uploading
       if (err.code === 'LIMIT_FILE_SIZE') {
-        res.json({success: false, message: 'File size is to large. Max limit is 5MB.'});
+        res.json({success: false, message: 'File size is to large. Max limit is 4MB.'});
       } else if (err.code === 'filetype') {
         res.json({success: false, message: 'File type is invalid. Must be .png/.jpg/.jpeg .'});
       } else {
@@ -54,15 +55,6 @@ router.post('/uploadFile', function (req, res) {
   });
 });
 
-
-// router.post('/uploadFile', upload.single('avatar'), (req, res, next) => {
-//   const file = req.file;
-//   console.log(req.file);
-//   res.json({
-//     status: 200,
-//     uploaded: true
-//   });
-// });
 
 
 module.exports = router;
