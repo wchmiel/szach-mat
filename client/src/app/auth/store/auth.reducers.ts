@@ -11,7 +11,7 @@ export interface State {
 
 const initialState: State = {
   token: null,
-  authenticated: false,
+  authenticated: null,
   expiresIn: null,
   signup_err: { valid: false, error_type: '', error_mess: '', error: '' },
   signin_err: { valid: false, error_type: '', error_mess: '', error: '' },
@@ -52,6 +52,12 @@ export function AuthReducer(state = initialState, action: AuthActions.AuthAction
       return {
         ...state,
         signin_err: { valid: false, error_type: '', error_mess: '', error: '' }
+      };
+    case AuthActions.USER_AUTHORIZED:
+    case AuthActions.USER_UNAUTHORIZED:
+      return {
+        ...state,
+        authenticated: action.payload.success
       };
     default:
       return state;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
 import * as fromApp from '../../store/app.reducers';
@@ -10,7 +10,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit, OnDestroy {
 
   private selectedImg: File = null;
   private accountServerErrSub: Subscription;
@@ -40,6 +40,10 @@ export class SettingsComponent implements OnInit {
 
   onUpload() {
     this.store.dispatch(new AccountActions.TryUploadFile(this.selectedImg));
+  }
+
+  ngOnDestroy() {
+    this.accountServerErrSub.unsubscribe();
   }
 
 }

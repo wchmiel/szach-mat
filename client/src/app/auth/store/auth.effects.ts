@@ -70,6 +70,29 @@ export class AuthEffects {
         }
       });
 
+      @Effect() authIsAuthenticated$ = this.actions$
+        .ofType(AuthActions.CHECK_AUTHENTICATION)
+        .switchMap(() => {
+          const headers = new HttpHeaders({'Content-Type': 'application/json'});
+          return this.http.get<any>('http://localhost:3000/api/auth/check/authentication', {headers: headers});
+        })
+        .map((res) => {
+          console.log('-----------from effect------------');
+          console.log(res);
+          console.log('-----------from effect------------');
+          if (res.success) {
+            return {
+              type: AuthActions.USER_AUTHORIZED,
+              payload: res
+            };
+          } else {
+            return {
+              type: AuthActions.USER_UNAUTHORIZED,
+              payload: res
+            };
+          }
+        });
+
   constructor(private actions$: Actions,
     private http: HttpClient,
     private router: Router,

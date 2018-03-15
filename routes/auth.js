@@ -97,6 +97,11 @@ router.get('/account', middleware.checkIfAuthenticated, middleware.handleTokenEr
   });
 });
 
+router.get('/check/authentication', middleware.checkIfAuthenticated, middleware.handleTokenErrors, (req, res, next) => {
+  console.log('success - user authorized!');
+  res.json({success: true, message: 'User authorized.'});
+});
+
 
 
 module.exports = router;

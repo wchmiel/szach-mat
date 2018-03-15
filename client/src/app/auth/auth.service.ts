@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as moment from 'moment';
+import * as AuthActions from './store/auth.actions';
+import * as fromApp from '../store/app.reducers';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class AuthService {
@@ -8,7 +10,7 @@ export class AuthService {
   private idTokenKey = 'sz_id_token';
   private tokenExpiresAtKey = 'sz_expires_at';
 
-  constructor(private http: HttpClient) {}
+  constructor(private store: Store<fromApp.AppState>) {}
 
   public login(tokenData: {idToken: string, expiresIn: number}) {
     return this.setSession(tokenData); // return true when token saved in localstorage
@@ -57,5 +59,22 @@ export class AuthService {
 
   public getToken() {
     return localStorage.getItem(this.idTokenKey);
+  }
+
+  public isUserAuthenticated() {
+    console.log('is user auth check from service!');
+    this.store.dispatch(new AuthActions.CheckAuthentication());
+    this.store.select('auth') // tutaj raczej nie mozna suskrybowac bo to bez sensu
+      .subscribe((res) => {
+        console.log('@@@@@@@@@@@@@@ res from sub @@@@@@@@@@');
+        if (res.authenticated !== null) {
+          if (res.authenticated) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      });
+    // return new Promise((resolve, reject)
   }
 }

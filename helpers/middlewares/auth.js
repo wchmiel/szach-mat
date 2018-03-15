@@ -19,7 +19,8 @@ const middlewareObj = {
   handleTokenErrors: function(err, req, res, next) {
     err = (typeof err !== 'undefined') ? err : false;
     if (err && err.name === 'UnauthorizedError') {
-      res.status(401).send(err);
+      // res.status(401).send(err);
+      res.json({success: false, message: 'You are not authorized.'});
     } else {
       // console.log('token ok from middleware');
       return next();
