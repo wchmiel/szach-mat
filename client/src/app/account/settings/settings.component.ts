@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs/Subscription';
 import * as fromApp from '../../store/app.reducers';
 import * as AccountActions from '../store/account.actions';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-settings',
@@ -11,10 +13,24 @@ import * as AccountActions from '../store/account.actions';
 export class SettingsComponent implements OnInit {
 
   private selectedImg: File = null;
+  private accountServerErrSub: Subscription;
 
-  constructor(private store: Store<fromApp.AppState>) { }
+  constructor(private store: Store<fromApp.AppState>,
+    private flashMessagesService: FlashMessagesService) { }
 
   ngOnInit() {
+
+    this.accountServerErrSub = this.store.select('account')
+      .map(err => err.file_upload_mess)
+      .subscribe((res) => {
+        if (res.message) {
+          if (res.success) {
+            this.flashMessagesService.show(res.message, { cssClass: 'sz-alert sz-alert-success' });
+          } else {
+            this.flashMessagesService.show('Uploading failed. ' + res.message, { cssClass: 'sz-alert sz-alert-error' });
+          }
+        }
+      });
 
   }
 

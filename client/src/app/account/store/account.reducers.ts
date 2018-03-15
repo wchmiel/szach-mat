@@ -13,7 +13,8 @@ export function AccountReducer(state = initialState, action: AccountActions.Acco
   switch (action.type) {
     case AccountActions.UPLOAD_FILE:
       return {
-        ...state
+        ...state,
+        file_upload_mess: {success: action.payload.success, message: action.payload.message}
       };
     case AccountActions.UPLOAD_FILE_ERR:
       return {

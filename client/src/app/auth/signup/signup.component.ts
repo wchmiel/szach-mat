@@ -44,7 +44,7 @@ export class SignupComponent implements OnInit, OnDestroy {
     // subscribe for the signupServerErr occur
     this.signupServerErrSub = this.signupServerErr.subscribe((err) => {
 
-      console.log(err);
+      // console.log(err);
 
       // stop btn_spinner animation
       this.renderer.removeClass(this.btnSubmitForm.nativeElement, 'sz-btn-is-loading');

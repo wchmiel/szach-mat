@@ -11,12 +11,14 @@ export class TryUploadFile implements Action {
 
 export class UploadFile implements Action {
   readonly type = UPLOAD_FILE;
-  constructor(public payload: {success: boolean, message: string}) {}
+  // constructor(public payload: {success: boolean, message: string}) {}
+  constructor(public payload) {}
 }
 
 export class UploadFileErr implements Action {
   readonly type = UPLOAD_FILE_ERR;
-  constructor(public payload: {success: boolean, message: string}) {}
+  // constructor(public payload: {success: boolean, message: string}) {}
+  constructor(public payload) {}
 }
 
 export type AccountActions = TryUploadFile | UploadFile | UploadFileErr;

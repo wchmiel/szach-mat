@@ -21,7 +21,7 @@ const middlewareObj = {
     if (err && err.name === 'UnauthorizedError') {
       res.status(401).send(err);
     } else {
-      console.log('token ok from middleware');
+      // console.log('token ok from middleware');
       return next();
     }
   }
