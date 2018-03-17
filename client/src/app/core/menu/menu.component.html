@@ -17,7 +17,10 @@
               <a class="nav-link" routerLink="/signup" (click)="toggleMenu()">Sign up</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" >About</a>
+              <a class="nav-link" (click)="[toggleMenu(), logout()]">Logout</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/account" (click)="toggleMenu()">Account</a>
             </li>
           </ul>
         </nav>

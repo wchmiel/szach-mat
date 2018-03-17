@@ -53,12 +53,12 @@ export function AuthReducer(state = initialState, action: AuthActions.AuthAction
         ...state,
         signin_err: { valid: false, error_type: '', error_mess: '', error: '' }
       };
-    case AuthActions.USER_AUTHORIZED:
-    case AuthActions.USER_UNAUTHORIZED:
-      return {
-        ...state,
-        authenticated: action.payload.success
-      };
+    // case AuthActions.USER_AUTHORIZED:
+    // case AuthActions.USER_UNAUTHORIZED:
+    //   return {
+    //     ...state,
+    //     authenticated: action.payload.success
+    //   };
     default:
       return state;
   }

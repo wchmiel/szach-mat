@@ -3,6 +3,10 @@ import * as moment from 'moment';
 import * as AuthActions from './store/auth.actions';
 import * as fromApp from '../store/app.reducers';
 import { Store } from '@ngrx/store';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+const jwtHelper = new JwtHelperService();
 
 @Injectable()
 export class AuthService {
@@ -10,7 +14,7 @@ export class AuthService {
   private idTokenKey = 'sz_id_token';
   private tokenExpiresAtKey = 'sz_expires_at';
 
-  constructor(private store: Store<fromApp.AppState>) {}
+  constructor(private store: Store<fromApp.AppState>, private http: HttpClient) {}
 
   public login(tokenData: {idToken: string, expiresIn: number}) {
     return this.setSession(tokenData); // return true when token saved in localstorage
@@ -61,20 +65,16 @@ export class AuthService {
     return localStorage.getItem(this.idTokenKey);
   }
 
-  public isUserAuthenticated() {
-    console.log('is user auth check from service!');
-    this.store.dispatch(new AuthActions.CheckAuthentication());
-    this.store.select('auth') // tutaj raczej nie mozna suskrybowac bo to bez sensu
-      .subscribe((res) => {
-        console.log('@@@@@@@@@@@@@@ res from sub @@@@@@@@@@');
-        if (res.authenticated !== null) {
-          if (res.authenticated) {
-            return true;
-          } else {
-            return false;
-          }
-        }
-      });
-    // return new Promise((resolve, reject)
+  public isUserAuthenticated(): boolean {
+    const token = localStorage.getItem(this.idTokenKey);
+    return !jwtHelper.isTokenExpired(token);
   }
+
+  // public isUserAuthenticated() {
+  //   console.log('is user auth check from service!');
+  //   this.store.dispatch(new AuthActions.CheckAuthentication());
+  //
+  //   // return new Promise((resolve, reject)
+  // }
+
 }

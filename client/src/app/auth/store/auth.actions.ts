@@ -9,9 +9,9 @@ export const SIGNUP_MESS_SHOWN = 'SIGNUP_MESS_SHOWN';
 export const SIGNIN = 'SIGNIN';
 export const SIGNIN_ERR = 'SIGNIN_ERR';
 export const SIGNIN_MESS_SHOWN = 'SIGNIN_MESS_SHOWN';
-export const CHECK_AUTHENTICATION = 'CHECK_AUTHENTICATION';
-export const USER_AUTHORIZED = 'USER_AUTHORIZED';
-export const USER_UNAUTHORIZED = 'USER_UNAUTHORIZED';
+// export const CHECK_AUTHENTICATION = 'CHECK_AUTHENTICATION';
+// export const USER_AUTHORIZED = 'USER_AUTHORIZED';
+// export const USER_UNAUTHORIZED = 'USER_UNAUTHORIZED';
 // export const SET_TOKEN = 'SET_TOKEN';
 // export const LOGOUT = 'LOGOUT';
 
@@ -52,19 +52,19 @@ export class SigninMessShown implements Action {
   readonly type = SIGNIN_MESS_SHOWN;
 }
 
-export class CheckAuthentication implements Action {
-  readonly type = CHECK_AUTHENTICATION;
-}
-
-export class UserAuthorized implements Action {
-  readonly type = USER_AUTHORIZED;
-  constructor(public payload: {success: boolean, message: string}) {}
-}
-
-export class UserUnAuthorized implements Action {
-  readonly type = USER_UNAUTHORIZED;
-  constructor(public payload: {success: boolean, message: string}) {}
-}
+// export class CheckAuthentication implements Action {
+//   readonly type = CHECK_AUTHENTICATION;
+// }
+//
+// export class UserAuthorized implements Action {
+//   readonly type = USER_AUTHORIZED;
+//   constructor(public payload: {success: boolean, message: string}) {}
+// }
+//
+// export class UserUnAuthorized implements Action {
+//   readonly type = USER_UNAUTHORIZED;
+//   constructor(public payload: {success: boolean, message: string}) {}
+// }
 
 export type AuthActions =
   TrySignup |
@@ -74,7 +74,7 @@ export type AuthActions =
   TrySignin |
   Signin |
   SigninErr |
-  SigninMessShown |
-  CheckAuthentication |
-  UserAuthorized |
-  UserUnAuthorized;
+  SigninMessShown;
+  // CheckAuthentication |
+  // UserAuthorized |
+  // UserUnAuthorized;
