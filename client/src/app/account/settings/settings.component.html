@@ -33,9 +33,15 @@
         </form>
       </div>
       <div class="col-md-6 sz-form-wrap">
+        <div class="img-upload" (click)="fileInput.click()">
+          <img src="./assets/images/man.svg" alt="avatar" class="img-thumbnail img-responsive">
+        </div>
+        <p id="img-label" (click)="fileInput.click()">
+          Click to edit
+        </p>
 
-        <input type="file" (change)="onFileSelected($event)">
-        <button type="button" (click)="onUpload()">Upload</button>
+        <input id="file-input" #fileInput type="file" (change)="onFileSelected($event)">
+        <button type="button" (click)="onUpload()" class="btn btn-dark" >Upload</button>
 
       </div>
   </div>

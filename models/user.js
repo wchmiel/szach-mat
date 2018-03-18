@@ -8,7 +8,7 @@ var userSchema = mongoose.Schema({
   password: String,
   name: String,
   surname: String,
-  avatar: String,
+  photo: { type: String, default: 'default.svg'},
   created_at: { type: Date, default: Date.now },
   last_login: { type: Date }
 });

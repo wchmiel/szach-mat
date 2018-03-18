@@ -21,7 +21,7 @@ router.post('/signin', (req, res, next) => {
 
       // Creating JWT
       try {
-        const userId = toString(user[0]._id);
+        const userId = String(user[0]._id);
 
         // PRIVATE KEY
         const options = {

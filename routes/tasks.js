@@ -3,6 +3,8 @@
 const express = require("express"),
       router = express.Router(),
       multer  = require('multer'),
+      User = require("../models/user"),
+      jwt = require("jsonwebtoken"),
       middleware = require('../helpers/middlewares/auth');
 
 
@@ -19,8 +21,8 @@ const storageAvatar = multer.diskStorage({
       return cb(err);
     } else {
       const ext = file.originalname.split('.').pop();
-      cb(null, 'iddddddd' + '_' +  Date.now() + '.' + ext); // name of the uploaded file
-      // cb(null, file.originalname + '_' +  Date.now());
+      // cb(null, req.user.sub + '_' +  Date.now() + '.' + ext); // name of the uploaded file
+      cb(null, req.user.sub + '.' + ext); // name of the uploaded file
     }
   }
 });
@@ -48,7 +50,16 @@ router.post('/uploadFile', middleware.checkIfAuthenticated, middleware.handleTok
       if (!req.file) {
         res.json({success: false, message: 'No file was selected.'});
       } else {
-        res.json({success: true, message: 'File was uploaded.'});
+
+        // save user photo name to db
+        User.findByIdAndUpdate(req.user.sub, {photo: req.file.filename}, (err, user) => {
+          if (err) {
+            res.json({success: false, message: 'There was a problem with database. Try again later.'});
+          } else {
+            res.json({success: true, message: 'File was uploaded.'});
+          }
+        });
+
       }
     }
 
