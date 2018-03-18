@@ -8,11 +8,13 @@ import { AuthService } from './auth.service';
 
 import { SignupComponent } from './signup/signup.component';
 import { SigninComponent } from './signin/signin.component';
+import { MenuComponent } from '../core/menu/menu.component';
 
 @NgModule({
   declarations: [
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    MenuComponent
   ],
   imports: [
     CommonModule,
@@ -24,6 +26,9 @@ import { SigninComponent } from './signin/signin.component';
     //   disableBtn: true,
     //   btnLoadingClass: 'sz-btn-is-loading',
     // })
+  ],
+  exports: [
+    MenuComponent
   ],
   providers: [
     AuthService

@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
-import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -11,7 +10,7 @@ export class MenuComponent implements OnInit {
   @ViewChild('hamburger') hamburger: ElementRef;
   @ViewChild('menuComponent') menuComponent: ElementRef;
 
-  constructor(private renderer: Renderer2, private authService: AuthService) { }
+  constructor(private renderer: Renderer2) { }
 
   ngOnInit() {
   }
@@ -27,10 +26,6 @@ export class MenuComponent implements OnInit {
       this.renderer.removeClass(this.hamburger.nativeElement, 'icon-bar-eff-end');
       this.renderer.removeClass(this.menuComponent.nativeElement, 'sz-menu-active');
     }
-  }
-
-  logout() {
-    this.authService.logout();
   }
 
 }

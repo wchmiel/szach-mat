@@ -1,5 +1,9 @@
 @import '~styles/abstracts/variables';
 
+.nav-link {
+  cursor: pointer;
+}
+
 .sz-sidebar-content {
   font-family: "Bungee Inline", cursive;
   padding: 0px 15px;

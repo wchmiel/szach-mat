@@ -5,6 +5,7 @@ import * as fromApp from '../store/app.reducers';
 import { Store } from '@ngrx/store';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 
 const jwtHelper = new JwtHelperService();
 
@@ -14,7 +15,7 @@ export class AuthService {
   private idTokenKey = 'sz_id_token';
   private tokenExpiresAtKey = 'sz_expires_at';
 
-  constructor(private store: Store<fromApp.AppState>, private http: HttpClient) {}
+  constructor(private store: Store<fromApp.AppState>, private http: HttpClient, private router: Router) {}
 
   public login(tokenData: {idToken: string, expiresIn: number}) {
     return this.setSession(tokenData); // return true when token saved in localstorage
@@ -22,6 +23,7 @@ export class AuthService {
 
   public logout() {
     this.destroySession();
+    this.router.navigate(['/']);
   }
 
   private setSession(authResult: {idToken: string, expiresIn: number}) {

@@ -46,7 +46,7 @@ export class AuthEffects {
 
           // token saved correctly
           if (tokenSaved) {
-            this.router.navigate(['/']);
+            this.router.navigate(['/account']);
             return {
               type: AuthActions.SIGNIN,
               payload: { idToken: res.idToken, expiresIn: res.expiresIn }

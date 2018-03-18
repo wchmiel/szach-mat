@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, Renderer2, ElementRef, HostListener, Inpu
 import { AccountService } from '../account.service';
 import { AppService } from '../../app.service';
 import { ConstantsService } from '../../helpers/constants/constants.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,7 +15,8 @@ export class SidebarComponent implements OnInit {
   constructor(private renderer: Renderer2,
     private accountService: AccountService,
     private appService: AppService,
-    private constService: ConstantsService) { }
+    private constService: ConstantsService,
+    private authService: AuthService) { }
 
   ngOnInit() {
 
@@ -55,6 +57,10 @@ export class SidebarComponent implements OnInit {
       this.renderer.removeClass(this.sidebarCont.nativeElement, 'sz-sidebar-cont-open');
       this.renderer.addClass(this.sidebarCont.nativeElement, 'sz-sidebar-cont-close');
     }
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
 }

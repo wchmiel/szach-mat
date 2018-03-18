@@ -21,7 +21,6 @@ import { AuthInterceptor } from './helpers/interceptors/auth.interceptor';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './core/home/home.component';
-import { MenuComponent } from './core/menu/menu.component';
 
 import { ConstantsService } from './helpers/constants/constants.service';
 import { AppService } from './app.service';
@@ -29,8 +28,7 @@ import { AppService } from './app.service';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    MenuComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
