@@ -7,11 +7,12 @@ const express = require("express"),
       jwt = require("jsonwebtoken"),
       fs = require('fs'),
       middleware = require('../helpers/middlewares/auth'),
-      validators = require('../helpers/validators/auth');
+      validators = require('../helpers/validators/auth'),
+      sha256 = require('js-sha256');
 
 
 router.post('/signin', (req, res, next) => {
-  User.find({email: req.body.email, password: req.body.password}, (err, user) => {
+  User.find({email: req.body.email, password: sha256(req.body.password)}, (err, user) => {
     if (err) {
       res.json({valid: false, error_type: 'db', error_mess: "We have problem with our database. Try again later.", error: err});
     } else if (!user.length) {
@@ -70,7 +71,7 @@ router.post('/signup', (req, res, next) => {
             User.create({
               nick: req.body.nick,
               email: req.body.email,
-              password: req.body.password
+              password: sha256(req.body.password)
             }, (err, user) => {
               if(err) {
                 res.json({valid: false, error_type: 'db', error_mess: "Database error. Try again later.", error: err});
