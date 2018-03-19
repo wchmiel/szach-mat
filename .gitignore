@@ -63,4 +63,4 @@ typings/
 /constants/server
 
 # uploaded files
-/files
+/public

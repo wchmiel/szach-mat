@@ -31,7 +31,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set static folder
-app.use(express.static(__dirname + "/client"));
+// app.use(express.static(__dirname + "/client"));
+app.use('/public', express.static(path.join(__dirname + '/public')));
 // app.set("view engine", "ejs");
 
 //use to override http method (mandatory to use PUT, DESTROY methods)

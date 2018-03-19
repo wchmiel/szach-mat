@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import * as fromApp from '../../store/app.reducers';
 import * as AccountActions from '../store/account.actions';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-settings',
@@ -15,11 +16,17 @@ export class SettingsComponent implements OnInit, OnDestroy {
   private selectedImg: File = null;
   private accountServerErrSub: Subscription;
   private flashMessInit =  false; // false - before component initialization
+  public settingsForm: FormGroup;
 
   constructor(private store: Store<fromApp.AppState>,
     private flashMessagesService: FlashMessagesService) { }
 
   ngOnInit() {
+
+    this.settingsForm = new FormGroup({
+      'name': new FormControl(null),
+      'surname': new FormControl(null)
+    });
 
     this.accountServerErrSub = this.store.select('account')
       .map(err => err.file_upload_mess)
@@ -49,6 +56,11 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.accountServerErrSub.unsubscribe();
+  }
+
+  onSubmit() {
+    console.log(this.settingsForm.value);
+    this.store.dispatch(new AccountActions.TryEditUserDatas(this.settingsForm.value));
   }
 
 }

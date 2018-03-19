@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AccountRoutingModule } from './account-routing.module';
 import { CountryPickerModule } from 'ngx-country-picker';
@@ -24,6 +24,7 @@ import { CountryPickerService } from 'ngx-country-picker';
   imports: [
     HttpClientModule,
     CommonModule,
+    ReactiveFormsModule,
     FormsModule,
     AccountRoutingModule,
     CountryPickerModule.forRoot()

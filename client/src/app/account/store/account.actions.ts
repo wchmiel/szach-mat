@@ -3,6 +3,7 @@ import { Action } from '@ngrx/store';
 export const TRY_UPLOAD_FILE = 'TRY_UPLOAD_FILE';
 export const UPLOAD_FILE = 'UPLOAD_FILE';
 export const UPLOAD_FILE_ERR = 'UPLOAD_FILE_ERR';
+export const TRY_EDIT_USER_DATA = 'TRY_EDIT_USER_DATA';
 
 export class TryUploadFile implements Action {
   readonly type = TRY_UPLOAD_FILE;
@@ -21,4 +22,10 @@ export class UploadFileErr implements Action {
   constructor(public payload) {}
 }
 
-export type AccountActions = TryUploadFile | UploadFile | UploadFileErr;
+export class TryEditUserDatas implements Action {
+  readonly type = TRY_EDIT_USER_DATA;
+  // constructor(public payload: {success: boolean, message: string}) {}
+  constructor(public payload) {}
+}
+
+export type AccountActions = TryUploadFile | UploadFile | UploadFileErr | TryEditUserDatas;

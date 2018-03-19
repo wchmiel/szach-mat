@@ -5,12 +5,14 @@ const express = require("express"),
       multer  = require('multer'),
       User = require("../models/user"),
       jwt = require("jsonwebtoken"),
-      middleware = require('../helpers/middlewares/auth');
+      middleware = require('../helpers/middlewares/auth'),
+      { check, validationResult } = require('express-validator/check'),
+      { matchedData, sanitize, sanitizeBody } = require('express-validator/filter');
 
 
 const storageAvatar = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './files/account/images'); // files path
+    cb(null, './public/files/account/images'); // files path
   },
   filename: function (req, file, cb) {
 
@@ -64,6 +66,29 @@ router.post('/uploadFile', middleware.checkIfAuthenticated, middleware.handleTok
     }
 
   });
+});
+
+router.post('/account/update/userdata',
+  middleware.checkIfAuthenticated,
+  middleware.handleTokenErrors,
+  sanitizeBody('trim').trim(),
+  function (req, res) {
+  console.log(req.body.trim);
+  // res.send('dziala');
+  if (!req.body.name && !req.body.surname) {
+    res.json({success: false, message: 'Empty filds.'});
+  } else {
+    const name = sanitize(req.body.name).toString();
+    const surname = sanitize(req.body.surname);
+    // console.log(name);
+    User.findByIdAndUpdate(req.user.sub, {name: name}, (err, user) => {
+      if (err) {
+        res.json({success: false, message: 'There was a problem with database. Try again later.'});
+      } else {
+        res.json({success: true, message: 'Data updated successfully.'});
+      }
+    });
+  }
 });
 
 

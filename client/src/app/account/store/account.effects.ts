@@ -58,6 +58,16 @@ export class AccountEffects {
 
     });
 
+  @Effect({dispatch: false})
+    accountEditUserData$ = this.actions$
+    .ofType(AccountActions.TRY_EDIT_USER_DATA)
+    .switchMap((action: AccountActions.TryEditUserDatas) => {
+      return this.http.post('http://localhost:3000/api/tasks/account/update/userdata', action.payload);
+    })
+    .map((res) => {
+      console.log(res);
+    });
+
 
   constructor(private actions$: Actions,
     private http: HttpClient,
