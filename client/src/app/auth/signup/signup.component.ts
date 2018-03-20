@@ -4,7 +4,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as AuthActions from '../store/auth.actions';
 import * as fromApp from '../../store/app.reducers';
-import { UserDatas } from '../../models/user-datas.model';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -71,7 +70,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    const newUser: UserDatas = {
+    const newUser = {
       nick: this.signupForm.value['nick'],
       email: this.signupForm.value['email'],
       password: this.signupForm.value.passFields['password']

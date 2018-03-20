@@ -4,20 +4,22 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as AuthActions from './auth.actions';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-import { UserDatas } from '../../models/user-datas.model';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { ConstantsService } from '../../helpers/constants/constants.service';
 import { AuthService } from '../auth.service';
 
 @Injectable()
 export class AuthEffects {
+
+  private apiUrl = this.constantsService.API_HOST;
 
   // the action will occurs when we try to signup
   @Effect() authSignup$ = this.actions$
     .ofType(AuthActions.TRY_SIGNUP)
     .switchMap((action: AuthActions.TrySignup) => {
       const headers = new HttpHeaders({'Content-Type': 'application/json'});
-      return this.http.post<any>('http://localhost:3000/api/auth/signup', action.payload, {headers: headers});
+      return this.http.post<any>(this.apiUrl + '/api/auth/signup', action.payload, {headers: headers});
     })
     .map((res) => {
       if (res.valid) {
@@ -37,7 +39,7 @@ export class AuthEffects {
       .ofType(AuthActions.TRY_SIGNIN)
       .switchMap((action: AuthActions.TrySignin) => {
         const headers = new HttpHeaders({'Content-Type': 'application/json'});
-        return this.http.post<any>('http://localhost:3000/api/auth/signin', action.payload, {headers: headers});
+        return this.http.post<any>(this.apiUrl + '/api/auth/signin', action.payload, {headers: headers});
       })
       .map((res) => {
         if (res.valid) {
@@ -96,5 +98,6 @@ export class AuthEffects {
   constructor(private actions$: Actions,
     private http: HttpClient,
     private router: Router,
+    private constantsService: ConstantsService,
     private authService: AuthService) {}
 }

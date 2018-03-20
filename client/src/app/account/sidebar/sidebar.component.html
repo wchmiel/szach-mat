@@ -13,8 +13,14 @@
       </div>
     </div>
     <div class="sz-avatar-cont">
-      <img src="./assets/images/man.svg" class="img-responsive sz-avatar-sm-circle" alt="">
-      <span>wojton124</span>
+      <img
+        [(ngModel)]="avatarPath"
+        ngDefaultControl
+        src="{{ avatarPath }}"
+        class="img-responsive sz-avatar-sm-circle" alt="">
+      <span [(ngModel)]="userData.nick" ngDefaultControl>
+        {{ userData.nick }}
+      </span>
     </div>
     <div class="sz-nav-cont">
       <nav>

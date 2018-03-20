@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-import { UserDatas } from '../../models/user-datas.model';
 
 export const TRY_SIGNUP = 'TRY_SIGNUP';
 export const TRY_SIGNIN = 'TRY_SIGNIN';
@@ -17,7 +16,7 @@ export const SIGNIN_MESS_SHOWN = 'SIGNIN_MESS_SHOWN';
 
 export class TrySignup implements Action {
   readonly type = TRY_SIGNUP;
-  constructor(public payload: UserDatas) {}
+  constructor(public payload) {}
 }
 
 export class Signup implements Action {

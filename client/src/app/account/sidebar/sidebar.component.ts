@@ -1,16 +1,22 @@
-import { Component, OnInit, ViewChild, Renderer2, ElementRef, HostListener, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, Renderer2, ElementRef, HostListener, Input } from '@angular/core';
 import { AccountService } from '../account.service';
 import { AppService } from '../../app.service';
 import { ConstantsService } from '../../helpers/constants/constants.service';
 import { AuthService } from '../../auth/auth.service';
+import { UserData } from '../../models/user.model';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, OnDestroy {
   @Input() @ViewChild('sidebarCont') sidebarCont: ElementRef;
+  public userData = new UserData;
+  public apiUrl = this.constService.API_HOST;
+  public avatarPath = '';
+  private userSubscription: Subscription;
 
   constructor(private renderer: Renderer2,
     private accountService: AccountService,
@@ -19,6 +25,13 @@ export class SidebarComponent implements OnInit {
     private authService: AuthService) { }
 
   ngOnInit() {
+    this.userSubscription = this.accountService.userDataChanged.subscribe((data) => {
+      this.userData = data;
+      this.avatarPath = this.apiUrl + '/public/files/account/images/' + this.userData.photo;
+    });
+
+    this.userData = this.accountService.userData;
+    this.avatarPath = this.apiUrl + '/public/files/account/images/' + this.userData.photo;
 
     // if widnow width is greater than 768px
     if (window.screen.width > this.constService.SM_RES) {
@@ -61,6 +74,10 @@ export class SidebarComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
   }
 
 }
