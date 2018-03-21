@@ -1,0 +1,17 @@
+@import '~styles/abstracts/variables';
+@import '~styles/abstracts/mixins';
+
+.sz-game-cont {
+  position: relative;
+  height: 100%;
+
+  .sz-board-cont {
+    @include centerer(true, false);
+    top: 0px;
+    bottom: 0px;
+
+    img.board {
+
+    }
+  }
+}

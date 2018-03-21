@@ -3,10 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../auth/auth-guard.service';
 
 import { GameComponent } from './game.component';
+import { IndexComponent } from './index/index.component';
 
 const gameRoutes: Routes = [
   { path: 'game', canActivate: [AuthGuard], component: GameComponent, children: [
-    // { path: '', component: IndexComponent }
+    { path: '', component: IndexComponent }
   ]}
 ];
 

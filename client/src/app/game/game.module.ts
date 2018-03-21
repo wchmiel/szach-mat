@@ -10,11 +10,13 @@ import { GameComponent } from './game.component';
 import { ConstantsService } from '../helpers/constants/constants.service';
 import { GameService } from './game.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { IndexComponent } from './index/index.component';
 
 @NgModule({
   declarations: [
     GameComponent,
-    SidebarComponent
+    SidebarComponent,
+    IndexComponent
   ],
   imports: [
     CommonModule,

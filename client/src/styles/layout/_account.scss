@@ -36,10 +36,12 @@
   top: 15px;
   left: 15px;
   right: 15px;
+  bottom: 15px;
   @media all and (min-width: $SM_RES) {
     top: 30px;
     left: 30px;
     right: 30px;
+    bottom: 30px;
   }
 }
 
