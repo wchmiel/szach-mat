@@ -8,7 +8,8 @@
 
 // 2. Vendors
 @import
-  './vendors/bootstrap';
+  './vendors/bootstrap',
+  './vendors/ng-material';
 
 $fa-font-path: "~font-awesome/fonts";
 @import '~font-awesome/scss/font-awesome';

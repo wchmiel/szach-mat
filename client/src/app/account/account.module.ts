@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { AccountRoutingModule } from './account-routing.module';
 import { CountryPickerModule } from 'ngx-country-picker';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgMaterialModule } from '../helpers/modules/ng-material/ng-material.module';
 
 import { AccountComponent } from './account.component';
 import { IndexComponent } from './index/index.component';
@@ -27,6 +29,8 @@ import { CountryPickerService } from 'ngx-country-picker';
     ReactiveFormsModule,
     FormsModule,
     AccountRoutingModule,
+    BrowserAnimationsModule,
+    NgMaterialModule,
     CountryPickerModule.forRoot()
   ],
   providers: [

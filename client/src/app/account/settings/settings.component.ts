@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
@@ -31,9 +32,17 @@ export class SettingsComponent implements OnInit, OnDestroy {
   constructor(private store: Store<fromApp.AppState>,
     private accountService: AccountService,
     private constService: ConstantsService,
+    private route: ActivatedRoute,
     private flashMessagesService: FlashMessagesService) { }
 
   ngOnInit() {
+
+    console.log(this.route.data);
+
+    this.settingsForm = new FormGroup({
+      'name': new FormControl(null),
+      'surname': new FormControl(null)
+    });
 
     this.userSubscription = this.accountService.userDataChanged
       .subscribe((data) => {
@@ -46,14 +55,13 @@ export class SettingsComponent implements OnInit, OnDestroy {
       });
 
     this.userData = this.accountService.userData;
-    if (this.userData.photo) {
-      this.photoPath = this.apiUrl + '/public/files/account/images/' + this.userData.photo;
+    if (this.userData.name) {
+      this.settingsForm.setValue({
+        name: this.userData.name,
+        surname: this.userData.surname
+      });
     }
-
-    this.settingsForm = new FormGroup({
-      'name': new FormControl(null),
-      'surname': new FormControl(null)
-    });
+    this.photoPath = this.userData.photo ? this.apiUrl + '/public/files/account/images/' + this.userData.photo : '';
 
     this.accountServerErrSub = this.store.select('account')
       .map(message => message.flash_message)

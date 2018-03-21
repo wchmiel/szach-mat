@@ -7,7 +7,8 @@ import { NotAuthGuard } from './auth/not-auth-guard.service';
 
 
 const appRoutes: Routes = [
-  { path: '', canActivate: [NotAuthGuard], component: HomeComponent}
+  { path: '', canActivate: [NotAuthGuard], component: HomeComponent},
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

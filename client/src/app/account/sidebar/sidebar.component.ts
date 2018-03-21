@@ -5,6 +5,8 @@ import { ConstantsService } from '../../helpers/constants/constants.service';
 import { AuthService } from '../../auth/auth.service';
 import { UserData } from '../../models/user.model';
 import { Subscription } from 'rxjs/Subscription';
+import { MatDialog } from '@angular/material';
+import { DialogComponent } from '../../core/dialog/dialog.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -22,6 +24,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     private accountService: AccountService,
     private appService: AppService,
     private constService: ConstantsService,
+    private dialog: MatDialog,
     private authService: AuthService) { }
 
   ngOnInit() {
@@ -75,7 +78,19 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.authService.logout();
+    this.openDialog();
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '400px',
+      data: 'Do you really want to logout from your account?'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'Confirm') {
+        this.authService.logout();
+      }
+    });
   }
 
   ngOnDestroy() {

@@ -12,12 +12,18 @@ $MD_RES: 992px;
 $LG_RES: 1200px;
 
 // Z-index variables
-$alerts-z-index: 9999;
-$sz-menu-content-z-index: 9998;
-$sz-menu-cont-z-index: 9997;
-$sz-menu-grey-bg-z-index: 9996;
-$sz-sidebar-cont-z-index: 9995;
-$sz-sidebar-arr-z-index: 9994;
+// $alerts-z-index: 9999;
+// $sz-menu-content-z-index: 9998;
+// $sz-menu-cont-z-index: 9997;
+// $sz-menu-grey-bg-z-index: 9996;
+// $sz-sidebar-cont-z-index: 9995;
+// $sz-sidebar-arr-z-index: 9994;
+$alerts-z-index: 9;
+$sz-menu-content-z-index: 8;
+$sz-menu-cont-z-index: 7;
+$sz-menu-grey-bg-z-index: 6;
+$sz-sidebar-cont-z-index: 5;
+$sz-sidebar-arr-z-index: 4;
 
 $sz-home-cont-z-index: -1;
 

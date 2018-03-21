@@ -17,6 +17,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { environment } from './../environments/environment';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgMaterialModule } from './helpers/modules/ng-material/ng-material.module';
 import { AuthInterceptor } from './helpers/interceptors/auth.interceptor';
 
 import { AppComponent } from './app.component';
@@ -24,11 +25,13 @@ import { HomeComponent } from './core/home/home.component';
 
 import { ConstantsService } from './helpers/constants/constants.service';
 import { AppService } from './app.service';
+import { DialogComponent } from './core/dialog/dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -42,9 +45,13 @@ import { AppService } from './app.service';
     NgbModule.forRoot(),
     StoreRouterConnectingModule,
     BrowserAnimationsModule,
+    NgMaterialModule,
     FlashMessagesModule.forRoot(),
     // we will add it here only when environment is not production
     !environment.production ? StoreDevtoolsModule.instrument() : []
+  ],
+  entryComponents: [
+    DialogComponent
   ],
   providers: [
     ConstantsService,
