@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 import * as fromApp from '../../store/app.reducers';
+import * as fromAccount from '../store/account.reducers';
 import * as AccountActions from '../store/account.actions';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -21,6 +23,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   private flashMessInit =  false; // false - before component initialization
   public settingsForm: FormGroup;
   public userData = new UserData;
+  // public accountState: Observable<fromAccount.State>;
   public apiUrl = this.constService.API_HOST;
   public photoPath = '';
   private userSubscription: Subscription;
@@ -32,13 +35,20 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.userSubscription = this.accountService.userDataChanged.subscribe((data) => {
-      this.userData = data;
-      this.photoPath = this.apiUrl + '/public/files/account/images/' + this.userData.photo;
-    });
+    this.userSubscription = this.accountService.userDataChanged
+      .subscribe((data) => {
+        this.userData = data;
+        this.photoPath = this.apiUrl + '/public/files/account/images/' + this.userData.photo;
+        this.settingsForm.setValue({
+          name: this.userData.name,
+          surname: this.userData.surname
+        });
+      });
 
     this.userData = this.accountService.userData;
-    this.photoPath = this.apiUrl + '/public/files/account/images/' + this.userData.photo;
+    if (this.userData.photo) {
+      this.photoPath = this.apiUrl + '/public/files/account/images/' + this.userData.photo;
+    }
 
     this.settingsForm = new FormGroup({
       'name': new FormControl(null),

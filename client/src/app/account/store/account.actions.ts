@@ -7,6 +7,7 @@ export const TRY_EDIT_USER_DATA = 'TRY_EDIT_USER_DATA';
 export const EDIT_USER_DATA = 'EDIT_USER_DATA';
 export const EDIT_USER_DATA_ERR = 'EDIT_USER_DATA_ERR';
 export const GET_USER_DATA = 'GET_USER_DATA';
+export const SAVE_USER_DATA = 'SAVE_USER_DATA';
 
 export class TryUploadFile implements Action {
   readonly type = TRY_UPLOAD_FILE;
@@ -45,6 +46,11 @@ export class GetUserData implements Action {
   readonly type = GET_USER_DATA;
 }
 
+export class SaveUserData implements Action {
+  readonly type = SAVE_USER_DATA;
+  constructor(public payload) {}
+}
+
 export type AccountActions =
 TryUploadFile |
 UploadFile |
@@ -52,4 +58,5 @@ UploadFileErr |
 TryEditUserData |
 EditUserData |
 EditUserDataErr |
-GetUserData;
+GetUserData |
+SaveUserData;

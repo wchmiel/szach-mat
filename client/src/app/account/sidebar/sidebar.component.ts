@@ -31,7 +31,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
     });
 
     this.userData = this.accountService.userData;
-    this.avatarPath = this.apiUrl + '/public/files/account/images/' + this.userData.photo;
+    if (this.userData.photo) {
+      this.avatarPath = this.apiUrl + '/public/files/account/images/' + this.userData.photo;
+    }
 
     // if widnow width is greater than 768px
     if (window.screen.width > this.constService.SM_RES) {

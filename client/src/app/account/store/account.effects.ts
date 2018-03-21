@@ -95,6 +95,7 @@ export class AccountEffects {
     .map((res) => {
       if (res['success']) {
         this.accountService.saveUserData(res['userData']);
+        this.store.dispatch(new AccountActions.SaveUserData(res['userData']));
       } else {
         // when error from db when fetching user data logout user
         this.authService.logout();
