@@ -7,6 +7,7 @@ import { reducers } from './store/app.reducers';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthModule } from './auth/auth.module';
 import { AccountModule } from './account/account.module';
+import { GameModule } from './game/game.module';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
@@ -31,7 +32,7 @@ import { DialogComponent } from './core/dialog/dialog.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    DialogComponent
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +40,7 @@ import { DialogComponent } from './core/dialog/dialog.component';
     ReactiveFormsModule,
     AuthModule,
     AccountModule,
+    GameModule,
     AppRoutingModule, // the main routing module
     StoreModule.forRoot(reducers), // here we pass all our reducers bound to reducers obj
     EffectsModule.forRoot([AuthEffects, AccountEffects]),

@@ -12,42 +12,5 @@
         <span> Szach-Mat </span>
       </div>
     </div>
-    <div class="sz-avatar-cont">
-      <img
-        [(ngModel)]="avatarPath"
-        ngDefaultControl
-        src="{{ avatarPath }}"
-        class="img-responsive sz-avatar-sm-circle" alt="">
-      <span [(ngModel)]="userData.nick" ngDefaultControl>
-        {{ userData.nick }}
-      </span>
-    </div>
-    <div class="sz-nav-cont">
-      <nav>
-        <div class="nav flex-column">
-          <a class="nav-link" [routerLink]="['/game']">
-            <i class="fa fa-gamepad"></i>
-            Play
-          </a>
-          <a class="nav-link" >
-            <i class="fa fa-line-chart"></i>
-            Ranking
-          </a>
-          <!-- <a class="nav-link" >History</a> -->
-          <a class="nav-link" >
-            <i class="fa fa-comments"></i>
-            Messages
-          </a>
-          <a class="nav-link" [routerLink]="['/account', 'settings']">
-            <i class="fa fa-cogs"></i>
-            Settings
-          </a>
-          <a class="nav-link" (click)="logout()">
-            <i class="fa fa-sign-out"></i>
-            Logout
-          </a>
-        </div>
-      </nav>
-    </div>
   </div>
 </div>
