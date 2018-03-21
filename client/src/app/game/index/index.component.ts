@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/co
 
 import { AppService } from '../../app.service';
 import { ConstantsService } from '../../helpers/constants/constants.service';
+import { ResizeService } from '../engine/resize.service';
 
 @Component({
   selector: 'app-index',
@@ -17,11 +18,12 @@ export class IndexComponent implements OnInit {
 
   constructor(private constService: ConstantsService,
     private renderer: Renderer2,
+    private resizeService: ResizeService,
     private appService: AppService) { }
 
   ngOnInit() {
 
-    this.setBoardDimensions();
+    // this.setBoardDimensions();
 
     // widnow resize event from app component
     this.appService.windowResizeEvent.subscribe((windowWidth: number) => {
@@ -31,16 +33,12 @@ export class IndexComponent implements OnInit {
   }
 
   setBoardDimensions() {
-    const boardContHeight = this.boardCont.nativeElement.clientHeight;
-    const boardContWidth = this.boardCont.nativeElement.clientWidth;
-    const gameContWidth = this.gameCont.nativeElement.clientWidth;
-    console.log('boardContWidth -> ' + boardContWidth);
-    console.log('gameContWidth -> ' + gameContWidth);
-    this.renderer.setStyle(this.boardCont.nativeElement.firstElementChild, 'height', boardContHeight + 'px');
+    const dimensions = this.resizeService.countBoardDim(this.boardCont, this.gameCont);
 
-    if (gameContWidth < boardContWidth) {
-      this.renderer.setStyle(this.boardCont.nativeElement.firstElementChild, 'width', gameContWidth + 'px');
-    }
+    this.renderer.setStyle(this.boardCont.nativeElement.firstElementChild, 'height', dimensions.height + 'px');
+    this.renderer.setStyle(this.boardCont.nativeElement.firstElementChild, 'width', dimensions.width + 'px');
+
+    // console.log(dimensions);
   }
 
 }

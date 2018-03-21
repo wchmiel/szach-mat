@@ -6,11 +6,12 @@ import { NgMaterialModule } from '../helpers/modules/ng-material/ng-material.mod
 import { GameRoutingModule } from './game-routing.module';
 
 import { GameComponent } from './game.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { IndexComponent } from './index/index.component';
 
 import { ConstantsService } from '../helpers/constants/constants.service';
 import { GameService } from './game.service';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { IndexComponent } from './index/index.component';
+import { ResizeService } from './engine/resize.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { IndexComponent } from './index/index.component';
   ],
   providers: [
     ConstantsService,
-    GameService
+    GameService,
+    ResizeService
   ]
 })
 

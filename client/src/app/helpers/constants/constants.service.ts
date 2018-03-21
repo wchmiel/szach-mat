@@ -4,4 +4,6 @@ export class ConstantsService {
   public SM_RES = 768;
   public MD_RES = 992;
   public LG_RES = 1200;
+  public BOARD_WIDTH = 800;
+  public BOARD_HEIGHT = 800;
 }
