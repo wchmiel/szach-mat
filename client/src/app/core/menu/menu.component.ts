@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'app-menu',
@@ -9,10 +11,24 @@ export class MenuComponent implements OnInit {
 
   @ViewChild('hamburger') hamburger: ElementRef;
   @ViewChild('menuComponent') menuComponent: ElementRef;
+  public menuActive = true;
 
-  constructor(private renderer: Renderer2) { }
+  constructor(private renderer: Renderer2,
+    private activatedRoute: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
+
+    // detect router events to hide menu inside account and game routes
+    this.router.events
+      .filter(event => event instanceof NavigationEnd)
+      .subscribe((event) => {
+        if (event['url'] === '/' || event['url'] === '/signin' || event['url'] === '/signup') {
+          this.menuActive = true;
+        } else {
+          this.menuActive = false;
+        }
+      });
   }
 
   toggleMenu() {
