@@ -4,38 +4,27 @@ import { ConstantsService } from '../../helpers/constants/constants.service';
 @Injectable()
 export class ResizeService {
 
-  private boardImgWidth;
-  private boardImgHeight;
-
   constructor(private constService: ConstantsService) {}
 
   // method count board img dimensions
   public countBoardDim(boardCont: ElementRef, gameCont: ElementRef) {
 
+    let height, width;
+
+    // board container - container for board img
     const boardContHeight = boardCont.nativeElement.clientHeight;
     const boardContWidth = boardCont.nativeElement.clientWidth;
+
+    // game container - max space for board
     const gameContHeight = gameCont.nativeElement.clientHeight;
     const gameContWidth = gameCont.nativeElement.clientWidth;
-    console.log(boardCont);
-    console.log('boardContWidth -> ' + boardContWidth);
-    console.log('gameContWidth -> ' + gameContWidth);
 
-    let height = boardContHeight;
-    let width = height;
-
-    if (gameContWidth < this.constService.BOARD_WIDTH) {
+    if (gameContWidth > gameContHeight) {
+      width = height = gameContHeight;
+    } else {
       width = height = gameContWidth;
     }
-    if (gameContHeight < this.constService.BOARD_HEIGHT) {
-      width = height = gameContHeight;
-    }
 
-    this.boardImgHeight = height;
-    this.boardImgWidth = width;
-
-    return {
-      height: height,
-      width: width
-    };
+    return { height: height, width: width };
   }
 }

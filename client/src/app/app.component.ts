@@ -1,5 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, HostListener } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
 import { AppService } from './app.service';
@@ -34,7 +33,7 @@ import { AppService } from './app.service';
     ])
   ]
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'app';
 
   // WINDOW RESIZE EVENT
@@ -42,12 +41,6 @@ export class AppComponent implements OnInit {
     this.appService.windowResizeEvent.next(event.target['innerWidth']);
   }
 
-  constructor(private appService: AppService, private route: ActivatedRoute) {}
+  constructor(private appService: AppService) {}
 
-  ngOnInit() {
-    console.log('okokokok');
-    this.route.data.subscribe((data) => {
-      console.log(data);
-    });
-  }
 }

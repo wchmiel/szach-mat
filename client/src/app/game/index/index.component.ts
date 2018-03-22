@@ -23,7 +23,7 @@ export class IndexComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.setBoardDimensions();
+    this.setBoardDimensions();
 
     // widnow resize event from app component
     this.appService.windowResizeEvent.subscribe((windowWidth: number) => {

@@ -1,0 +1,99 @@
+@import '~styles/abstracts/variables';
+
+.nav-link {
+  cursor: pointer;
+}
+
+.sz-sidebar-content {
+  font-family: "Bungee Inline", cursive;
+  padding: 0px 15px;
+  @media all and (min-width: $SM_RES) {
+    padding: 0px 15px;
+  }
+
+  // logo styles
+  .logo-cont {
+    position: relative;
+    height: 85px;
+    margin: 0px;
+    .sz-logo {
+      width: 45px;
+      font-size: 26px;
+      margin-left: 35px;
+      @media all and (min-width: $SM_RES) {
+        width: 190px;
+        margin-left: 0px;
+      }
+      svg {
+        width: 45px;
+        height: 45px;
+        transition: all 600ms;
+      }
+      span {
+        display: none;
+        @media all and (min-width: $SM_RES) {
+          display: inline;
+        }
+      }
+    }
+    &:after {
+      content: '';
+      clear: both;
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: $lightgrey;
+      opacity: 0.2;
+      transition: all 600ms;
+    }
+  }
+
+}
+
+// when sidebar is closed
+.sz-sidebar-cont-close {
+  .sz-avatar-cont {
+    span {
+      display: none;
+    }
+    img {
+      margin: 0px;
+      width: 30px;
+      height: 30px;
+      position: relative;
+      left: -7px;
+      @media all and (min-width: $SM_RES) {
+        left: -5px;
+      }
+    }
+  }
+  .logo-cont {
+    position: relative;
+    height: 85px;
+    margin: 0px;
+    .sz-logo {
+      width: 30px;
+      margin-left: 0px;
+      svg {
+        width: 30px;
+        height: 30px;
+        position: relative;
+        left: -7px;
+        @media all and (min-width: $SM_RES) {
+          left: -5px;
+        }
+      }
+      span {
+        display: none;
+      }
+    }
+    &:after {
+      width: 30px;
+      position: relative;
+      left: -7px;
+      @media all and (min-width: $SM_RES) {
+        left: -5px;
+      }
+    }
+  }
+}
