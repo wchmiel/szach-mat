@@ -1,5 +1,5 @@
 import { ElementRef, Injectable } from '@angular/core';
-import { ConstantsService } from '../../helpers/constants/constants.service';
+import { ConstantsService } from '../../../helpers/constants/constants.service';
 
 @Injectable()
 export class ResizeService {

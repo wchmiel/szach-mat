@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/co
 
 import { AppService } from '../../app.service';
 import { ConstantsService } from '../../helpers/constants/constants.service';
-import { ResizeService } from '../engine/resize.service';
+import { ResizeService } from '../engine/services/resize.service';
 
 @Component({
   selector: 'app-index',
