@@ -12,6 +12,8 @@ import { IndexComponent } from './index/index.component';
 import { ConstantsService } from '../helpers/constants/constants.service';
 import { GameService } from './game.service';
 import { ResizeService } from './engine/services/resize.service';
+import { ControllerService } from './engine/services/controller.service';
+// import { HttpService } from './engine/services/http.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { ResizeService } from './engine/services/resize.service';
   providers: [
     ConstantsService,
     GameService,
-    ResizeService
+    ResizeService,
+    ControllerService
+    // HttpService
   ]
 })
 

@@ -1,4 +1,5 @@
 export class ConstantsService {
+  public static API_HOST_STATIC = 'http://localhost:3000';
   public API_HOST = 'http://localhost:3000';
   public XS_RES = 576;
   public SM_RES = 768;

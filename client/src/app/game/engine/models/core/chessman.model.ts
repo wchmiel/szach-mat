@@ -1,3 +1,8 @@
+export interface MoveDetails {
+  row: number;
+  col: number;
+}
+
 export abstract class Chessman {
 
   constructor(
@@ -25,8 +30,8 @@ export abstract class Chessman {
     };
   }
 
-  set setPawnPosition(rowMove: number, colMove: number) {
-    this.row = rowMove;
-    this.col = colMove;
+  set setPawnPosition(moveDetails: MoveDetails) {
+    this.row = moveDetails.row;
+    this.col = moveDetails.col;
   }
 }
