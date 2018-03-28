@@ -12,6 +12,7 @@ import { ControllerService } from '../engine/services/controller.service';
 export class IndexComponent implements OnInit {
 
   public apiUrl = this.constService.API_HOST;
+  public pawnsArrangement = []; // array of pawns arrangement for view
 
   @ViewChild('boardCont') boardCont: ElementRef;
   @ViewChild('gameCont') gameCont: ElementRef;
@@ -56,6 +57,11 @@ export class IndexComponent implements OnInit {
 
     this.setBoardDimensions();
 
+
+    // ZWRACAC DO WIDOKU TYLKO TABLICE PLASKA Z ELEMENTAMI KTORE WYSTEPUJA - same pionki do wyswietlenia i juz!
+    this.pawnsArrangement = this.controllerService.getPawnsArrangement();
+    console.log(this.pawnsArrangement);
+
     // widnow resize event from app component
     this.appService.windowResizeEvent.subscribe((windowWidth: number) => {
       this.setBoardDimensions();
@@ -64,7 +70,7 @@ export class IndexComponent implements OnInit {
   }
 
   setBoardDimensions() {
-    // const dimensions = this.resizeService.countBoardDim(this.boardCont, this.gameCont);
+
     const dimensions = this.controllerService.onChangeBoardDim(this.boardCont, this.gameCont);
 
     this.renderer.setStyle(this.boardCont.nativeElement.firstElementChild, 'height', dimensions.height + 'px');

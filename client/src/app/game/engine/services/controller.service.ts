@@ -30,17 +30,19 @@ export class ControllerService {
 
   }
 
-  // private countArrCordinates(pixelValue: number) {
-  //
-  // }
-
-  // TUTAJ PRZELICZAC NA WSP TABLICOWE
+  private countArrCordinates(pixelValue: number) {
+    const fieldW = this.map.getMapDim().fieldW;
+    let arrCord = Math.floor(pixelValue / fieldW);
+    return arrCord = arrCord < 8 ? arrCord : 7;
+  }
 
 
   public onMouseButtonClicked(clickedX: number, clickedY: number) {
-    console.log('mam to klik cords!');
+    this.rowClicked = this.countArrCordinates(clickedY);
+    this.colClicked = this.countArrCordinates(clickedX);
 
-    // WYSLAC I PRZELICZAC NA WSP TABLICOWE
+    console.log(`clicked -> [${ this.rowClicked }, ${ this.colClicked }]`);
+
   }
 
   // method invoked when board size is changing (screen resize e.g)
@@ -51,6 +53,35 @@ export class ControllerService {
     this.map.setMapDim(dimensions);
 
     return dimensions;
+  }
+
+  // method to get pawns arrangement array for view
+  public getPawnsArrangement() {
+    return this.convertPawnsArrangementCoord();
+
+    // ZWRACAC DO WIDOKU TYLKO TABLICE PLASKA Z ELEMENTAMI KTORE WYSTEPUJA - same pionki do wyswietlenia i juz!
+
+  }
+
+  // return pawnsArrangement with pixels coordinates for view
+  private convertPawnsArrangementCoord() {
+    const viewPawnsArrangement = [];
+    const pawnsArrangement = this.map.getPawnsArrangement();
+    const fieldW = this.map.getMapDim().fieldW;
+    for (let i = 0; i < 8; i++) {
+      viewPawnsArrangement[i] = [];
+      for (let j = 0; j < 8; j++) {
+        if (pawnsArrangement[i][j]) {
+          viewPawnsArrangement[i][j] = {
+            ...pawnsArrangement[i][j],
+            x_center: pawnsArrangement[i][j].col * fieldW + (fieldW / 2),
+            y_center: pawnsArrangement[i][j].row * fieldW + (fieldW / 2)
+          };
+        }
+      }
+    }
+
+    return viewPawnsArrangement;
   }
 
 }
