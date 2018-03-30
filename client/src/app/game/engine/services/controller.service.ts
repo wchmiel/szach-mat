@@ -10,6 +10,7 @@ export class ControllerService {
   private teamWithMove: string;
 
   public mouseButtonDown = false; // flag when user click a mouse button on chess board
+  public pawnClickedName = null; // name of clicked pawn
   public rowClicked: number; // array cords when user click a mouse button on chess board
   public colClicked: number;
   public mouseMotionX: number; // coords when user drag a pawn
@@ -30,19 +31,54 @@ export class ControllerService {
 
   }
 
-  private countArrCordinates(pixelValue: number) {
+  // method convert pixels to arrayCoordinates [row, col]
+  private countArrCoordinates(pixelValue: number) {
     const fieldW = this.map.getMapDim().fieldW;
     let arrCord = Math.floor(pixelValue / fieldW);
     return arrCord = arrCord < 8 ? arrCord : 7;
   }
 
+  // method convert arrayCoordinates [row, col] to pixels
+  private countPixelCoordinates(arrValue: number) {
+    const fieldW = this.map.getMapDim().fieldW;
+    return arrValue * fieldW + (fieldW / 2);
+  }
+
 
   public onMouseButtonClicked(clickedX: number, clickedY: number) {
-    this.rowClicked = this.countArrCordinates(clickedY);
-    this.colClicked = this.countArrCordinates(clickedX);
+    const pawns = this.map.getPawnsArrangement();
+    this.rowClicked = this.countArrCoordinates(clickedY);
+    this.colClicked = this.countArrCoordinates(clickedX);
 
-    console.log(`clicked -> [${ this.rowClicked }, ${ this.colClicked }]`);
+    if (pawns[this.rowClicked][this.colClicked]) {
+      this.mouseButtonDown = true;
+      this.pawnClickedName = pawns[this.rowClicked][this.colClicked].name;
+      console.log(`clicked -> [${ this.rowClicked }, ${ this.colClicked }]`);
+    }
 
+  }
+
+  public onMouseButtonReleased(releasedX: number, releasedY: number) {
+    if (this.mouseButtonDown) {
+      this.mouseButtonDown = false;
+      this.pawnClickedName = null;
+      const releasedRow = this.countArrCoordinates(releasedY);
+      const releasedCol = this.countArrCoordinates(releasedX);
+      console.log(`released -> [${ releasedRow }, ${ releasedCol }]`);
+    }
+  }
+
+  public onMouseLeave() {
+    this.mouseButtonDown = false;
+    this.pawnClickedName = null;
+  }
+
+  // method return original pawns coordinates in pixels before pawn moved
+  public getOriginalPawnViewCoord() {
+    return {
+      x: this.countPixelCoordinates(this.colClicked),
+      y: this.countPixelCoordinates(this.rowClicked)
+    };
   }
 
   // method invoked when board size is changing (screen resize e.g)
