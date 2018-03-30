@@ -1,27 +1,34 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Renderer2, HostListener } from '@angular/core';
 
 import { AppService } from '../../app.service';
 import { ConstantsService } from '../../helpers/constants/constants.service';
 import { ControllerService } from '../engine/services/controller.service';
+import { GameService } from '../game.service';
 
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss']
 })
-export class IndexComponent implements OnInit {
+export class IndexComponent implements OnInit, AfterViewInit {
 
   public apiUrl = this.constService.API_HOST;
-  public pawnsArrangement = []; // array of pawns arrangement for view
+  public initPawnsArrangement = [];
+  private pawnsArrangement = []; // array of pawns arrangement for view
+
+  // SPROBOWAC DODAC DO TEJ TABLICY PETLA @ViewChild dla kazdego elementu pionka
+  // pozniej przestawiac je juz za pomoca renderer2
 
   @ViewChild('boardCont') boardCont: ElementRef;
   @ViewChild('gameCont') gameCont: ElementRef;
+  @ViewChild('pawnsCont') pawnsCont: ElementRef;
   // @HostListener('mousedown', ['$event']) mousedown(eventData: Event) {
   //   console.log(this.boardCont);
   // }
 
   constructor(private constService: ConstantsService,
     private renderer: Renderer2,
+    private gameService: GameService,
     private controllerService: ControllerService,
     private appService: AppService) { }
 
@@ -59,14 +66,37 @@ export class IndexComponent implements OnInit {
 
 
     // ZWRACAC DO WIDOKU TYLKO TABLICE PLASKA Z ELEMENTAMI KTORE WYSTEPUJA - same pionki do wyswietlenia i juz!
+    this.initPawnsArrangement = this.controllerService.getPawnsArrangement();
     this.pawnsArrangement = this.controllerService.getPawnsArrangement();
-    console.log(this.pawnsArrangement);
+    // console.log(this.pawnsArrangement);
+
+
 
     // widnow resize event from app component
     this.appService.windowResizeEvent.subscribe((windowWidth: number) => {
       this.setBoardDimensions();
+      this.pawnsArrangement = this.controllerService.getPawnsArrangement();
+      this.setPawnsDimAndPos();
     });
 
+    // event from sidebar component
+    this.gameService.toggleSidebarEvent.subscribe(() => {
+      this.setBoardDimensions();
+      this.pawnsArrangement = this.controllerService.getPawnsArrangement();
+      this.setPawnsDimAndPos();
+    });
+
+    // const arr = this.pawnsCont.nativeElement.children;
+    //
+    //     console.log(arr.length);
+    // setTimeout(function() {
+    //   console.log(arr.length);
+    // }, 1000);
+
+  }
+
+  ngAfterViewInit() {
+    this.setPawnsDimAndPos();
   }
 
   setBoardDimensions() {
@@ -78,5 +108,29 @@ export class IndexComponent implements OnInit {
 
     // console.log(dimensions);
   }
+
+  // method to set pawns dimensions and position on board
+  setPawnsDimAndPos() {
+    const pawnsElemRef = Array.from(this.pawnsCont.nativeElement.children); // array with all pawns ElementRef
+    const scale = this.boardCont.nativeElement.clientWidth / this.constService.BOARD_WIDTH;
+    const pawnsWidth = this.constService.PAWN_INIT_WIDTH * scale;
+    const pawnsHeight = this.constService.PAWN_INIT_HEIGHT * scale;
+
+    pawnsElemRef.forEach((pawn, index) => {
+
+      const top = this.pawnsArrangement[index].y_center - (pawnsHeight / 2);
+      const left = this.pawnsArrangement[index].x_center - (pawnsWidth / 2);
+
+      this.renderer.setStyle(pawn, 'width', pawnsWidth + 'px');
+      this.renderer.setStyle(pawn, 'height', pawnsHeight + 'px');
+      this.renderer.setStyle(pawn, 'top', top + 'px');
+      this.renderer.setStyle(pawn, 'left', left + 'px');
+    });
+  }
+
+  // removePawnFromView(index) {
+  //   const pawnsElemRef = Array.from(this.pawnsCont.nativeElement.children);
+  //   this.renderer.removeChild(pawnsElemRef, pawnsElemRef[index]);
+  // }
 
 }

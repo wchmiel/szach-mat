@@ -58,25 +58,22 @@ export class ControllerService {
   // method to get pawns arrangement array for view
   public getPawnsArrangement() {
     return this.convertPawnsArrangementCoord();
-
-    // ZWRACAC DO WIDOKU TYLKO TABLICE PLASKA Z ELEMENTAMI KTORE WYSTEPUJA - same pionki do wyswietlenia i juz!
-
   }
 
-  // return pawnsArrangement with pixels coordinates for view
+  // return pawnsArrangement with pixels coordinates for view to display
   private convertPawnsArrangementCoord() {
     const viewPawnsArrangement = [];
     const pawnsArrangement = this.map.getPawnsArrangement();
     const fieldW = this.map.getMapDim().fieldW;
     for (let i = 0; i < 8; i++) {
-      viewPawnsArrangement[i] = [];
+      // viewPawnsArrangement[i] = [];
       for (let j = 0; j < 8; j++) {
         if (pawnsArrangement[i][j]) {
-          viewPawnsArrangement[i][j] = {
+          viewPawnsArrangement.push({
             ...pawnsArrangement[i][j],
             x_center: pawnsArrangement[i][j].col * fieldW + (fieldW / 2),
             y_center: pawnsArrangement[i][j].row * fieldW + (fieldW / 2)
-          };
+          });
         }
       }
     }

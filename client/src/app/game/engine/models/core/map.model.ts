@@ -62,15 +62,15 @@ export class Map {
 
   populatePawnsArrangement(): void {
     // white pawns
-    this.pawnsArrangement[0][0] = new Rook(0, 0, 'white', 'white_rook1',
+    this.pawnsArrangement[0][0] = new Rook(0, 0, 'white_rook1', 'white',
       ConstantsService.API_HOST_STATIC + '/public/files/game/images/wr.png');
-    this.pawnsArrangement[0][7] = new Rook(0, 7, 'white', 'white_rook2',
+    this.pawnsArrangement[0][7] = new Rook(0, 7, 'white_rook2', 'white',
       ConstantsService.API_HOST_STATIC + '/public/files/game/images/wr.png');
 
     // black pawns
-    this.pawnsArrangement[7][0] = new Rook(7, 0, 'black', 'black_rook1',
+    this.pawnsArrangement[7][0] = new Rook(7, 0, 'black_rook1', 'black',
       ConstantsService.API_HOST_STATIC + '/public/files/game/images/br.png');
-    this.pawnsArrangement[7][7] = new Rook(7, 7, 'black', 'black_rook2',
+    this.pawnsArrangement[7][7] = new Rook(7, 7, 'black_rook2', 'black',
       ConstantsService.API_HOST_STATIC + '/public/files/game/images/br.png');
   }
 }

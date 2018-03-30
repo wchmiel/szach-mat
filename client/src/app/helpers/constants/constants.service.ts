@@ -7,4 +7,6 @@ export class ConstantsService {
   public LG_RES = 1200;
   public BOARD_WIDTH = 800;
   public BOARD_HEIGHT = 800;
+  public PAWN_INIT_WIDTH = 80;
+  public PAWN_INIT_HEIGHT = 80;
 }

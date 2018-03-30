@@ -1,16 +1,16 @@
 <div class="sz-game-cont" #gameCont>
   <div class="sz-board-cont" #boardCont>
     <img src="{{ apiUrl + '/public/files/game/images/board.jpg' }}" alt="" class="img-responsive board">
-    <!-- <ng-template *ngFor="let pawn of pawnsArrangement">
-      <img src="{{ pawn.bgImg }}" alt="">
-      <p>aaa</p>
-    </ng-template> -->
+    <!-- <img *ngFor="let pawn of pawnsArrangement; let i = index"
+      src="{{ pawn.bgImg }}" alt=""
+      [ngStyle] = "{top: getTest(i).top, left: getTest(i).left}"
+      style="position:absolute;width:30px; height: 30px;"> -->
+      <div class="pawns-cont" #pawnsCont style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
+        <img style="position:absolute;" *ngFor="let pawn of initPawnsArrangement; let i = index" name="{{ pawn.name }}" src="{{ pawn.bgImg }}" alt="">
+      </div>
   </div>
 </div>
 
-<!-- <div *ngFor="let pawns of pawnsArrangement">
-  <div *ngFor="let pawn of pawns">
-
-    <p>{{ pawn.row }}</p>
-  </div>
+<!-- <div *ngFor="let pawn of pawnsArrangement">
+    <p>{{ pawn.name }}</p>
 </div> -->
