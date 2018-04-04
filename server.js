@@ -19,9 +19,9 @@ mongoose.connect(dbUrl);
 // mongoose.connect("mongodb://wojton:123qwe@ds231559.mlab.com:31559/szach-mat");
 
 // Api routes folders
-const indexRoute = require('./routes/index');
 const authRoute = require('./routes/auth');
 const tasksRoute = require('./routes/tasks');
+const indexRoute = require('./routes/index');
 // const tasksRoute = require('./routes/tasks');
 
 // View Engine
@@ -35,6 +35,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set static folder
 // app.use(express.static(__dirname + "/client"));
+app.use('', express.static(path.join(__dirname + '/client/dist')));
 app.use('/public', express.static(path.join(__dirname + '/public')));
 // app.set("view engine", "ejs");
 
@@ -46,16 +47,17 @@ app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', "*");
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+  res.header('cache-control', 'no-cache');
   // res.header('Access-Control-Allow-Headers', '*');
   next();
 });
 
 // routes
-app.use('/', indexRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/tasks', tasksRoute);
+app.use('/', indexRoute);
 
 app.listen(serverMainConst.SERVER_PORT, () => {
   console.log('Szach-mat app listening on port ' + serverMainConst.SERVER_PORT);
-  console.log(process.env.DATABASE);
+  console.log(dbUrl);
 });
