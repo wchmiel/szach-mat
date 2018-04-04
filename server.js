@@ -13,7 +13,10 @@ const express = require("express"),
       passportLocalMongoose = require("passport-local-mongoose");
 
 // Connect to db using mongoose
-mongoose.connect("mongodb://localhost/szach-dev");
+// mongoose.connect("mongodb://localhost/szach-dev");
+var dbUrl = process.env.DATABASE || "mongodb://localhost/szach-dev";
+mongoose.connect(dbUrl);
+// mongoose.connect("mongodb://wojton:123qwe@ds231559.mlab.com:31559/szach-mat");
 
 // Api routes folders
 const indexRoute = require('./routes/index');
@@ -54,4 +57,5 @@ app.use('/api/tasks', tasksRoute);
 
 app.listen(serverMainConst.SERVER_PORT, () => {
   console.log('Szach-mat app listening on port ' + serverMainConst.SERVER_PORT);
+  console.log(process.env.DATABASE);
 });
