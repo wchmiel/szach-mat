@@ -34,5 +34,9 @@
     "passport-local-mongoose": "^4.5.0",
     "request": "^2.83.0",
     "require": "^2.4.20"
+  },
+  "engines": {
+    "node": "8.4.0",
+    "npm": "5.8.0"
   }
 }
