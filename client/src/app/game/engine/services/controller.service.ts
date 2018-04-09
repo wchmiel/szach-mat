@@ -1,4 +1,5 @@
 import { ElementRef, Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
 import { ConstantsService } from '../../../helpers/constants/constants.service';
 import { ResizeService } from './resize.service';
 import * as fromMap from '../models/core/map.model';
@@ -15,6 +16,7 @@ export class ControllerService {
   public colClicked: number;
   public mouseMotionX: number; // coords when user drag a pawn
   public mouseMotionY: number;
+  public pawnsArrangementChangedEvent = new Subject();
 
   constructor(private constService: ConstantsService,
     private resizeService: ResizeService) {
@@ -65,6 +67,27 @@ export class ControllerService {
       const releasedRow = this.countArrCoordinates(releasedY);
       const releasedCol = this.countArrCoordinates(releasedX);
       console.log(`released -> [${ releasedRow }, ${ releasedCol }]`);
+
+
+      // AKTUALNIE TYLKO VALIDACJA RUCHU PO STRONIE KLIENTA! DOROBIC PO STRONIE SERWERA i dopiero wtedy akceptacja!
+      const pawn = this.map.getPawnsArrangement()[this.rowClicked][this.colClicked];
+      const movePermission = pawn.checkPawnMove({
+        rowMove: releasedRow,
+        colMove: releasedCol
+      });
+      console.log(movePermission);
+
+      if (movePermission) {
+        // set new pawn possition in map object
+        this.map.setPawnsArrangement({
+          rowOld: this.rowClicked,
+          colOld: this.colClicked,
+          rowNew: releasedRow,
+          colNew: releasedCol
+        });
+      }
+
+      this.pawnsArrangementChangedEvent.next();
     }
   }
 
@@ -94,6 +117,15 @@ export class ControllerService {
   // method to get pawns arrangement array for view
   public getPawnsArrangement() {
     return this.convertPawnsArrangementCoord();
+  }
+
+  public getPawnsArrangementWithNamesKeys() {
+    const pawnsArrWithNamesKeys = [];
+    const pawnsArr = this.convertPawnsArrangementCoord();
+    pawnsArr.forEach((pawn, index) => {
+      pawnsArrWithNamesKeys[pawn.name] = pawn;
+    });
+    return pawnsArrWithNamesKeys;
   }
 
   // return pawnsArrangement with pixels coordinates for view to display

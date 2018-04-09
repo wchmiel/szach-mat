@@ -1,6 +1,6 @@
 export interface MoveDetails {
-  row: number;
-  col: number;
+  rowMove: number;
+  colMove: number;
 }
 
 export abstract class Chessman {
@@ -13,25 +13,25 @@ export abstract class Chessman {
     protected bgImg: string
   ) {}
 
-  abstract checkPawnMove(): boolean; // method check pawn move and return the answer
+  abstract checkPawnMove(moveDetails: MoveDetails): boolean; // method check pawn move and return the answer
 
-  get getPawnName() {
+  public getPawnName() {
     return this.name;
   }
 
-  get getPawnTeam() {
+  public getPawnTeam() {
     return this.team;
   }
 
-  get getPawnArrangement() {
+  public getPawnArrangement() {
     return {
       row: this.row,
       col: this.col
     };
   }
 
-  set setPawnPosition(moveDetails: MoveDetails) {
-    this.row = moveDetails.row;
-    this.col = moveDetails.col;
+  public setPawnPosition(moveDetails: MoveDetails) {
+    this.row = moveDetails.rowMove;
+    this.col = moveDetails.colMove;
   }
 }

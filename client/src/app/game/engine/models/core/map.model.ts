@@ -8,6 +8,13 @@ export interface MapDimensions {
   height: number;
 }
 
+export interface MovePawnDetails {
+  rowOld: number;
+  colOld: number;
+  rowNew: number;
+  colNew: number;
+}
+
 export class Map {
   private mapW: number; // map board width
   private mapH: number; // map board height
@@ -30,37 +37,13 @@ export class Map {
     this.populatePawnsArrangement();
   }
 
-  getMapDim() {
-    return {
-      mapW: this.mapW,
-      mapH: this.mapH,
-      fieldW: this.fieldW,
-      fieldH: this.fieldH
-    };
-  }
-
-  getMapBgImg() {
-    return this.bgImg;
-  }
-
-  getPawnsArrangement() {
-    return this.pawnsArrangement;
-  }
-
-  setMapDim(mapDim: MapDimensions) {
-    this.mapW = mapDim.width;
-    this.mapH = mapDim.height;
-    this.fieldW = mapDim.width / 8;
-    this.fieldH = mapDim.height / 8;
-  }
-
-  initPawnsArrangement(): void {
+  private initPawnsArrangement(): void {
     for (let i = 0; i < 8; i++) {
       this.pawnsArrangement[i] = new Array<Chessman>();
     }
   }
 
-  populatePawnsArrangement(): void {
+  private populatePawnsArrangement(): void {
     // white pawns
     this.pawnsArrangement[0][0] = new Rook(0, 0, 'white_rook1', 'white',
       ConstantsService.API_HOST_STATIC + '/public/files/game/images/wr.png');
@@ -73,4 +56,45 @@ export class Map {
     this.pawnsArrangement[7][7] = new Rook(7, 7, 'black_rook2', 'black',
       ConstantsService.API_HOST_STATIC + '/public/files/game/images/br.png');
   }
+
+  public getMapDim() {
+    return {
+      mapW: this.mapW,
+      mapH: this.mapH,
+      fieldW: this.fieldW,
+      fieldH: this.fieldH
+    };
+  }
+
+  public getMapBgImg() {
+    return this.bgImg;
+  }
+
+  public getPawnsArrangement() {
+    return this.pawnsArrangement;
+  }
+
+  public setPawnsArrangement(moveDetails: MovePawnDetails): void {
+    const pawnToMove = this.pawnsArrangement[moveDetails.rowOld][moveDetails.colOld];
+
+    // changes in pawns objects
+    pawnToMove.setPawnPosition({
+      rowMove: moveDetails.rowNew,
+      colMove: moveDetails.colNew
+    });
+
+    // changes in pawnsArrangement array
+    this.pawnsArrangement[moveDetails.rowNew][moveDetails.colNew] = this.pawnsArrangement[moveDetails.rowOld][moveDetails.colOld];
+    this.pawnsArrangement[moveDetails.rowOld][moveDetails.colOld] = null;
+
+    console.log(this.pawnsArrangement);
+  }
+
+  public setMapDim(mapDim: MapDimensions): void {
+    this.mapW = mapDim.width;
+    this.mapH = mapDim.height;
+    this.fieldW = mapDim.width / 8;
+    this.fieldH = mapDim.height / 8;
+  }
+
 }

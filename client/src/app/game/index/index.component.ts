@@ -50,7 +50,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
     this.boardCont.nativeElement.onmouseup = function (event) {
       self.controllerService.onMouseButtonReleased(event['offsetX'], event['offsetY']);
       self.renderer.removeClass(self.clickedPawnElemRef, 'dragStarted'); // remove css class to change cursor
-      // self.clickedPawnElemRef = null; // reset clicked pawn elementRef
+      self.clickedPawnElemRef = null; // reset clicked pawn elementRef
     };
 
     this.boardCont.nativeElement.onmouseleave = function () {
@@ -100,9 +100,8 @@ export class IndexComponent implements OnInit, AfterViewInit {
     this.setBoardDimensions();
 
 
-    // ZWRACAC DO WIDOKU TYLKO TABLICE PLASKA Z ELEMENTAMI KTORE WYSTEPUJA - same pionki do wyswietlenia i juz!
     this.initPawnsArrangement = this.controllerService.getPawnsArrangement();
-    this.pawnsArrangement = this.controllerService.getPawnsArrangement();
+    this.pawnsArrangement = this.controllerService.getPawnsArrangementWithNamesKeys();
     // console.log(this.pawnsArrangement);
 
 
@@ -110,14 +109,21 @@ export class IndexComponent implements OnInit, AfterViewInit {
     // widnow resize event from app component
     this.appService.windowResizeEvent.subscribe((windowWidth: number) => {
       this.setBoardDimensions();
-      this.pawnsArrangement = this.controllerService.getPawnsArrangement();
+      this.pawnsArrangement = this.controllerService.getPawnsArrangementWithNamesKeys();
       this.setPawnsDimAndPos();
     });
 
     // event from sidebar component
     this.gameService.toggleSidebarEvent.subscribe(() => {
       this.setBoardDimensions();
-      this.pawnsArrangement = this.controllerService.getPawnsArrangement();
+      this.pawnsArrangement = this.controllerService.getPawnsArrangementWithNamesKeys();
+      this.setPawnsDimAndPos();
+    });
+
+    // event from controller when pawnsArrangement will change
+    this.controllerService.pawnsArrangementChangedEvent.subscribe(() => {
+
+      this.pawnsArrangement = this.controllerService.getPawnsArrangementWithNamesKeys();
       this.setPawnsDimAndPos();
     });
 
@@ -151,10 +157,16 @@ export class IndexComponent implements OnInit, AfterViewInit {
     this.pawnsWidth = this.constService.PAWN_INIT_WIDTH * this.boardScale;
     this.pawnsHeight = this.constService.PAWN_INIT_HEIGHT * this.boardScale;
 
+    console.log(pawnsElemRef);
+    console.log(this.pawnsArrangement);
+
     pawnsElemRef.forEach((pawn, index) => {
 
-      const top = this.pawnsArrangement[index].y_center - (this.pawnsHeight / 2);
-      const left = this.pawnsArrangement[index].x_center - (this.pawnsWidth / 2);
+      console.log(this.pawnsArrangement[pawn['name']]);
+      console.log(pawn);
+
+      const top = this.pawnsArrangement[pawn['name']].y_center - (this.pawnsHeight / 2);
+      const left = this.pawnsArrangement[pawn['name']].x_center - (this.pawnsWidth / 2);
 
       this.renderer.setStyle(pawn, 'width', this.pawnsWidth + 'px');
       this.renderer.setStyle(pawn, 'height', this.pawnsHeight + 'px');
