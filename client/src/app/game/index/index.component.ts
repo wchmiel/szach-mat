@@ -35,7 +35,9 @@ export class IndexComponent implements OnInit, AfterViewInit {
 
     const self = this;
 
+    // CLICK ON PAWN
     this.boardCont.nativeElement.onmousedown = function (event) {
+      document.body.style.cursor = 'move';
       self.controllerService.onMouseButtonClicked(event['offsetX'], event['offsetY']);
 
       const pawnsElemRef = Array.from(self.pawnsCont.nativeElement.children); // array with all pawns ElementRef
@@ -44,21 +46,32 @@ export class IndexComponent implements OnInit, AfterViewInit {
           self.clickedPawnElemRef = pawn; // set clicked pawn elementRef
         }
       });
-      self.renderer.addClass(self.clickedPawnElemRef, 'dragStarted'); // add css class to change cursor
+
+      if (self.clickedPawnElemRef !== null) {
+        self.renderer.addClass(self.clickedPawnElemRef, 'dragStarted'); // add css class to change cursor
+      }
     };
-    //
+
+    // RELEASED PAWN
     this.boardCont.nativeElement.onmouseup = function (event) {
-      self.controllerService.onMouseButtonReleased(event['offsetX'], event['offsetY']);
-      self.renderer.removeClass(self.clickedPawnElemRef, 'dragStarted'); // remove css class to change cursor
-      self.clickedPawnElemRef = null; // reset clicked pawn elementRef
+      if (self.controllerService.mouseButtonDown) {
+        document.body.style.cursor = 'default';
+        self.controllerService.onMouseButtonReleased(event['offsetX'], event['offsetY']);
+
+        if (self.clickedPawnElemRef !== null) {
+          self.renderer.removeClass(self.clickedPawnElemRef, 'dragStarted'); // remove css class to change cursor
+          self.clickedPawnElemRef = null; // reset clicked pawn elementRef
+        }
+      }
     };
 
     this.boardCont.nativeElement.onmouseleave = function () {
       if (self.controllerService.mouseButtonDown) {
+        document.body.style.cursor = 'default';
         const originalPawnCoord = self.controllerService.getOriginalPawnViewCoord();
         const top = originalPawnCoord.y - (self.pawnsHeight / 2);
         const left = originalPawnCoord.x - (self.pawnsWidth / 2);
-        console.log(top + ' , ' + left);
+        // console.log(top + ' , ' + left);
         self.renderer.setStyle(self.clickedPawnElemRef, 'top', top + 'px');
         self.renderer.setStyle(self.clickedPawnElemRef, 'left', left + 'px');
 
@@ -81,9 +94,9 @@ export class IndexComponent implements OnInit, AfterViewInit {
     // this.boardCont.nativeElement.ondrag = function () {
     //   console.log('ondrag');
     // };
-    // this.boardCont.nativeElement.ondragstart = function () {
-    //   console.log('ondragstart');
-    // };
+    this.boardCont.nativeElement.ondragstart = function (event) {
+      event.preventDefault();
+    };
     // this.boardCont.nativeElement.ondragend = function () {
     //   console.log('ondragend');
     // };
@@ -150,34 +163,38 @@ export class IndexComponent implements OnInit, AfterViewInit {
     // console.log(dimensions);
   }
 
-  // method to set pawns dimensions and position on board
+  // method to set pawns dimensions and position on board. Also responsible for removing pawns from view!
   setPawnsDimAndPos() {
     const pawnsElemRef = Array.from(this.pawnsCont.nativeElement.children); // array with all pawns ElementRef
     this.boardScale = this.boardCont.nativeElement.clientWidth / this.constService.BOARD_WIDTH;
     this.pawnsWidth = this.constService.PAWN_INIT_WIDTH * this.boardScale;
     this.pawnsHeight = this.constService.PAWN_INIT_HEIGHT * this.boardScale;
 
-    console.log(pawnsElemRef);
-    console.log(this.pawnsArrangement);
+    // console.log(pawnsElemRef);
+    // console.log(this.pawnsArrangement);
 
     pawnsElemRef.forEach((pawn, index) => {
 
-      console.log(this.pawnsArrangement[pawn['name']]);
-      console.log(pawn);
+      // console.log(this.pawnsArrangement[pawn['name']]);
+      // console.log(pawn);
 
-      const top = this.pawnsArrangement[pawn['name']].y_center - (this.pawnsHeight / 2);
-      const left = this.pawnsArrangement[pawn['name']].x_center - (this.pawnsWidth / 2);
+      if (this.pawnsArrangement[pawn['name']]) {
+        const top = this.pawnsArrangement[pawn['name']].y_center - (this.pawnsHeight / 2);
+        const left = this.pawnsArrangement[pawn['name']].x_center - (this.pawnsWidth / 2);
 
-      this.renderer.setStyle(pawn, 'width', this.pawnsWidth + 'px');
-      this.renderer.setStyle(pawn, 'height', this.pawnsHeight + 'px');
-      this.renderer.setStyle(pawn, 'top', top + 'px');
-      this.renderer.setStyle(pawn, 'left', left + 'px');
+        this.renderer.setStyle(pawn, 'width', this.pawnsWidth + 'px');
+        this.renderer.setStyle(pawn, 'height', this.pawnsHeight + 'px');
+        this.renderer.setStyle(pawn, 'top', top + 'px');
+        this.renderer.setStyle(pawn, 'left', left + 'px');
+      } else {
+        console.log('------ USUWAM PIONKA -> ' + pawn['name'] + ' --------');
+        this.removePawnFromView(pawn, pawnsElemRef);
+      }
     });
   }
 
-  // removePawnFromView(index) {
-  //   const pawnsElemRef = Array.from(this.pawnsCont.nativeElement.children);
-  //   this.renderer.removeChild(pawnsElemRef, pawnsElemRef[index]);
-  // }
+  removePawnFromView(pawn, pawnsElemRef) {
+    this.renderer.removeChild(pawnsElemRef, pawn);
+  }
 
 }

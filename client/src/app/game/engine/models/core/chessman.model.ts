@@ -3,6 +3,13 @@ export interface MoveDetails {
   colMove: number;
 }
 
+export interface FromOldToNewPositionMove {
+  rowOld: number;
+  colOld: number;
+  rowNew: number;
+  colNew: number;
+}
+
 export abstract class Chessman {
 
   constructor(

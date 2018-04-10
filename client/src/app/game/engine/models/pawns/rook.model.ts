@@ -1,9 +1,6 @@
 import { Chessman } from '../core/chessman.model';
-
-interface MoveDetails {
-  rowMove: number;
-  colMove: number;
-}
+import { CheckMove } from '../core/checkmove.model';
+import * as fromChessman from '../core/chessman.model';
 
 export class Rook extends Chessman {
 
@@ -11,8 +8,12 @@ export class Rook extends Chessman {
     super(row, col, name, team, bgImg);
   }
 
-  checkPawnMove(moveDetails: MoveDetails): boolean {
-    if ((moveDetails.rowMove !== this.row) && (moveDetails.colMove !== this.col)) { return false; }
+  checkPawnMove(move: fromChessman.MoveDetails): boolean {
+    if (!CheckMove.moveOnTheSamePosition({rowOld: this.row, colOld: this.col, rowNew: move.rowMove, colNew: move.colMove})) {
+      return false;
+    }
+
+    if ((move.rowMove !== this.row) && (move.colMove !== this.col)) { return false; }
     return true;
   }
 
