@@ -1,6 +1,7 @@
 export interface MoveDetails {
   rowMove: number;
   colMove: number;
+  pawnsArrangement: any[];
 }
 
 export interface FromOldToNewPositionMove {
@@ -20,7 +21,7 @@ export abstract class Chessman {
     protected bgImg: string
   ) {}
 
-  abstract checkPawnMove(moveDetails: MoveDetails): boolean; // method check pawn move and return the answer
+  abstract checkPawnMove(move: MoveDetails): boolean; // method check pawn move and return the answer
 
   public getPawnName() {
     return this.name;

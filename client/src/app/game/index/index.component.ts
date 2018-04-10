@@ -178,6 +178,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
       // console.log(this.pawnsArrangement[pawn['name']]);
       // console.log(pawn);
 
+      // change pawn arrangement when pawn still in game
       if (this.pawnsArrangement[pawn['name']]) {
         const top = this.pawnsArrangement[pawn['name']].y_center - (this.pawnsHeight / 2);
         const left = this.pawnsArrangement[pawn['name']].x_center - (this.pawnsWidth / 2);
@@ -186,7 +187,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
         this.renderer.setStyle(pawn, 'height', this.pawnsHeight + 'px');
         this.renderer.setStyle(pawn, 'top', top + 'px');
         this.renderer.setStyle(pawn, 'left', left + 'px');
-      } else {
+      } else { // remove pawn when it doesn't exist in pawnsArrangement array
         console.log('------ USUWAM PIONKA -> ' + pawn['name'] + ' --------');
         this.removePawnFromView(pawn, pawnsElemRef);
       }

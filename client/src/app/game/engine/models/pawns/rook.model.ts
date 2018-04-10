@@ -9,11 +9,22 @@ export class Rook extends Chessman {
   }
 
   checkPawnMove(move: fromChessman.MoveDetails): boolean {
-    if (!CheckMove.moveOnTheSamePosition({rowOld: this.row, colOld: this.col, rowNew: move.rowMove, colNew: move.colMove})) {
+    // check if move is valid for rook (only move in row or in col)
+    if ((move.rowMove !== this.row) && (move.colMove !== this.col)) {
+      console.log('---NOT VALID MOVE -> NOT ROOK---');
       return false;
     }
 
-    if ((move.rowMove !== this.row) && (move.colMove !== this.col)) { return false; }
+    const opponentCollision = CheckMove.rookCheckOpponentsCollision(
+      {rowOld: this.row, colOld: this.col, rowNew: move.rowMove, colNew: move.colMove},
+      move.pawnsArrangement
+    );
+
+    if (!opponentCollision) {
+      console.log('---NOT VALID MOVE -> PAWN COLLISION---');
+      return false;
+    }
+
     return true;
   }
 

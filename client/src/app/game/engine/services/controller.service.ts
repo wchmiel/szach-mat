@@ -3,6 +3,7 @@ import { Subject } from 'rxjs/Subject';
 import { ConstantsService } from '../../../helpers/constants/constants.service';
 import { ResizeService } from './resize.service';
 import * as fromMap from '../models/core/map.model';
+import { CheckMove } from '../models/core/checkmove.model';
 
 @Injectable()
 export class ControllerService {
@@ -60,33 +61,53 @@ export class ControllerService {
 
   }
 
+  // -------------- MOUSE BUTTON REALESED ---------------//
   public onMouseButtonReleased(releasedX: number, releasedY: number) {
     if (this.mouseButtonDown) {
+      let correctMove = true;
+      const pawnsArrangement = this.map.getPawnsArrangement();
+      const pawn = pawnsArrangement[this.rowClicked][this.colClicked];
       this.mouseButtonDown = false;
       this.pawnClickedName = null;
       const releasedRow = this.countArrCoordinates(releasedY);
       const releasedCol = this.countArrCoordinates(releasedX);
       console.log(`released -> [${ releasedRow }, ${ releasedCol }]`);
 
+      // check if user move pawn or leave it in the same place
+      if ((this.rowClicked === releasedRow) && (this.colClicked === releasedCol)) {
+        correctMove = false;
+        console.log('---NOT VALID MOVE -> THE SAME POSITION---');
+      } else {
 
-      // AKTUALNIE TYLKO VALIDACJA RUCHU PO STRONIE KLIENTA! DOROBIC PO STRONIE SERWERA i dopiero wtedy akceptacja!
-      const pawn = this.map.getPawnsArrangement()[this.rowClicked][this.colClicked];
-      const movePermission = pawn.checkPawnMove({
-        rowMove: releasedRow,
-        colMove: releasedCol
-      });
-      console.log(movePermission);
-
-      if (movePermission) {
-        // set new pawn possition in map object
-        this.map.setPawnsArrangement({
-          rowOld: this.rowClicked,
-          colOld: this.colClicked,
-          rowNew: releasedRow,
-          colNew: releasedCol
-        });
+        // check if new position is free of pawns from the same team
+        const newField = pawnsArrangement[releasedRow][releasedCol];
+        if ((newField) && (newField.getPawnTeam() === pawn.getPawnTeam())) {
+          correctMove = false;
+          console.log('---NOT VALID MOVE -> TEAM MATE---');
+        }
       }
 
+      if (correctMove) {
+        // AKTUALNIE TYLKO VALIDACJA RUCHU PO STRONIE KLIENTA! DOROBIC PO STRONIE SERWERA i dopiero wtedy akceptacja!
+        const movePermission = pawn.checkPawnMove({
+          rowMove: releasedRow,
+          colMove: releasedCol,
+          pawnsArrangement: pawnsArrangement
+        });
+        console.log(movePermission);
+
+        if (movePermission) {
+          // set new pawn possition in map object
+          this.map.setPawnsArrangement({
+            rowOld: this.rowClicked,
+            colOld: this.colClicked,
+            rowNew: releasedRow,
+            colNew: releasedCol
+          });
+        }
+      }
+
+      // information for view to update pawnsArrangement array
       this.pawnsArrangementChangedEvent.next();
     }
   }
