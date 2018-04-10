@@ -39,7 +39,7 @@ export class CheckMove {
   static bishopCheckOpponentsCollision(move: fromChessman.FromOldToNewPositionMove, pawnsArr): boolean {
     const diffRow = move.rowNew - move.rowOld;
     const diffCol = move.colNew - move.colOld;
-    const diffRowMod = (move.rowNew - move.rowOld) > 0 ? move.rowNew - move.rowOld : move.rowOld - move.rowNew;
+    const diffRowMod = Math.abs(move.rowNew - move.rowOld);
     for (let i = 1; i < diffRowMod; i++) {
       let rowTemp, colTemp;
       if (diffRow > 1 && diffCol > 1) {

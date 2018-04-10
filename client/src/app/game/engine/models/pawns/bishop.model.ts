@@ -9,14 +9,13 @@ export class Bishop extends Chessman {
   }
 
   checkPawnMove(move: fromChessman.MoveDetails): boolean {
-    // check if move is valid for rook (only move in row or in col)
-    const diffRowMod = (move.rowMove - this.row) > 0 ? move.rowMove - this.row : this.row - move.rowMove;
-    const diffColMod = (move.colMove - this.col) > 0 ? move.colMove - this.col : this.col - move.colMove;
+    // check if move is valid for bishop (only move in diagonal)
+    const diffRowMod = Math.abs(move.rowMove - this.row);
+    const diffColMod = Math.abs(move.colMove - this.col);
     if (diffRowMod !== diffColMod) {
       console.log('---NOT VALID MOVE -> NOT BISHOP---');
       return false;
     }
-
 
     const opponentCollision = CheckMove.bishopCheckOpponentsCollision(
       {rowOld: this.row, colOld: this.col, rowNew: move.rowMove, colNew: move.colMove},

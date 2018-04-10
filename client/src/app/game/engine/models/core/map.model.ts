@@ -3,6 +3,9 @@ import { ConstantsService } from '../../../../helpers/constants/constants.servic
 import { Chessman } from './chessman.model';
 import { Rook } from '../pawns/rook.model';
 import { Bishop } from '../pawns/bishop.model';
+import { Knight } from '../pawns/knight.model';
+import { Queen } from '../pawns/queen.model';
+import { King } from '../pawns/king.model';
 
 export interface MapDimensions {
   width: number;
@@ -54,6 +57,14 @@ export class Map {
       ConstantsService.API_HOST_STATIC + '/public/files/game/images/wb.png');
     this.pawnsArrangement[0][6] = new Bishop(0, 6, 'white_bishop2', 'white',
       ConstantsService.API_HOST_STATIC + '/public/files/game/images/wb.png');
+    this.pawnsArrangement[0][2] = new Knight(0, 2, 'white_knight1', 'white',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/wn.png');
+    this.pawnsArrangement[0][5] = new Knight(0, 5, 'white_knight2', 'white',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/wn.png');
+    this.pawnsArrangement[0][3] = new Queen(0, 3, 'white_queen', 'white',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/wq.png');
+    this.pawnsArrangement[0][4] = new King(0, 4, 'white_king', 'white',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/wk.png');
 
     // black pawns
     this.pawnsArrangement[7][0] = new Rook(7, 0, 'black_rook1', 'black',
@@ -64,6 +75,14 @@ export class Map {
       ConstantsService.API_HOST_STATIC + '/public/files/game/images/bb.png');
     this.pawnsArrangement[7][6] = new Bishop(7, 6, 'black_bishop2', 'black',
       ConstantsService.API_HOST_STATIC + '/public/files/game/images/bb.png');
+    this.pawnsArrangement[7][2] = new Knight(7, 2, 'black_knight1', 'black',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/bn.png');
+    this.pawnsArrangement[7][5] = new Knight(7, 5, 'black_knight2', 'black',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/bn.png');
+    this.pawnsArrangement[7][3] = new Queen(7, 3, 'black_queen', 'black',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/bq.png');
+    this.pawnsArrangement[7][4] = new King(7, 4, 'black_king', 'black',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/bk.png');
   }
 
   public getMapDim() {

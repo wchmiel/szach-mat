@@ -37,7 +37,6 @@ export class IndexComponent implements OnInit, AfterViewInit {
 
     // CLICK ON PAWN
     this.boardCont.nativeElement.onmousedown = function (event) {
-      document.body.style.cursor = 'move';
       self.controllerService.onMouseButtonClicked(event['offsetX'], event['offsetY']);
 
       const pawnsElemRef = Array.from(self.pawnsCont.nativeElement.children); // array with all pawns ElementRef
@@ -48,6 +47,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
       });
 
       if (self.clickedPawnElemRef !== null) {
+        document.body.style.cursor = 'move';
         self.renderer.addClass(self.clickedPawnElemRef, 'dragStarted'); // add css class to change cursor
       }
     };
