@@ -36,4 +36,29 @@ export class CheckMove {
     return true;
   }
 
+  static bishopCheckOpponentsCollision(move: fromChessman.FromOldToNewPositionMove, pawnsArr): boolean {
+    const diffRow = move.rowNew - move.rowOld;
+    const diffCol = move.colNew - move.colOld;
+    const diffRowMod = (move.rowNew - move.rowOld) > 0 ? move.rowNew - move.rowOld : move.rowOld - move.rowNew;
+    for (let i = 1; i < diffRowMod; i++) {
+      let rowTemp, colTemp;
+      if (diffRow > 1 && diffCol > 1) {
+        rowTemp = move.rowOld + i; colTemp = move.colOld + i;
+      } else if (diffRow < -1 && diffCol < -1) {
+        rowTemp = move.rowOld - i; colTemp = move.colOld - i;
+      } else if (diffRow > 1 && diffCol < -1) {
+        rowTemp = move.rowOld + i; colTemp = move.colOld - i;
+      } else if (diffRow < -1 && diffCol > 1) {
+        rowTemp = move.rowOld - i; colTemp = move.colOld + i;
+      }
+
+      if (pawnsArr[rowTemp][colTemp]) {
+        return false;
+      }
+      console.log('check position: [' + rowTemp + ', ' + colTemp + ']');
+    }
+
+    return true;
+  }
+
 }

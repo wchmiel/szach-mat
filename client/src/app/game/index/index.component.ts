@@ -188,7 +188,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
         this.renderer.setStyle(pawn, 'top', top + 'px');
         this.renderer.setStyle(pawn, 'left', left + 'px');
       } else { // remove pawn when it doesn't exist in pawnsArrangement array
-        console.log('------ USUWAM PIONKA -> ' + pawn['name'] + ' --------');
+        console.log('------ REMOVE PAWN -> ' + pawn['name'] + ' --------');
         this.removePawnFromView(pawn, pawnsElemRef);
       }
     });

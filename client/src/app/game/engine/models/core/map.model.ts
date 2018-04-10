@@ -2,6 +2,7 @@ import { ConstantsService } from '../../../../helpers/constants/constants.servic
 
 import { Chessman } from './chessman.model';
 import { Rook } from '../pawns/rook.model';
+import { Bishop } from '../pawns/bishop.model';
 
 export interface MapDimensions {
   width: number;
@@ -49,12 +50,20 @@ export class Map {
       ConstantsService.API_HOST_STATIC + '/public/files/game/images/wr.png');
     this.pawnsArrangement[0][7] = new Rook(0, 7, 'white_rook2', 'white',
       ConstantsService.API_HOST_STATIC + '/public/files/game/images/wr.png');
+    this.pawnsArrangement[0][1] = new Bishop(0, 1, 'white_bishop1', 'white',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/wb.png');
+    this.pawnsArrangement[0][6] = new Bishop(0, 6, 'white_bishop2', 'white',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/wb.png');
 
     // black pawns
     this.pawnsArrangement[7][0] = new Rook(7, 0, 'black_rook1', 'black',
       ConstantsService.API_HOST_STATIC + '/public/files/game/images/br.png');
     this.pawnsArrangement[7][7] = new Rook(7, 7, 'black_rook2', 'black',
       ConstantsService.API_HOST_STATIC + '/public/files/game/images/br.png');
+    this.pawnsArrangement[7][1] = new Bishop(7, 1, 'black_bishop1', 'black',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/bb.png');
+    this.pawnsArrangement[7][6] = new Bishop(7, 6, 'black_bishop2', 'black',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/bb.png');
   }
 
   public getMapDim() {
