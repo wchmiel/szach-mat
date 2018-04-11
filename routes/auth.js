@@ -25,8 +25,8 @@ router.post('/signin', (req, res, next) => {
 
         // PRIVATE KEY
         const options = {
-           key: fs.readFileSync('./constants/private-key/key.pem', 'utf8'),
-           cert: fs.readFileSync('./constants/private-key/server.crt', 'utf8')
+           key: process.env.KEY_PEM || fs.readFileSync('./constants/private-key/key.pem', 'utf8'),
+           cert: process.env.SERVER_CRT || fs.readFileSync('./constants/private-key/server.crt', 'utf8')
         };
         const jwtBearerToken = jwt.sign({}, options, {
           algorithm: 'RS256',

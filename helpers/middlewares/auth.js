@@ -7,7 +7,7 @@
 const expressJwt = require('express-jwt'),
       fs = require('fs');
 
-const RSA_PUBLIC_KEY = fs.readFileSync('./constants/public-key/key.pem', 'utf8');
+const RSA_PUBLIC_KEY = process.env.RSA_PUBLIC_KEY || fs.readFileSync('./constants/public-key/key.pem', 'utf8');
 
 const middlewareObj = {
   // JWT validation middleware using express-jwt

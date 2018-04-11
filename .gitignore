@@ -60,7 +60,6 @@ typings/
 # main app constants
 /constants/private-key
 /constants/public-key
-/constants/server
 
 # uploaded files
 /public/files/account
