@@ -6,6 +6,7 @@ import { Bishop } from '../pawns/bishop.model';
 import { Knight } from '../pawns/knight.model';
 import { Queen } from '../pawns/queen.model';
 import { King } from '../pawns/king.model';
+import { Pawn } from '../pawns/pawn.model';
 
 export interface MapDimensions {
   width: number;
@@ -65,6 +66,22 @@ export class Map {
       ConstantsService.API_HOST_STATIC + '/public/files/game/images/wq.png');
     this.pawnsArrangement[0][4] = new King(0, 4, 'white_king', 'white',
       ConstantsService.API_HOST_STATIC + '/public/files/game/images/wk.png');
+    this.pawnsArrangement[1][0] = new Pawn(1, 0, 'white_pawn1', 'white',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/wp.png');
+    this.pawnsArrangement[1][1] = new Pawn(1, 1, 'white_pawn2', 'white',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/wp.png');
+    this.pawnsArrangement[1][2] = new Pawn(1, 2, 'white_pawn3', 'white',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/wp.png');
+    this.pawnsArrangement[1][3] = new Pawn(1, 3, 'white_pawn4', 'white',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/wp.png');
+    this.pawnsArrangement[1][4] = new Pawn(1, 4, 'white_pawn5', 'white',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/wp.png');
+    this.pawnsArrangement[1][5] = new Pawn(1, 5, 'white_pawn6', 'white',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/wp.png');
+    this.pawnsArrangement[1][6] = new Pawn(1, 6, 'white_pawn7', 'white',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/wp.png');
+    this.pawnsArrangement[1][7] = new Pawn(1, 7, 'white_pawn8', 'white',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/wp.png');
 
     // black pawns
     this.pawnsArrangement[7][0] = new Rook(7, 0, 'black_rook1', 'black',
@@ -83,6 +100,22 @@ export class Map {
       ConstantsService.API_HOST_STATIC + '/public/files/game/images/bq.png');
     this.pawnsArrangement[7][4] = new King(7, 4, 'black_king', 'black',
       ConstantsService.API_HOST_STATIC + '/public/files/game/images/bk.png');
+    this.pawnsArrangement[6][0] = new Pawn(6, 0, 'black_pawn1', 'black',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/bp.png');
+    this.pawnsArrangement[6][1] = new Pawn(6, 1, 'black_pawn2', 'black',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/bp.png');
+    this.pawnsArrangement[6][2] = new Pawn(6, 2, 'black_pawn3', 'black',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/bp.png');
+    this.pawnsArrangement[6][3] = new Pawn(6, 3, 'black_pawn4', 'black',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/bp.png');
+    this.pawnsArrangement[6][4] = new Pawn(6, 4, 'black_pawn5', 'black',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/bp.png');
+    this.pawnsArrangement[6][5] = new Pawn(6, 5, 'black_pawn6', 'black',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/bp.png');
+    this.pawnsArrangement[6][6] = new Pawn(6, 6, 'black_pawn7', 'black',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/bp.png');
+    this.pawnsArrangement[6][7] = new Pawn(6, 7, 'black_pawn8', 'black',
+      ConstantsService.API_HOST_STATIC + '/public/files/game/images/bp.png');
   }
 
   public getMapDim() {

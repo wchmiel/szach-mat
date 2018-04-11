@@ -61,4 +61,48 @@ export class CheckMove {
     return true;
   }
 
+  static whitePawn(move: fromChessman.FromOldToNewPositionMove, pawnsArr): boolean {
+    if (move.rowNew <= move.rowOld) {
+      return false;
+    } else if (move.rowOld === 1 && (move.rowNew === move.rowOld + 2) && move.colNew === move.colOld) { // when white pawn is on the 1 line
+      if (pawnsArr[move.rowOld + 1][move.colOld] || pawnsArr[move.rowOld + 2][move.colOld]) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      if (move.rowNew === (move.rowOld + 1) && move.colNew === move.colOld && (!pawnsArr[move.rowNew][move.colNew])) {
+        return true;
+      }
+      if (move.rowNew === (move.rowOld + 1) && (move.colNew === (move.colOld + 1) || move.colNew === (move.colOld - 1))) {
+        if (pawnsArr[move.rowNew][move.colNew] && (pawnsArr[move.rowNew][move.colNew].getPawnTeam() === 'black')) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  static blackPawn(move: fromChessman.FromOldToNewPositionMove, pawnsArr): boolean {
+    if (move.rowNew >= move.rowOld) {
+      return false;
+    } else if (move.rowOld === 6 && (move.rowNew === move.rowOld - 2) && move.colNew === move.colOld) { // when pawn on 6 line
+      if (pawnsArr[move.rowOld - 1][move.colOld] || pawnsArr[move.rowOld - 2][move.colOld]) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      if (move.rowNew === (move.rowOld - 1) && move.colNew === move.colOld && (!pawnsArr[move.rowNew][move.colNew])) {
+        return true;
+      }
+      if (move.rowNew === (move.rowOld - 1) && (move.colNew === (move.colOld + 1) || move.colNew === (move.colOld - 1))) {
+        if (pawnsArr[move.rowNew][move.colNew] && (pawnsArr[move.rowNew][move.colNew].getPawnTeam() === 'white')) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
 }
