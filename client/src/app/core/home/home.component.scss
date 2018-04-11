@@ -1,4 +1,5 @@
 @import '~styles/abstracts/variables';
+@import '~styles/abstracts/mixins';
 
 // logo styles
 .sz-home-cont {
@@ -17,20 +18,92 @@
 .logo-cont {
   position: relative;
   height: 100px;
-  margin: 50px 0px 20px 0px;
+  margin: 35px 0px 20px 0px;
   .sz-logo {
-    font-size: 40px;
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
-    width: 295px;
-    height: 80px;
-    svg {
-      width: 100px;
+    transform: translateX(-55%);
+    @media all and (min-width: $SM_RES) {
+      font-size: 40px;
+      width: 295px;
       height: 80px;
+      svg {
+        width: 100px;
+        height: 80px;
+      }
     }
   }
   &:after {
     clear: both;
+  }
+}
+
+.register-sec {
+  margin-top: 30px;
+  .sz-signup-btn {
+    display: block;
+    width: 250px;
+    height: 40px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: $main-text-grey-color;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      #0B7912, #0B7912 2px,
+      $darkCyan 2px, $darkCyan 10px
+    );
+    text-align: center;
+    line-height: 40px;
+    border-radius: 5px;
+    margin: 0 auto;
+    transition: 0.3s;
+    border: 1px solid #0B7912;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  @media all and (min-width: $SM_RES) {
+    margin-top: 70px;
+    .sz-signup-btn {
+      width: 300px;
+      height: 50px;
+      font-size: 1.5rem;
+      line-height: 50px;
+      animation-name: pulse;
+      animation-duration: 4000ms;
+      animation-delay: 500ms;
+      animation-timing-function: ease-in-out;
+      animation-play-state: running;
+      animation-iteration-count: infinite;
+
+      &:hover {
+        animation-play-state: paused;
+        border: 1px solid $khaki;
+        color: $khaki;
+      }
+    }
+  }
+
+  .main-slogan {
+    font-size: 1.2rem;
+    max-width: 100%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    text-align: center;
+    color: $main-text-grey-color;
+    // color: $khaki;
+    @media all and (min-width: $SM_RES) {
+      font-size: 1.7rem;
+      max-width: 600px;
+    }
+  }
+}
+
+@keyframes pulse {
+  0%, 45%, 55%, 100% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.05, 1.05) rotateZ(1deg);
   }
 }

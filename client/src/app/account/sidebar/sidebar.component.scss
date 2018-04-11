@@ -20,7 +20,7 @@
       font-size: 26px;
       margin-left: 35px;
       @media all and (min-width: $SM_RES) {
-        width: 190px;
+        width: 180px;
         margin-left: 0px;
       }
       svg {
@@ -66,6 +66,12 @@
       @media all and (min-width: $SM_RES) {
         display: inline-block;
       }
+      &:hover {
+        cursor: pointer;
+      }
+      &:focus {
+        outline: none;
+      }
     }
   }
 
@@ -75,11 +81,22 @@
       .nav-link {
         font-size: 1rem;
         padding-left: 0px;
+        color: $main-text-grey-color;
+        transition: 0.3s;
+
         @media all and (min-width: $SM_RES) {
           font-size: 1.2rem;
         }
         i {
           margin-right: 10px;
+        }
+
+        &:hover {
+          color: $khaki;
+        }
+
+        &.nav-link-active {
+          color: $khaki;
         }
       }
     }

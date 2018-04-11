@@ -1,0 +1,23 @@
+@import '~styles/abstracts/variables';
+@import '~styles/abstracts/mixins';
+
+.sz-building-mockup {
+  @include centerer(true, true);
+  text-align: center;
+  font-size: 1.1rem;
+  min-width: 230px;
+
+  .fa {
+    font-size: 1.7rem;
+    padding-right: 10px;
+    position: relative;
+    top: 5px;
+  }
+
+  @media all and (min-width: $SM_RES) {
+    font-size: 1.5rem;
+    .fa {
+      font-size: 2.5rem;
+    }
+  }
+}

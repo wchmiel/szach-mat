@@ -17,7 +17,7 @@
         [(ngModel)]="avatarPath"
         ngDefaultControl
         src="{{ avatarPath }}"
-        class="img-responsive sz-avatar-sm-circle" alt="">
+        class="img-responsive sz-avatar-sm-circle" alt="" [routerLink]="['/account']">
       <span [(ngModel)]="userData.nick" ngDefaultControl>
         {{ userData.nick }}
       </span>
@@ -25,20 +25,20 @@
     <div class="sz-nav-cont">
       <nav>
         <div class="nav flex-column">
-          <a class="nav-link" [routerLink]="['/game']">
+          <a class="nav-link" [routerLink]="['/game']" routerLinkActive="nav-link-active">
             <i class="fa fa-gamepad"></i>
             Play
           </a>
-          <a class="nav-link" >
+          <a class="nav-link" [routerLink]="['/account']">
             <i class="fa fa-line-chart"></i>
             Ranking
           </a>
           <!-- <a class="nav-link" >History</a> -->
-          <a class="nav-link" >
+          <a class="nav-link" [routerLink]="['/account']" >
             <i class="fa fa-comments"></i>
             Messages
           </a>
-          <a class="nav-link" [routerLink]="['/account', 'settings']">
+          <a class="nav-link" [routerLink]="['/account', 'settings']" routerLinkActive="nav-link-active">
             <i class="fa fa-cogs"></i>
             Settings
           </a>

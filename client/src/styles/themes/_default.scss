@@ -1,9 +1,7 @@
-// @import url('https://fonts.googleapis.com/css?family=Itim');
-// @import url('https://fonts.googleapis.com/css?family=Alef:400,700');
+
 
 body {
   // font-family: 'Bungee Inline', cursive;
-  // font-family: 'Itim', cursive;
   font-family: 'Alef', sans-serif;
   background-color: $main-background-color;
   color: $main-text-grey-color;
@@ -14,4 +12,9 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     background-color: $form-main-background-color !important;
     background-image: none;
     color: $main-text-grey-color !important;
+}
+
+// readonly input styles
+input[readonly] {
+  color: $form-readonly-input-txt-color;
 }

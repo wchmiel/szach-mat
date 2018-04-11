@@ -48,3 +48,12 @@ button {
     }
   }
 }
+
+.sz-form-wrap {
+  margin-left: 15px;
+  margin-right: 15px;
+  @media all and (min-width: $SM_RES) {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
