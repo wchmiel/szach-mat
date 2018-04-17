@@ -42,6 +42,7 @@ router.post('/uploadFile', middleware.checkIfAuthenticated, middleware.handleTok
       } else if (err.code === 'filetype') {
         res.json({success: false, message: 'File type is invalid. Must be .png/.jpg/.jpeg .'});
       } else {
+        console.log('Szach-mat error occured:');
         console.log(err);
         res.json({success: false, message: 'File was not able to be uploaded.'});
       }

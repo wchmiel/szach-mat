@@ -61,5 +61,6 @@ typings/
 /constants/private-key
 /constants/public-key
 
-# uploaded files
-/public/files/account
+# uploaded files except default.svg
+/public/files/account/images/**
+!/public/files/account/images/default.svg
