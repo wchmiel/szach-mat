@@ -40,8 +40,24 @@
           Click to edit
         </p>
 
+        <!-- <input id="file-input" #fileInput type="file" (change)="onFileSelected($event)">
+        <button type="button" (click)="onUpload()" class="btn btn-dark" >Upload Photo</button> -->
+        <br>
+        <!-- <div>
+          <img-cropper [image]="data" [settings]="cropperSettings"></img-cropper><br>
+          <img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+        </div> -->
+        <!-- <img-cropper [image]="data" [settings]="cropperSettings" (onCrop)="cropped($event)"></img-cropper>
+        <button (click)="upload()">Upload</button> -->
+
+        <!-- <input id="file-input" #fileInput type="file" (change)="onFileSelected($event)"> -->
+
         <input id="file-input" #fileInput type="file" (change)="onFileSelected($event)">
-        <button type="button" (click)="onUpload()" class="btn btn-dark" >Upload Photo</button>
+
+        <!-- <div class="cropper-cnt">
+          <img-cropper #cropper [image]="data" [settings]="cropperSettings" (onCrop)="cropped($event)"></img-cropper>
+          <button (click)="upload()">Upload</button>
+        </div> -->
 
       </div>
   </div>

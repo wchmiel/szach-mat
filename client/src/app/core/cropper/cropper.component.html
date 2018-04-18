@@ -4,7 +4,9 @@
   </h3>
   <hr>
   <div mat-dialog-content>
-    {{ data.text }}
+    <div class="cropper-cnt">
+      <img-cropper #cropper [image]="cropperData" [settings]="cropperSettings" (onCrop)="cropped($event)"></img-cropper>
+    </div>
   </div>
   <hr>
   <div mat-dialog-actions>

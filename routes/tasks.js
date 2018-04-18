@@ -14,14 +14,13 @@ const storageAvatar = multer.diskStorage({
   },
   filename: function (req, file, cb) {
 
-    // validate the file extencion
-    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+    // validate the file extencion - accept only blob files
+    if (!file.mimetype.match(/\image\/(png|jpg|jpeg)$/)) {
       const err = new Error();
       err.code = 'filetype';
       return cb(err);
     } else {
       const ext = file.originalname.split('.').pop();
-      // cb(null, req.user.sub + '_' +  Date.now() + '.' + ext); // name of the uploaded file
       cb(null, req.user.sub + '.' + ext); // name of the uploaded file
     }
   }

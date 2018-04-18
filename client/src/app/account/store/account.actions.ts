@@ -11,7 +11,7 @@ export const SAVE_USER_DATA = 'SAVE_USER_DATA';
 
 export class TryUploadFile implements Action {
   readonly type = TRY_UPLOAD_FILE;
-  constructor(public payload: File) {}
+  constructor(public payload) {}
 }
 
 export class UploadFile implements Action {

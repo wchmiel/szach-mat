@@ -84,7 +84,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '400px',
-      data: 'Do you really want to logout from your account?'
+      data: {
+        headline: 'Confirm Logout',
+        text: 'Do you really want to logout from your account?'
+      }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'Confirm') {
