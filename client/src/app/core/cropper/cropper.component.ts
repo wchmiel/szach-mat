@@ -23,19 +23,19 @@ export class CropperComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: string
   ) {
     this.cropperSettings = new CropperSettings();
-    this.cropperSettings.width = 200;
-    this.cropperSettings.height = 200;
-    this.cropperSettings.croppedWidth = 200;
-    this.cropperSettings.croppedHeight = 200;
-    this.cropperSettings.canvasWidth = 300;
-    this.cropperSettings.canvasHeight = 300;
-    this.cropperSettings.minWidth = 100;
-    this.cropperSettings.minHeight = 100;
-    this.cropperSettings.rounded = false;
-    this.cropperSettings.keepAspect = true;
-    this.cropperSettings.cropperDrawSettings.strokeColor = 'rgba(255,255,255,1)';
-    this.cropperSettings.cropperDrawSettings.strokeWidth = 2;
-    this.cropperSettings.noFileInput = true;
+    this.cropperSettings.width = this.data['width'] || 200;
+    this.cropperSettings.height = this.data['height'] || 200;
+    this.cropperSettings.croppedWidth = this.data['croppedWidth'] || 200;
+    this.cropperSettings.croppedHeight = this.data['croppedHeight'] || 200;
+    this.cropperSettings.canvasWidth = this.data['canvasWidth'] || 300;
+    this.cropperSettings.canvasHeight = this.data['canvasHeight'] || 300;
+    this.cropperSettings.minWidth = this.data['minWidth'] || 100;
+    this.cropperSettings.minHeight = this.data['minHeight'] || 100;
+    this.cropperSettings.rounded = this.data['rounded'] || false;
+    this.cropperSettings.keepAspect = this.data['keepAspect'] || true;
+    this.cropperSettings.cropperDrawSettings.strokeColor = this.data['strokeColor'] || 'rgba(255,255,255,1)';
+    this.cropperSettings.cropperDrawSettings.strokeWidth = this.data['strokeWidth'] || 2;
+    this.cropperSettings.noFileInput = this.data['noFileInput'] || true;
     this.cropperData = {};
   }
 

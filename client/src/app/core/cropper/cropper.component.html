@@ -1,5 +1,5 @@
 <div>
-  <h3 md-dialog-title>
+  <h3 md-dialog-title class="cropper-heading">
     {{ data.headline }}
   </h3>
   <hr>
@@ -9,8 +9,8 @@
     </div>
   </div>
   <hr>
-  <div mat-dialog-actions>
-    <button mat-raised-button color="accent" (click)="onCloseConfirm()">CONFIRM</button>&nbsp;
-    <button mat-raised-button color="primary" (click)="onCloseCancel()">CANCEL</button>
+  <div mat-dialog-actions class="cropper-btns">
+    <button id="confirm" mat-raised-button color="accent" (click)="onCloseConfirm()">CONFIRM</button>
+    <button id="cancel" mat-raised-button color="primary" (click)="onCloseCancel()">CANCEL</button>
   </div>
 </div>

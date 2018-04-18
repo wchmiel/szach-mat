@@ -1,0 +1,22 @@
+.cropper-heading {
+  text-align: center;
+}
+
+.cropper-cnt {
+  text-align: center;
+}
+
+.cropper-btns {
+  position: relative;
+  height: 60px;
+  #confirm, #cancel {
+    position: absolute;
+    top: 0px;
+  }
+  #confirm {
+    left: 0px;
+  }
+  #cancel {
+    right: 0px;
+  }
+}

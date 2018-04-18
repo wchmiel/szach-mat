@@ -1,0 +1,10 @@
+@import '~styles/abstracts/variables';
+
+.sz-account-cont {
+  bottom: auto;
+  margin-bottom: 15px !important;
+  @media all and (min-width: $SM_RES) {
+    bottom: 15px;
+    margin-bottom: 0px;
+  }
+}

@@ -14,21 +14,22 @@ const storageAvatar = multer.diskStorage({
   },
   filename: function (req, file, cb) {
 
-    // validate the file extencion - accept only blob files
+    // validate the file extension
     if (!file.mimetype.match(/\image\/(png|jpg|jpeg)$/)) {
       const err = new Error();
       err.code = 'filetype';
       return cb(err);
     } else {
       const ext = file.originalname.split('.').pop();
-      cb(null, req.user.sub + '.' + ext); // name of the uploaded file
+      cb(null, req.user.sub + '_' +  Date.now() + '.' + ext); // name of the uploaded file
+      // cb(null, req.user.sub + '.' + ext); // name of the uploaded file
     }
   }
 });
 
 const uploadAvatar = multer({
   storage: storageAvatar,
-  limits: { fileSize: 4000000 } // maks file size 4mb
+  limits: { fileSize: 2000000 } // maks file size 2mb
 }).single('avatar');
 
 
@@ -37,7 +38,7 @@ router.post('/uploadFile', middleware.checkIfAuthenticated, middleware.handleTok
     if (err) {
       // An error occurred when uploading
       if (err.code === 'LIMIT_FILE_SIZE') {
-        res.json({success: false, message: 'File size is to large. Max limit is 4MB.'});
+        res.json({success: false, message: 'File size is to large. Max limit is 2MB.'});
       } else if (err.code === 'filetype') {
         res.json({success: false, message: 'File type is invalid. Must be .png/.jpg/.jpeg .'});
       } else {
